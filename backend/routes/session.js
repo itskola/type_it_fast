@@ -7,7 +7,7 @@ const Error = require("../util/error")
 
 const Token = "token"
 
-router.route("/login")
+router.route("/")
 	.get((req, res) => {
 		if (req.cookies[Token]) {
 			jwt.verify(req.cookies[Token], process.env.JWT_SECRET, 
@@ -21,7 +21,6 @@ router.route("/login")
 		}
 	})
 	.post(async (req, res) => {
-		// if (req.cookies) console.log(req.cookies)
 		try {
 			let user = await User.findOne({ username: req.body.username, password: req.body.password }).select("-password")
 			if (!user)
@@ -42,32 +41,7 @@ router.route("/login")
 	})
 	.delete((req, res) => {
 		res.cookie(Token, "", { maxAge: 0 })
-		res.status(200).json("logged out")
+		res.status(200).send("")
 	})
-
-router.post("/register", async (req, res) => {
-	const { hasErrors, errors } = validateUser(req.body)
-	if (hasErrors) {
-		return res.status(409).json(Error.CreateMessage(
-			Error.Type.Form, errors
-		))
-	}
-
-	try {
-		const { hasErrors, errors } = await existingUser(req.body)
-		if (hasErrors) {
-			return res.status(409).json(Error.CreateMessage(
-				Error.Type.Form, errors
-			))
-		}
-		
-		await (new User(req.body)).save()
-		res.status(200).send(`User ${req.body.username} created.`)
-	} catch (error) {
-		res.status(500).json(Error.CreateMessage(
-			Error.Type.Db, Error.Message.Db
-		))
-	}
-})
 
 module.exports = router

@@ -1,7 +1,10 @@
 const session = "/api/session"
+const account = "/api/account"
 
 export const endpoints = {
-	Login: `${session}/login`,
-	Logout: `${session}/login`,
-	Register: `${session}/register`,
+	Login: `${session}`,
+	Logout: `${session}`,
+
+	Register: `${account}`,
+	DeleteAccount: `${account}`
 }

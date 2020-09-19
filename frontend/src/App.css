@@ -1,6 +1,7 @@
 :root {
-	--txt-main: #e2e2e2;
-	--txt-main-dark: #cdcdcd;
+	--txt-main-light: #f0f0f0;
+	--txt-main: #e0e0e0;
+	--txt-main-dark: #bfbfbf;
 	
 	--bg-main-light: #303030;
 	--bg-main: #252525;

@@ -47,6 +47,7 @@ io.on("connect", socket => {
 })
 
 app.use("/api/session", require("./routes/session"))
+app.use("/api/account", require("./routes/account"))
 
 app.get("/sentence", async (req, res) => {
 	// Model.aggregate([{ $sample: { size: 1 } }])

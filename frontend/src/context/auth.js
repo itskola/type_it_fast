@@ -23,6 +23,10 @@ class AuthAction {
 		type: ActionType.Logout,
 		payload: {},
 	})
+
+	static DeleteAccount = () => {
+		return AuthAction.Logout()
+	}
 }
 
 class Auth {
