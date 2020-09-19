@@ -1,0 +1,55 @@
+.mb-none {
+	border: none;
+	outline: none;
+	background: none;
+}
+
+.message-focus {
+	color: var(--accent-color) !important;
+	border-color: var(--accent-color) !important;
+}
+
+.message-box {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	
+	display: flex;
+	font-size: 0.95rem;
+	background-color: var(--bg-main-dark);
+	padding: 5px 10px;
+	border: 2px solid var(--bg-main-dark);
+	border-radius: 20px;
+	margin: 5px;
+
+	transition: border-color 0.2s ease;
+}
+
+.message-type {
+	resize: none;
+	overflow: hidden;
+	height: auto;
+	max-height: 75px;
+
+	flex-grow: 1;
+	color: var(--txt-main-dark);
+	padding-right: 4px;
+}
+
+.message-type::placeholder {
+	color: var(--txt-main-dark);
+	opacity: 0.4;
+}
+
+.message-send-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+}
+
+.message-send {
+	color: var(--txt-main-dark);
+
+	transition: color 0.2s ease;
+}

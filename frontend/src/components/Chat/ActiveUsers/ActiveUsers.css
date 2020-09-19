@@ -1,0 +1,52 @@
+.users {
+	overflow: auto;
+	max-height: 100%;
+}
+
+.users-total {
+	position: -webkit-sticky;
+	position: sticky;
+	top: 0;
+	left: 0;
+	right: 0;
+
+	font-size: 0.95rem;
+	text-transform: uppercase;
+	color: var(--correct);
+	border-bottom: 3px solid black;
+}
+
+.users-total span:nth-child(2) {
+	background-color: var(--bg-main-light);
+	padding: 2px 10px;
+	border-radius: 50%;
+}
+
+/* ========================================== */
+
+.users-total,
+.user {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+
+	background-color: var(--bg-main);
+	padding: 3px 10px;
+}
+
+.user:nth-child(odd) {
+	background-color: var(--bg-main-light);
+}
+
+.username {
+	font-size: 0.85rem;
+}
+
+.user-online {
+	color: var(--correct);
+	font-size: 0.45rem;
+}
+
+.user:hover {
+	background-color: var(--bg-main-dark);
+}

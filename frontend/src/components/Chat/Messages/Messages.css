@@ -1,0 +1,49 @@
+.messages {
+	overflow: auto;
+	max-height: calc(100% - 50px);
+	padding: 5px;
+}
+
+/* ========================================== */
+
+:root {
+	--msg-border-r: 10px;
+}
+
+/* ========================================== */
+
+.message-container {
+    display: table;
+    max-width: 80%;
+	word-break: break-all;
+	margin-bottom: 3px;
+}
+
+.message-sender {
+    font-size: 0.75rem; 
+}
+
+.message-text {
+    font-size: 0.85rem;
+	padding: 4px 10px;
+	
+    background-color: var(--txt-main-dark);
+    color: var(--bg-main-dark);
+    border-radius: var(--msg-border-r);
+	border-top-left-radius: 0;
+}
+
+.message-container-right {
+    margin-left: auto;
+}
+
+.message-container-right .message-sender {
+    display: none;
+}
+
+.message-container-right .message-text {
+    background: var(--accent-color);
+    color: var(--txt-main);
+    border-radius: var(--msg-border-r);
+	border-top-right-radius: 0;
+}

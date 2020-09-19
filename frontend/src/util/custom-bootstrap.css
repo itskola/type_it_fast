@@ -1,0 +1,78 @@
+:root {
+	--bs-bg: #080808;
+	--bs-txt: white;
+}
+
+h1, h2, h3, p {
+	margin: 0;
+	padding: 0;
+}
+
+/* Tooltip ============================================ */
+
+#tooltip {
+	font-family: inherit !important;
+	font-size: 0.85rem !important;
+}
+
+#tooltip > .tooltip-inner {
+	padding: 12px;
+	background-color: var(--bs-bg);
+	border-radius: 3px;
+	color: var(--bs-txt);
+}
+
+.bs-tooltip-auto[x-placement^="right"] .arrow::before,
+.bs-tooltip-right .arrow::before {
+	border-right-color: var(--bs-bg) !important;
+	color: var(--bs-txt) !important;
+}
+
+.bs-tooltip-auto[x-placement^="bottom"] .arrow::before,
+.bs-tooltip-right .arrow::before {
+	border-right-color: var(--bs-bg) !important;
+	color: var(--bs-txt) !important;
+}
+
+/* ============================================ Tooltip */
+
+/* Tabs =============================================== */
+
+.nav.nav-tabs {
+	display: flex;
+	align-items: stretch;
+}
+
+.nav-item.nav-link {
+	flex: 1;
+	text-align: center;
+	text-transform: uppercase;
+	font-size: 0.8rem;
+	border-radius: 0;
+}
+
+.tab-content {
+	height: 95%;
+}
+
+.tab-content > .tab-pane {
+	height: 100%;
+}
+
+/* =============================================== Tabs */
+
+/* Toast ============================================== */
+
+.toast {
+	color: var(--bs-txt);
+	background-color: var(--bs-bg);
+}
+
+.toast-top {
+	position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* ============================================== Toast */

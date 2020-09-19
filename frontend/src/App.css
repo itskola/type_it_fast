@@ -1,0 +1,57 @@
+:root {
+	--txt-main: #e2e2e2;
+	--txt-main-dark: #cdcdcd;
+	
+	--bg-main-light: #303030;
+	--bg-main: #252525;
+	--bg-main-dark: #1e1e1e;
+	
+	--accent-color: #4a4acc;
+	--accent-color-gradient: linear-gradient(
+		to left,
+		#4a4acc, #088880
+	);
+
+	--correct: rgb(15, 185, 15);
+	--incorrect: rgb(185, 15, 15);
+}
+
+/* ==================================================== */
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+html,
+body,
+input,
+textarea {
+	font-family: "Poppins", sans-serif;
+}
+
+body {
+	font-size: 62.5%;
+	height: 100vh;
+	background-color: var(--bg-main);
+	color: var(--txt-main);
+}
+
+/* ==================================================== */
+
+#root {
+	height: 100%;
+}
+
+/* Hide Scrollbar ====================================== */
+.scrollbar-hidden {
+	-ms-overflow-style: none; /* IE and Edge */
+	scrollbar-width: none; /* Firefox */
+}
+
+/* Chrome, Safari and Opera */
+.scrollbar-hidden::-webkit-scrollbar {
+	display: none;
+}
+/* ====================================== Hide Scrollbar */

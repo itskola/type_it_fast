@@ -1,0 +1,39 @@
+#options {
+	position: absolute;
+	top: var(--spacing);
+	left: var(--spacing);
+}
+
+#dropdown-options {
+	background: none;
+	border: none;
+	outline: none;
+}
+
+#dropdown-options:after {
+	content: none;
+}
+
+.fa-cog {
+	color: var(--txt-main-dark);
+	font-size: 1.8rem;
+	cursor: pointer;
+	
+	transition: color 250ms;
+}
+
+.fa-cog:hover {
+	color: var(--txt-main);
+}
+
+#options .dropdown-menu {
+	background-color: var(--txt-main-dark) !important;
+}
+
+#options .dropdown-item {
+	color: var(--bg-main) !important;
+}
+
+#options .dropdown-item:hover {
+	background-color: var(--txt-main) !important;
+}

@@ -1,0 +1,25 @@
+#title {
+	text-align: center;
+}
+
+#title > h1 {
+	font-size: 2.4rem;
+	background-image: var(--accent-color-gradient);
+	-webkit-background-clip: text;
+	background-clip: text;
+	color: transparent;
+}
+
+#title > h1 > span {
+	font-size: 1.8rem;
+	font-weight: bold;
+}
+
+.bg-bluish {
+	background: var(--accent-color);
+}
+
+.bg-gradient-bluish {
+	background: var(--accent-color);
+	background: var(--accent-color-gradient)
+}

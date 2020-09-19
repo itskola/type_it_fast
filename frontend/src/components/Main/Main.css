@@ -1,0 +1,14 @@
+:root {
+	--spacing: 15px;
+}
+
+#main-container {
+	display: flex;
+	justify-content: space-between;
+	height: 100%;
+	padding: var(--spacing) 0 0 var(--spacing);
+}
+
+#main-container > div {
+	margin: 0 var(--spacing) var(--spacing) 0;
+}
