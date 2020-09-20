@@ -34,7 +34,7 @@ function Options() {
 			})
 	}
 
-	const handleDeleteAccount = () => {
+	const handleDeleteAccount = (e) => {
 		axios.delete(endpoints.DeleteAccount)
 			.then(() => setAuthState(AuthAction.DeleteAccount()))
 			.catch(() => {

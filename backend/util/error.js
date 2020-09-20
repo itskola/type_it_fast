@@ -1,14 +1,18 @@
 class Error {
 	static Type = {
+		Unauthorized: "unauthorized",
+		Forbidden: "forbidden",
 		Login: "login",
 		Form: "form",
 		Db: "db"
 	}
 
 	static Message = {
-		Db: "Database error. Please try again later.",
+		Unauthorized: "Access denied. Please log in and try again.",
+		Forbidden: "Unable to verify token (invalid token).",
+		Register: "Registration failed. Please check all fields and try again.",
 		Login: "Incorrect login credentials.",
-		Register: "Registration failed. Please check all fields and try again."
+		Db: "Database error. Please try again later."
 	}
 
 	static CreateMessage = (type, payload) => ({ type, payload })

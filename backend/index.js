@@ -3,11 +3,12 @@ const socketio = require("socket.io")
 const http = require("http")
 
 require("dotenv").config({ path: "./config/.env" })
+const DB_URI = process.env.DB_URI
+const PORT = process.env.PORT || 5000
 
 // Database ==========================================
 
 const connectDB = require("./config/db")
-const DB_URI = process.env.DB_URI
 
 connectDB(DB_URI, (conn, err) => {
 	if (err) { console.error(err); process.exit(1) }
@@ -67,5 +68,4 @@ app.get("/sentence", async (req, res) => {
 	  })
 })
 
-const PORT = process.env.PORT || 5000
 server.listen(PORT, () => console.log(`Server is listening on port ${PORT}`))

@@ -1,19 +1,41 @@
 const jwt = require("jsonwebtoken")
 
-function auth(req, res, next) {
-    const bearerToken = req.headers["authorization"]
-    if (typeof bearerToken === "undefined")
-        return res.status(401).json({
-            type: "authorization",
-            message: "Access denied. Please login to continue."
-        })
+const Error = require("./error")
 
-    jwt.verify(bearerToken.split(" ")[1], process.env.JWT_SECRET, 
-        (err, decoded) => {
-            if (err) return res.status(401)
-            
-            req.user = decoded
-            next()
-        }
-    )
+class Auth {
+	static Name = "token"
+
+	static verify = (req, res, next) => {
+		const token = req.cookies[Auth.Name]
+		if (!token) {
+			return res
+				.status(401)
+				.json(
+					Error.CreateMessage(
+						Error.Type.Unauthorized,
+						Error.Message.Unauthorized
+					)
+				)
+		}
+
+		jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+			if (err) {
+				return res
+					.status(401)
+					.json(
+						Error.CreateMessage(
+							Error.Type.Forbidden,
+							Error.Message.Forbidden
+						)
+					)
+			}
+
+			req.decoded = decoded
+			next()
+		})
+	}
+
+	static sign = payload => jwt.sign(payload, process.env.JWT_SECRET)
 }
+
+module.exports = Auth

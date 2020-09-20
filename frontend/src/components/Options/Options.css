@@ -20,10 +20,6 @@
 	color: var(--txt-main-dark);
 }
 
-#options .dropdown-item {
-	font-weight: bold;
-}
-
 .fa-exclamation-triangle {
 	color: var(--incorrect);
 	margin-right: 12px;

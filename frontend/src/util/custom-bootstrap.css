@@ -81,11 +81,12 @@ h1, h2, h3, p {
 
 .dropdown-menu {
 	background-color: var(--txt-main) !important;
+	padding: 4px 0;
 }
 
 .dropdown-item {
-	color: var(--bs-bg) !important;
-	padding: 4px 20px;
+	color: var(--bg-main-dark) !important;
+	padding: 4px 16px;
 }
 
 .dropdown-item:hover {
@@ -99,13 +100,13 @@ h1, h2, h3, p {
 .modal-content {
 	padding: 0 15px;
 	border: none !important;
-	border-radius: 0 !important;
-	background-color: var(--bs-txt) !important;
+	border-radius: 10px !important;
+	background-color: var(--txt-main-light) !important;
 }
 
 .modal-header, .modal-body, .modal-footer {
 	color: var(--bs-bg) !important;
-	background-color:  var(--bs-txt) !important;
+	background-color: var(--txt-main-light) !important;
 	border-color: var(--bs-bg) !important;
 }
 
