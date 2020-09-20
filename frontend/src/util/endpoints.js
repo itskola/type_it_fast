@@ -9,6 +9,6 @@ export const endpoints = {
 	Register: `${account}`,
 	DeleteAccount: `${account}`,
 
-	Sentence: `${textMode}/sentence`,
 	Words: `${textMode}/words`,
+	Sentence: `${textMode}/sentence`,
 }

@@ -7,12 +7,10 @@ const ActionType = {
 	Login: "login",
 	Logout: "logout"
 }
-const Token = "token"
+const Token = "auth"
 
 class AuthAction {
-	static IsAuth = () => {
-		return localStorage.getItem(Token)
-	}
+	static LocalAuth = () => localStorage.getItem(Token)
 
 	static Login = payload => ({
 		type: ActionType.Login,

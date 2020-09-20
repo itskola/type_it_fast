@@ -72,7 +72,7 @@ function Intro() {
 
 	return (
 		<div className="join-outer-container">
-			{AuthAction.IsAuth() ? (
+			{AuthAction.LocalAuth() ? (
 				<Spinner animation="border" role="status">
 					<span className="sr-only">Loading...</span>
 				</Spinner>

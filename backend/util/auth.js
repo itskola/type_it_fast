@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken")
 const Error = require("./error")
 
 class Auth {
-	static Name = "token"
+	static Name = "auth"
 
 	static verify = (req, res, next) => {
 		const token = req.cookies[Auth.Name]

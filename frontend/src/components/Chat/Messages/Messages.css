@@ -7,7 +7,7 @@
 /* ========================================== */
 
 :root {
-	--msg-border-r: 10px;
+	--message-radius: 10px;
 }
 
 /* ========================================== */
@@ -29,7 +29,7 @@
 	
     background-color: var(--txt-main-dark);
     color: var(--bg-main-dark);
-    border-radius: var(--msg-border-r);
+    border-radius: var(--message-radius);
 	border-top-left-radius: 0;
 }
 
@@ -44,6 +44,6 @@
 .message-container-right .message-text {
     background: var(--accent-color);
     color: var(--txt-main);
-    border-radius: var(--msg-border-r);
+    border-radius: var(--message-radius);
 	border-top-right-radius: 0;
 }

@@ -1,17 +1,19 @@
 #chat-container {
-	box-shadow: 0 0 5px black;
+	box-shadow: 0 0 5px var(--shadow-dark);
 	position: relative;
-	width: 325px;
+	width: 335px;
 }
 
 #chat-container .nav-item.nav-link {
-	border: none;
-	outline: none;
 	font-size: 0.85rem;
-	color: var(--accent-color);
+}
+
+#chat-container .nav-item.nav-link {
+	color: var(--bg-main);
+	background-color: var(--txt-main);
 }
 
 #chat-container .nav-item.nav-link.active {
-	color: var(--bg-main-light);
-	background-color: var(--txt-main);
+	color: var(--txt-main-dark);
+	background-color: var(--bg-main);
 }

@@ -1,17 +1,20 @@
 :root {
-	--txt-main-light: #f0f0f0;
-	--txt-main: #e0e0e0;
-	--txt-main-dark: #bfbfbf;
-	
-	--bg-main-light: #303030;
-	--bg-main: #252525;
-	--bg-main-dark: #1e1e1e;
-	
+	--txt-main-light: #c5c4c4;
+	--txt-main: #afadad;
+	--txt-main-dark: #9f9f9f;
+
+	--bg-main-light: #363a3f;
+	--bg-main: #2c2f35;
+	--bg-main-dark: #1d1e21;
+
 	--accent-color: #4a4acc;
 	--accent-color-gradient: linear-gradient(
 		to left,
 		#4a4acc, #088880
 	);
+
+	--shadow-light:  rgb(200, 200, 200);
+	--shadow-dark:  rgb(10, 10, 10);
 
 	--correct: rgb(15, 185, 15);
 	--incorrect: rgb(185, 15, 15);

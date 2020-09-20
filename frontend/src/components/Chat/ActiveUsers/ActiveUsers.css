@@ -13,7 +13,7 @@
 	font-size: 0.95rem;
 	text-transform: uppercase;
 	color: var(--correct);
-	border-bottom: 3px solid black;
+	border-bottom: 3px solid var(--bg-main-dark);
 }
 
 .users-total span:nth-child(2) {

@@ -6,29 +6,30 @@
 	height: 100%;
 }
 
+.type-this, .type-here {
+	padding: 10px 15px;
+	box-shadow: 0 0 5px var(--shadow-dark);
+}
+
 .type-this {
 	text-align: center;
 	color: var(--txt-main);
 	background: var(--bg-main-dark);
-	box-shadow: 0 0 5px black;
-	padding: 20px;
-	margin: 20px;
+	margin: 20px 0;
 }
 
 .type-this .word {
-	font-size: 1.65rem;
+	font-size: 1.6rem;
 }
 
 .type-here {
 	background: none;
+	border: none;
 	outline: none;
 
-	font-size: 1.55rem;
+	font-size: 1.4rem;
 	text-align: center;
 	color: var(--txt-main);
-	border: 1px solid var(--bg-main-dark);
-	box-shadow: 0 0 5px black;
-	padding: 10px 20px;
 	width: 325px;
 }
 

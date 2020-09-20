@@ -10,7 +10,7 @@
 
 .fa-cog {
 	color: var(--txt-main);
-	font-size: 1.65rem;
+	font-size: 1.6rem;
 	cursor: pointer;
 	
 	transition: color 250ms;
@@ -24,4 +24,19 @@
 	color: var(--incorrect);
 	margin-right: 12px;
 	font-size: 1.4rem; 
+}
+
+.fa-lightbulb {
+	font-size: 1rem;
+	color: black;
+}
+
+#options .option {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.option .fa-check {
+	color: green;
 }

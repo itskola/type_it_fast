@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react"
 
-import { endpoints } from "../../../util/endpoints"
+import { useTextModeContext } from "../../../context/textMode"
 
 import TypeThis from "./TypeThis"
 
@@ -9,6 +9,7 @@ import axios from "axios"
 import "./TypeFast.css"
 
 function TypeFast() {
+	const { textModeState } = useTextModeContext()
 	const [text, setText] = useState("")
 	const [typed, setTyped] = useState("")
 	const atWord  = useRef(0)
@@ -24,9 +25,9 @@ function TypeFast() {
 		
 		if (value[value.length - 1] === " ") {
 			const currentWord = typeThisNode.children[atWord.current]
-			
+
 			currentWord.classList.remove("current-word")
-			if (currentWord.innerText === value)
+			if (currentWord.textContent === value)
 				currentWord.classList.add("correct-word")
 			else
 				currentWord.classList.add("incorrect-word")
@@ -40,13 +41,13 @@ function TypeFast() {
 	}
 
 	useEffect(() => {
-		axios.get(endpoints.Sentence)
+		axios.get(textModeState.endpoint)
 			.then(({ data }) => { 
 				setText(data)
 				typeHere.current.focus() 
 			})
 			.catch(({ result: { data } }) => { setText("-") })
-	}, [])
+	}, [textModeState.endpoint])
 
 	useEffect(() => {
 		if (text) typeThis.current.children[0].classList.add("current-word")
