@@ -2,7 +2,7 @@ import React from "react"
 
 import Title from "../Title/Title"
 import TypeFast from "./TypeFast/TypeFast"
-// import Scoreboard from "./Scoreboard"
+// import Scoreboard from "./Scoreboard/Scoreboard"
 
 import "./Game.css"
 

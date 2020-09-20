@@ -2,10 +2,10 @@ const router = require("express").Router()
 
 const Auth = require("../util/auth")
 const Error = require("../util/error")
+
 const { User, exists: existingUser, validate: validateUser } = require("../models/user")
 
-router
-	.route("/")
+router.route("/")
 	.post(async (req, res) => {
 		const { hasErrors, errors } = validateUser(req.body)
 		if (hasErrors) {

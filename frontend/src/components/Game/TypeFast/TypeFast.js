@@ -1,7 +1,10 @@
 import React, { useEffect, useRef, useState } from "react"
-import axios from "axios"
+
+import { endpoints } from "../../../util/endpoints"
 
 import TypeThis from "./TypeThis"
+
+import axios from "axios"
 
 import "./TypeFast.css"
 
@@ -15,11 +18,12 @@ function TypeFast() {
 
 	const handleInput = ({ target: { value } }) => {
 		setTyped(value)
-		
-		if (atWord.current === typeThis.current.children.length) return
+
+		const typeThisNode = typeThis.current
+		if (atWord.current === typeThisNode.children.length) return
 		
 		if (value[value.length - 1] === " ") {
-			const currentWord = typeThis.current.children[atWord.current]
+			const currentWord = typeThisNode.children[atWord.current]
 			
 			currentWord.classList.remove("current-word")
 			if (currentWord.innerText === value)
@@ -28,15 +32,15 @@ function TypeFast() {
 				currentWord.classList.add("incorrect-word")
 			
 			++atWord.current
-			if (atWord.current < typeThis.current.children.length)
-				typeThis.current.children[atWord.current].classList.add("current-word")
+			if (atWord.current < typeThisNode.children.length)
+				typeThisNode.children[atWord.current].classList.add("current-word")
 			
 			setTyped("")
 		}
 	}
 
 	useEffect(() => {
-		axios.get("/sentence")
+		axios.get(endpoints.Sentence)
 			.then(({ data }) => { 
 				setText(data)
 				typeHere.current.focus() 
@@ -52,6 +56,7 @@ function TypeFast() {
 		<div id="games" className="scrollbar-hidden">
 			<div className="typefast-inner-container">
 				<TypeThis ref={typeThis} text={text} />
+
 				<input ref={typeHere} 
 					className="type-here" 
 					type="text" value={typed} 

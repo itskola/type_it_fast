@@ -2,6 +2,7 @@ const router = require("express").Router()
 
 const Auth = require("../util/auth")
 const Error = require("../util/error")
+
 const { User } = require("../models/user")
 
 router.route("/")

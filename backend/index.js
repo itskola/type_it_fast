@@ -6,29 +6,30 @@ require("dotenv").config({ path: "./config/.env" })
 const DB_URI = process.env.DB_URI
 const PORT = process.env.PORT || 5000
 
-// Database ==========================================
+// Database ==============================================
 
 const connectDB = require("./config/db")
 
 connectDB(DB_URI, (conn, err) => {
-	if (err) { console.error(err); process.exit(1) }
-	console.log("Database connection established successfully")
+	if (err) {
+		console.error(err)
+		process.exit(1)
+	}
+	console.log("Database connection established")
 })
 
-const Sentence = require("./models/sentence")
-
-// ========================================== Database
+// ============================================== Database
 
 const app = express()
 const server = http.createServer(app)
 var io = socketio(server)
 
-// Middleware ========================================
+// Middleware ============================================
 
 app.use(express.json())
 app.use(require("cookie-parser")())
 
-// ======================================== Middleware
+// ============================================ Middleware
 
 const connectedUsers = new Set()
 
@@ -47,25 +48,12 @@ io.on("connect", socket => {
 	})
 })
 
+// Routes ================================================
+
 app.use("/api/session", require("./routes/session"))
 app.use("/api/account", require("./routes/account"))
+app.use("/api/text-mode", require("./routes/textMode"))
 
-app.get("/sentence", async (req, res) => {
-	// Model.aggregate([{ $sample: { size: 1 } }])
-
-	// let date
-	// for (let i = 0; i < 5e6; ++i) date = new Date()
-	// console.log(date)
-
-	Sentence.countDocuments().exec((err, count) => {
-		var r = Math.floor(Math.random() * count)
-		Sentence.findOne().skip(r)
-			.exec((err, result) => {
-				if (err) return res.send(500).send("-")
-				// create error msg object
-				res.status(200).send(result.text)
-			})
-	  })
-})
+// ================================================ Routes
 
 server.listen(PORT, () => console.log(`Server is listening on port ${PORT}`))
