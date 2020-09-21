@@ -27,10 +27,6 @@ router.get("/sentence", async (req, res) => {
 })
 
 router.get("/words", async (req, res) => {
-	// let date
-	// for (let i = 0; i < 5e6; ++i) date = new Date()
-	// console.log(date)
-
 	WordList.countDocuments().exec((err, count) => {
 		var r = Math.floor(Math.random() * count)
 		WordList.findOne()
