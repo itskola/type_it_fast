@@ -1,8 +1,7 @@
 const mongoose = require("mongoose")
 const Joi = require("joi")
 
-// const minUsername = 1; const maxUsername = 50
-// const minPassword = 1; const maxPassword = 50
+const { generateHash } = require("../util/hash")
 
 const User = mongoose.model(
 	"User",
@@ -24,6 +23,13 @@ const User = mongoose.model(
 			required: true,
 			trim: true,
 		},
+	}).pre("save", function (next) {
+		generateHash(this.password)
+			.then(hash => {
+				this.password = hash
+				next()
+			})
+			.catch(err => next(err))
 	})
 )
 

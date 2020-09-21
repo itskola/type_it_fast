@@ -1,10 +1,10 @@
 const router = require("express").Router()
 
-const Auth = require("../util/auth")
-const Error = require("../util/error")
-
 const Sentence = require("../models/sentence")
 const WordList = require("../models/wordList")
+
+const Auth = require("../util/auth")
+const Error = require("../util/error")
 
 router.use(Auth.verify)
 

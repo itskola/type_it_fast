@@ -1,9 +1,9 @@
 const router = require("express").Router()
 
+const { User, exists: existingUser, validate: validateUser } = require("../models/user")
+
 const Auth = require("../util/auth")
 const Error = require("../util/error")
-
-const { User, exists: existingUser, validate: validateUser } = require("../models/user")
 
 router.route("/")
 	.post(async (req, res) => {
