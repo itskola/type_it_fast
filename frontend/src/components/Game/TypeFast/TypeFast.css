@@ -8,7 +8,7 @@
 
 .type-this, .type-here {
 	padding: 10px 15px;
-	box-shadow: 0 0 5px var(--shadow-dark);
+	box-shadow: 0 0 5px 1px var(--shadow-dark);
 }
 
 .type-this {

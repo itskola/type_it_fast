@@ -50,4 +50,9 @@ class TextMode {
 	}
 }
 
+// Initialize State
+// TextMode.state = TextMode.setState(TextMode.state, {
+// 	type: localStorage.getItem(Token) || ActionType.Words,
+// })
+
 export { TextModeContext, useTextModeContext, TextMode, TextModeAction }

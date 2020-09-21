@@ -16,7 +16,6 @@ const _form = {
 
 // TODO: add password recovery
 	/* <Button variant="link" className="p-0 mt-1">Forgot your password?</Button> */
-	// some id's are not unique
 function _Form({ id, display, onLogin, onRegister, errors={} }) {
 	const [form, setForm] = useState({
 		username: "",

@@ -61,7 +61,7 @@ function Intro() {
 			.catch(({ response: { data } }) => setRegisterErrors(data))
 	}
 
-	// FIXME: if server is offline, app wil continuosly load
+	// FIXME: if server is offline, app wil continuously load
 	useEffect(() => {
 		axios.get(endpoints.Login)
 			.then(({ data }) => {
@@ -81,7 +81,7 @@ function Intro() {
 					<Toast autohide
 						className="toast-top"
 						show={showToast}
-						delay={2000}
+						delay={20000}
 						onClose={() => setShowToast(false)}
 					>
 						<Toast.Body>{toastMsg}</Toast.Body>

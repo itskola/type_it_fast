@@ -3,6 +3,22 @@ h1, h2, h3, p {
 	padding: 0;
 }
 
+/* InputGroup ========================================= */
+
+.input-group {
+	background-color: var(--bg-main);
+}
+
+.input-group input {
+	color: var(--txt-main-dark) !important;
+}
+
+.input-group-text {
+	color: var(--txt-main-dark);
+}
+
+/* ========================================= InputGroup */
+
 /* Tooltip ============================================ */
 
 #tooltip {
@@ -73,8 +89,11 @@ h1, h2, h3, p {
 /* Toast ============================================== */
 
 .toast {
-	color: var(--txt-main);
-	background-color: var(--bg-main);
+	color: var(--txt-main-light);
+	background-color: var(--bg-main-dark);
+	border: none;
+	border-radius: 0;
+	box-shadow: 0 0 3px var(--shadow-dark);
 }
 
 .toast-top {
@@ -91,18 +110,19 @@ h1, h2, h3, p {
 .dropdown-menu {
 	border: none !important;
 	
-	background-color: var(--txt-main) !important;
+	background-color: var(--bg-main-light) !important;
 	border-radius: 0;
+	box-shadow: 0 0 5px 0px var(--shadow-dark);
 }
 
 .dropdown-item {
 	font-size: 0.9rem;
-	color: var(--bg-main) !important;
+	color: var(--txt-main-light) !important;
 	padding: 3px 15px;
 }
 
 .dropdown-item:hover {
-	background-color: var(--txt-main-dark) !important;
+	background-color: var(--bg-main) !important;
 }
 
 /* =========================================== Dropdown */
@@ -112,13 +132,14 @@ h1, h2, h3, p {
 .modal-content {
 	padding: 0 15px;
 	border: none !important;
-	border-radius: 10px !important;
-	background-color: var(--txt-main-light) !important;
+	border-radius: 0;
+	background-color: var(--bg-main-dark) !important;
+	box-shadow: 0 0 8px var(--shadow-dark);
 }
 
 .modal-header, .modal-body, .modal-footer {
-	color: var(--bg-main) !important;
-	background-color: var(--txt-main-light) !important;
+	color: var(--txt-main-light) !important;
+	background-color: var(--bg-main-dark) !important;
 	border-color: var(--bg-main) !important;
 }
 
@@ -132,6 +153,7 @@ h1, h2, h3, p {
 }
 
 .modal-header .close {
+	color: var(--txt-main-light);
 	margin: 0 !important;
 	padding: 0 !important;
 }

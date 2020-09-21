@@ -13,10 +13,10 @@
 		#4a4acc, #088880
 	);
 
-	--shadow-light:  rgb(200, 200, 200);
-	--shadow-dark:  rgb(10, 10, 10);
+	--shadow-light: rgb(125, 125, 125);
+	--shadow-dark: rgb(10, 10, 10);
 
-	--correct: rgb(15, 185, 15);
+	--correct: rgb(15, 165, 15);
 	--incorrect: rgb(185, 15, 15);
 }
 

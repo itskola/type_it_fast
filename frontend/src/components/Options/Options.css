@@ -28,7 +28,7 @@
 
 .fa-lightbulb {
 	font-size: 1rem;
-	color: black;
+	color: var(--shadow-dark);
 }
 
 #options .option {
@@ -38,5 +38,5 @@
 }
 
 .option .fa-check {
-	color: green;
+	color: var(--correct);
 }
