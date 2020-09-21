@@ -11,21 +11,22 @@ const ActionType = {
 }
 const Token = "textMode"
 
-class TextModeAction {
-	static Modes = {
+const TextModeAction = {
+	Mode: {
 		Sentences: ActionType.Sentences,
 		Words: ActionType.Words,
-	}
+	},
 
-	static Sentences = () => ({ type: ActionType.Sentences })
+	Sentences: () => ({ type: ActionType.Sentences }),
+	Words: () => ({ type: ActionType.Words }),
 
-	static Words = () => ({ type: ActionType.Words })
+	Set: () => ({ type: localStorage.getItem(Token) }),
 }
 
 class TextMode {
 	static state = {
-		mode: localStorage.getItem(Token) || ActionType.Sentences,
-		endpoint: endpoints.Sentence,
+		mode: "",
+		endpoint: "",
 	}
 
 	static setState = (state, { type }) => {
@@ -51,8 +52,8 @@ class TextMode {
 }
 
 // Initialize State
-// TextMode.state = TextMode.setState(TextMode.state, {
-// 	type: localStorage.getItem(Token) || ActionType.Words,
-// })
+TextMode.state = TextMode.setState(TextMode.state, {
+	type: localStorage.getItem(Token) || ActionType.Words,
+})
 
 export { TextModeContext, useTextModeContext, TextMode, TextModeAction }

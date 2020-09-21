@@ -1,12 +1,12 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 
 import { useAuthContext, AuthAction } from "../../context/auth"
 import { useTextModeContext, TextModeAction } from "../../context/textMode"
 import { endpoints } from "../../util/endpoints"
 
+import DeleteAccount from "./DeleteAccount"
+
 import Dropdown from "react-bootstrap/Dropdown"
-import Button from "react-bootstrap/Button"
-import Modal from "react-bootstrap/Modal"
 
 import axios from "axios"
 
@@ -36,23 +36,21 @@ function Options() {
 			.catch(() => {})
 	}
 
-	const handleDeleteAccount = () => {
-		axios.delete(endpoints.DeleteAccount)
-			.then(() => setAuthState(AuthAction.DeleteAccount()))
-			.catch(() => {})
-	}
-
 	// TODO: change color theme ...
 	const handleThemeChange = () => {
-		console.log("Color Theme handler")
+		console.log("Change ColorTheme handler")
 	}
 
 	const handleTextModeStateChange = (action, mode) => {
 		if (mode !== textModeState.mode) setTextModeState(action)
 	}
 
-	const isSentencesMode = textModeState.mode === TextModeAction.Modes.Sentences
-	const isWordsMode = textModeState.mode === TextModeAction.Modes.Words
+	useEffect(() => {
+		setTextModeState(TextModeAction.Set())
+	}, [setTextModeState])
+
+	const isSentencesMode = textModeState.mode === TextModeAction.Mode.Sentences
+	const isWordsMode = textModeState.mode === TextModeAction.Mode.Words
 
 	return (
 		<div id="options">
@@ -98,27 +96,7 @@ function Options() {
 				</Dropdown.Menu>
 			</Dropdown>
 
-			<Modal show={showDeleteAccount}
-				onHide={() => setShowDeleteAccount(false)}
-			>
-				<Modal.Header closeButton>
-					<Modal.Title>
-						<i className="fa fa-exclamation-triangle"></i>
-						Delete account?
-					</Modal.Title>
-				</Modal.Header>
-				<Modal.Body>
-					Click on "Delete" button to confirm that you want to delete your account.
-				</Modal.Body>
-				<Modal.Footer>
-					<Button variant="danger" onClick={handleDeleteAccount}>
-						Delete
-					</Button>
-					<Button variant="secondary" onClick={() => setShowDeleteAccount(false)}>
-						Cancel
-					</Button>
-				</Modal.Footer>
-			</Modal>
+			<DeleteAccount show={showDeleteAccount} setShow={setShowDeleteAccount} />
 		</div>
 	)
 }

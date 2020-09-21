@@ -4,9 +4,9 @@ import { useAuthContext } from "../../context/auth"
 import Tabs from "react-bootstrap/Tabs"
 import Tab from "react-bootstrap/Tab"
 
+import ActiveUsers from "./ActiveUsers/ActiveUsers"
 import Messages from "./Messages/Messages"
 import Input from "./Input/Input"
-import ActiveUsers from "./ActiveUsers/ActiveUsers"
 
 import io from "socket.io-client"
 
@@ -25,22 +25,24 @@ function Chat() {
 
 		socket.emit("join", { username: authState.username })
 		socket.on("users", ({ connectedUsers }) => {
-			setUsers(users => connectedUsers)
+			setUsers(connectedUsers)
 		})
 
 		socket.on("message", newMessage => {
 			setMessages(messages => [...messages, newMessage])
 		})
 
-		// socket.on("disconnect")
+		return () => {
+			socket.disconnect()
+		}
 	}, [authState.username])
 
 	const sendMessage = ({ target: { value } }) => {
 		if (value.trim().length === 0) return
 
-		const newMessage = { sender: authState.username, text: value }
-		setMessages([...messages, newMessage])
-		socket.emit("message", newMessage)
+		const message = { sender: authState.username, text: value }
+		setMessages([...messages, message])
+		socket.emit("message", message)
 
 		return true
 	}

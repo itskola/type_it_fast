@@ -4,7 +4,7 @@ const http = require("http")
 
 require("dotenv").config({ path: "./config/.env" })
 const DB_URI = process.env.DB_URI
-const PORT = process.env.PORT || 5000
+const PORT = process.env.PORT
 
 // Database ==============================================
 
@@ -31,20 +31,36 @@ app.use(require("cookie-parser")())
 
 // ============================================ Middleware
 
-const connectedUsers = new Set()
+const connUsers = (function () {
+	const users = []
+
+	return {
+		add: (id, username) => {
+			users.push({ id, username })
+		},
+		remove: id => {
+			const index = users.findIndex(user => user.id === id)
+			users.splice(index, 1)
+		},
+		getUsernames: () => users.map(user => user.username),
+	}
+})()
 
 io.on("connect", socket => {
 	socket.on("join", ({ username }) => {
-		connectedUsers.add(username)
-		io.emit("users", { connectedUsers: [...connectedUsers] })
+		// console.log("New:", socket.id, "-", username)
+		connUsers.add(socket.id, username)
+		io.emit("users", { connectedUsers: connUsers.getUsernames() })
 	})
 
-	socket.on("message", newMessage => {
-		socket.broadcast.emit("message", newMessage)
+	socket.on("message", message => {
+		socket.broadcast.emit("message", message)
 	})
 
 	socket.on("disconnect", () => {
-		console.log("user disconnected")
+		// console.log("New:", socket.i	d, "-", username)
+		connUsers.remove(socket.id)
+		io.emit("users", { connectedUsers: connUsers.getUsernames() })
 	})
 })
 

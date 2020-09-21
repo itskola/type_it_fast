@@ -43,7 +43,7 @@
 
 .message-container-right .message-text {
     background: var(--accent-color);
-    color: var(--txt-main);
+    color: var(--txt-main-light);
     border-radius: var(--message-radius);
 	border-top-right-radius: 0;
 }

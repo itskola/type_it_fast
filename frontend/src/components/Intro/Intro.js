@@ -61,7 +61,6 @@ function Intro() {
 			.catch(({ response: { data } }) => setRegisterErrors(data))
 	}
 
-	// FIXME: if server is offline, app wil continuously load
 	useEffect(() => {
 		axios.get(endpoints.Login)
 			.then(({ data }) => {
@@ -78,16 +77,15 @@ function Intro() {
 				</Spinner>
 			) : (
 				<div className="join-inner-container">
-					<Toast autohide
-						className="toast-top"
+					<Toast className="toast-top"
+						autohide delay={20000}
 						show={showToast}
-						delay={20000}
 						onClose={() => setShowToast(false)}
 					>
 						<Toast.Body>{toastMsg}</Toast.Body>
 					</Toast>
 
-					<Title className="title" />
+					<Title />
 
 					<Tabs activeKey={activeTab} onSelect={setActiveTab}>
 						<Tab eventKey={formTabs.Login} title="Login">

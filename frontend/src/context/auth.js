@@ -5,26 +5,24 @@ const useAuthContext = () => useContext(AuthContext)
 
 const ActionType = {
 	Login: "login",
-	Logout: "logout"
+	Logout: "logout",
 }
 const Token = "auth"
 
-class AuthAction {
-	static LocalAuth = () => localStorage.getItem(Token)
-
-	static Login = payload => ({
+const AuthAction = {
+	LocalAuth: () => localStorage.getItem(Token),
+	
+	Login: payload => ({
 		type: ActionType.Login,
 		payload,
-	})
-
-	static Logout = () => ({
+	}),
+	Logout: () => ({
 		type: ActionType.Logout,
 		payload: {},
-	})
-
-	static DeleteAccount = () => {
+	}),
+	DeleteAccount: () => {
 		return AuthAction.Logout()
-	}
+	},
 }
 
 class Auth {

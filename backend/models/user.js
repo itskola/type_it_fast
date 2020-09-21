@@ -1,7 +1,7 @@
 const mongoose = require("mongoose")
 const Joi = require("joi")
 
-const { generateHash } = require("../util/hash")
+const Hash = require("../util/hash")
 
 const User = mongoose.model(
 	"User",
@@ -24,7 +24,7 @@ const User = mongoose.model(
 			trim: true,
 		},
 	}).pre("save", function (next) {
-		generateHash(this.password)
+		Hash.generate(this.password)
 			.then(hash => {
 				this.password = hash
 				next()
