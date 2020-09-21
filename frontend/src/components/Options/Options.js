@@ -13,8 +13,7 @@ import axios from "axios"
 import "./Options.css"
 
 const CustomToggle = React.forwardRef(({ onClick, children, ...rest }, ref) => (
-	<button
-		ref={ref}
+	<button ref={ref}
 		onClick={e => {
 			e.preventDefault()
 			onClick(e)
@@ -32,15 +31,13 @@ function Options() {
 	const [showDeleteAccount, setShowDeleteAccount] = useState(false)
 
 	const handleLogout = () => {
-		axios
-			.delete(endpoints.Logout)
+		axios.delete(endpoints.Logout)
 			.then(() => setAuthState(AuthAction.Logout()))
 			.catch(() => {})
 	}
 
 	const handleDeleteAccount = () => {
-		axios
-			.delete(endpoints.DeleteAccount)
+		axios.delete(endpoints.DeleteAccount)
 			.then(() => setAuthState(AuthAction.DeleteAccount()))
 			.catch(() => {})
 	}
@@ -53,6 +50,9 @@ function Options() {
 	const handleTextModeStateChange = (action, mode) => {
 		if (mode !== textModeState.mode) setTextModeState(action)
 	}
+
+	const isSentencesMode = textModeState.mode === TextModeAction.Modes.Sentences
+	const isWordsMode = textModeState.mode === TextModeAction.Modes.Words
 
 	return (
 		<div id="options">
@@ -67,36 +67,30 @@ function Options() {
 						<i className="fa fa-lightbulb"></i>
 					</Dropdown.Item>
 					<Dropdown.Divider className="mx-2" />
-					<Dropdown.Item
-						className="option"
+					<Dropdown.Item className="option"
 						onClick={() =>
 							handleTextModeStateChange(
-								TextModeAction.Sentences(),
-								TextModeAction.Modes.Sentences
+								TextModeAction.Sentences(), TextModeAction.Modes.Sentences
 							)
 						}
 					>
 						<span>Sentences</span>
-						{textModeState.mode === TextModeAction.Modes.Sentences && (
-							<i className="fa fa-check"></i>
-						)}
+						{isSentencesMode && <i className="fa fa-check"></i>}
 					</Dropdown.Item>
-					<Dropdown.Item
-						className="option"
+					<Dropdown.Item className="option"
 						onClick={() =>
 							handleTextModeStateChange(
-								TextModeAction.Words(),
-								TextModeAction.Modes.Words
+								TextModeAction.Words(), TextModeAction.Modes.Words
 							)
 						}
 					>
 						<span>Words</span>
-						{textModeState.mode === TextModeAction.Modes.Words && (
-							<i className="fa fa-check"></i>
-						)}
+						{isWordsMode && <i className="fa fa-check"></i>}
 					</Dropdown.Item>
 					<Dropdown.Divider className="mx-2" />
-					<Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
+					<Dropdown.Item onClick={handleLogout}>
+						Logout
+					</Dropdown.Item>
 					<Dropdown.Divider className="mx-2" />
 					<Dropdown.Item onClick={() => setShowDeleteAccount(true)}>
 						Delete account
@@ -104,31 +98,23 @@ function Options() {
 				</Dropdown.Menu>
 			</Dropdown>
 
-			<Modal
-				show={showDeleteAccount}
+			<Modal show={showDeleteAccount}
 				onHide={() => setShowDeleteAccount(false)}
 			>
 				<Modal.Header closeButton>
 					<Modal.Title>
-						<i
-							className="fa fa-exclamation-triangle"
-							aria-hidden="true"
-						></i>
+						<i className="fa fa-exclamation-triangle"></i>
 						Delete account?
 					</Modal.Title>
 				</Modal.Header>
 				<Modal.Body>
-					Click on "Delete" button to confirm that you want to delete your
-					account.
+					Click on "Delete" button to confirm that you want to delete your account.
 				</Modal.Body>
 				<Modal.Footer>
 					<Button variant="danger" onClick={handleDeleteAccount}>
 						Delete
 					</Button>
-					<Button
-						variant="secondary"
-						onClick={() => setShowDeleteAccount(false)}
-					>
+					<Button variant="secondary" onClick={() => setShowDeleteAccount(false)}>
 						Cancel
 					</Button>
 				</Modal.Footer>

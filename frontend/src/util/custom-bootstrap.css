@@ -91,7 +91,7 @@ h1, h2, h3, p {
 .dropdown-menu {
 	border: none !important;
 	
-	background-color: var(--txt-main-light) !important;
+	background-color: var(--txt-main) !important;
 	border-radius: 0;
 }
 

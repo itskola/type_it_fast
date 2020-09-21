@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react"
 
 import { useTextModeContext } from "../../../context/textMode"
 
-import TypeThis from "./TypeThis"
+import Spinner from "react-bootstrap/Spinner"
 
 import axios from "axios"
 
@@ -40,13 +40,17 @@ function TypeFast() {
 		}
 	}
 
+	const [loadingText, setLoadingText] = useState(false)
+
 	useEffect(() => {
+		setLoadingText(true)
 		axios.get(textModeState.endpoint)
 			.then(({ data }) => { 
 				setText(data)
-				typeHere.current.focus() 
+				setLoadingText(false)
+				typeHere.current.focus()
 			})
-			.catch(({ result: { data } }) => { setText("-") })
+			.catch(() => { setText("-") })
 	}, [textModeState.endpoint])
 
 	useEffect(() => {
@@ -54,13 +58,20 @@ function TypeFast() {
 	}, [text])
 
 	return (
-		<div id="games" className="scrollbar-hidden">
+		<div className="typefast-outer-container">
 			<div className="typefast-inner-container">
-				<TypeThis ref={typeThis} text={text} />
+				<div ref={typeThis} className="type-this">
+					{loadingText ? (
+						<Spinner animation="border" />
+					) : (
+						text.split(" ").map((word, i) => (
+							<span key={i} className="word">{word + " "}</span>
+						))
+					)}
+				</div>
 
-				<input ref={typeHere} 
-					className="type-here" 
-					type="text" value={typed} 
+				<input ref={typeHere} className="type-here" 
+					type="text" value={typed}
 					onChange={handleInput}
 				/>
 			</div>

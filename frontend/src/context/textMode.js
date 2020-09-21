@@ -6,43 +6,43 @@ const TextModeContext = createContext()
 const useTextModeContext = () => useContext(TextModeContext)
 
 const ActionType = {
-	Words: "words",
 	Sentences: "sentences",
+	Words: "words",
 }
 const Token = "textMode"
 
 class TextModeAction {
 	static Modes = {
-		Words: ActionType.Words,
 		Sentences: ActionType.Sentences,
+		Words: ActionType.Words,
 	}
 
-	static Words = () => ({ type: ActionType.Words })
-
 	static Sentences = () => ({ type: ActionType.Sentences })
+
+	static Words = () => ({ type: ActionType.Words })
 }
 
 class TextMode {
 	static state = {
-		mode: localStorage.getItem(Token) || ActionType.Senteces,
+		mode: localStorage.getItem(Token) || ActionType.Sentences,
 		endpoint: endpoints.Sentence,
 	}
 
 	static setState = (state, { type }) => {
 		switch (type) {
-			case ActionType.Words:
-				localStorage.setItem(Token, type)
-				return {
-					...state,
-					mode: localStorage.getItem(Token),
-					endpoint: endpoints.Words,
-				}
 			case ActionType.Sentences:
 				localStorage.setItem(Token, type)
 				return {
 					...state,
 					mode: localStorage.getItem(Token),
 					endpoint: endpoints.Sentence,
+				}
+			case ActionType.Words:
+				localStorage.setItem(Token, type)
+				return {
+					...state,
+					mode: localStorage.getItem(Token),
+					endpoint: endpoints.Words,
 				}
 			default:
 				console.error(`Action "${type}" is not supported`)
