@@ -8,10 +8,7 @@
 	--bg-main-dark: #1d1e21;
 
 	--accent-color: #4a4acc;
-	--accent-color-gradient: linear-gradient(
-		to left,
-		#4a4acc, #088880
-	);
+	--accent-color-gradient: linear-gradient(to left, #4a4acc, #088880);
 
 	--shadow-light: rgb(125, 125, 125);
 	--shadow-dark: rgb(10, 10, 10);
@@ -36,16 +33,27 @@ textarea {
 }
 
 body {
-	font-size: 62.5%;
 	height: 100vh;
-	background-color: var(--bg-main);
+	font-size: 62.5%;
 	color: var(--txt-main);
+	background-color: var(--bg-main);
 }
 
 /* ==================================================== */
 
 #root {
 	height: 100%;
+}
+
+.strip-css-btn,
+.strip-css-input {
+	background: none;
+	border: none;
+	outline: none;
+}
+
+.strip-css-btn:focus {
+	outline: none;
 }
 
 /* Hide Scrollbar ====================================== */

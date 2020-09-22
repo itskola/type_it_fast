@@ -55,7 +55,9 @@ function Options() {
 	return (
 		<div id="options">
 			<Dropdown drop="right">
-				<Dropdown.Toggle as={CustomToggle} id="dropdown-options">
+				<Dropdown.Toggle as={CustomToggle} 
+					id="dropdown-options" className="strip-css-btn"
+				>
 					<i className="fa fa-cog"></i>
 				</Dropdown.Toggle>
 
@@ -64,11 +66,11 @@ function Options() {
 						<span>Theme</span>
 						<i className="fa fa-lightbulb"></i>
 					</Dropdown.Item>
-					<Dropdown.Divider className="mx-2" />
+					<Dropdown.Divider />
 					<Dropdown.Item className="option"
 						onClick={() =>
 							handleTextModeStateChange(
-								TextModeAction.Sentences(), TextModeAction.Modes.Sentences
+								TextModeAction.Sentences(), TextModeAction.Mode.Sentences
 							)
 						}
 					>
@@ -78,18 +80,18 @@ function Options() {
 					<Dropdown.Item className="option"
 						onClick={() =>
 							handleTextModeStateChange(
-								TextModeAction.Words(), TextModeAction.Modes.Words
+								TextModeAction.Words(), TextModeAction.Mode.Words
 							)
 						}
 					>
 						<span>Words</span>
 						{isWordsMode && <i className="fa fa-check"></i>}
 					</Dropdown.Item>
-					<Dropdown.Divider className="mx-2" />
+					<Dropdown.Divider />
 					<Dropdown.Item onClick={handleLogout}>
 						Logout
 					</Dropdown.Item>
-					<Dropdown.Divider className="mx-2" />
+					<Dropdown.Divider />
 					<Dropdown.Item onClick={() => setShowDeleteAccount(true)}>
 						Delete account
 					</Dropdown.Item>

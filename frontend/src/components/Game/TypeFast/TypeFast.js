@@ -2,6 +2,9 @@ import React, { useEffect, useRef, useState } from "react"
 
 import { useTextModeContext } from "../../../context/textMode"
 
+import Statistics from "../Statistics/Statistics"
+import Timer from "../Timer/Timer"
+
 import Spinner from "react-bootstrap/Spinner"
 
 import axios from "axios"
@@ -10,9 +13,14 @@ import "./TypeFast.css"
 
 function TypeFast() {
 	const { textModeState } = useTextModeContext()
-	const [text, setText] = useState("")
+
+	const [text, setText] = useState({
+		value: "",
+		loading: true
+	})
+
 	const [typed, setTyped] = useState("")
-	const atWord  = useRef(0)
+	const atWord = useRef(0)
 
 	const typeThis = useRef()
 	const typeHere = useRef()
@@ -40,14 +48,18 @@ function TypeFast() {
 		}
 	}
 
-	const [loadingText, setLoadingText] = useState(false)
-
 	useEffect(() => {
-		setLoadingText(true)
+		setText(text => ({
+			...text,
+			loading: true
+		}))
+
 		axios.get(textModeState.endpoint)
 			.then(({ data }) => { 
-				setText(data)
-				setLoadingText(false)
+				setText({
+					value: data, loading: false
+				})
+				atWord.current = 0
 				typeHere.current.focus()
 			})
 			.catch(() => { setText("-") })
@@ -61,19 +73,23 @@ function TypeFast() {
 		<div className="typefast-outer-container">
 			<div className="typefast-inner-container">
 				<div ref={typeThis} className="type-this">
-					{loadingText ? (
+					{text.loading ? (
 						<Spinner animation="border" />
 					) : (
-						text.split(" ").map((word, i) => (
+						text.value.split(" ").map((word, i) => (
 							<span key={i} className="word">{word + " "}</span>
 						))
 					)}
 				</div>
 
-				<input ref={typeHere} className="type-here" 
+				<Timer />
+
+				<input ref={typeHere} className="strip-css-input type-here" 
 					type="text" value={typed}
 					onChange={handleInput}
 				/>
+
+				<Statistics />
 			</div>
 		</div>
 	)

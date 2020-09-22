@@ -8,14 +8,12 @@
 
 .type-this, .type-here {
 	padding: 10px 15px;
-	box-shadow: 0 0 5px 1px var(--shadow-dark);
 }
 
 .type-this {
 	text-align: center;
 	color: var(--txt-main);
 	background: var(--bg-main-dark);
-	margin: 20px 0;
 }
 
 .type-this .word {
@@ -23,33 +21,28 @@
 }
 
 .type-here {
-	background: none;
-	border: none;
-	outline: none;
-
 	font-size: 1.4rem;
 	text-align: center;
 	color: var(--txt-main);
+	background: var(--bg-main-light) !important;
 	width: 325px;
 }
 
 /* ==================================================== */
 
 .word {
+	border-radius: 3px;
 	transition: background-color 0.1s linear;
 }
 
 .current-word {
 	background-color: var(--bg-main-light);
-	border-radius: 3px;
 }
 
 .correct-word {
 	color: var(--correct);
-	border-radius: 3px;
 }
 
 .incorrect-word {
 	color: var(--incorrect);
-	border-radius: 3px;
 }

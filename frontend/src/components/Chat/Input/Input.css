@@ -1,9 +1,3 @@
-.mb-none {
-	border: none;
-	outline: none;
-	background: none;
-}
-
 .message-focus {
 	color: var(--accent-color) !important;
 	border-color: var(--accent-color) !important;

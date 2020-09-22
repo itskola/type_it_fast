@@ -52,7 +52,7 @@ h1, h2, h3, p {
 .nav.nav-tabs {
 	border: none;
 	outline: none;
-	
+
 	display: flex;
 	align-items: stretch;
 }
@@ -71,7 +71,7 @@ h1, h2, h3, p {
 	background-color: var(--bg-main);
 }
 
-.nav-item.nav-link.active {	
+.nav-item.nav-link.active {
 	color: var(--bg-main);
 	background-color: var(--txt-main);
 }
@@ -108,9 +108,8 @@ h1, h2, h3, p {
 /* Dropdown =========================================== */
 
 .dropdown-menu {
-	border: none !important;
-	
 	background-color: var(--bg-main-light) !important;
+	border: none !important;
 	border-radius: 0;
 	box-shadow: 0 0 5px 0px var(--shadow-dark);
 }
@@ -119,10 +118,16 @@ h1, h2, h3, p {
 	font-size: 0.9rem;
 	color: var(--txt-main-light) !important;
 	padding: 3px 15px;
+	letter-spacing: 0.2px;
 }
 
 .dropdown-item:hover {
 	background-color: var(--bg-main) !important;
+}
+
+.dropdown-divider {
+	margin: 5px;
+	border-color: var(--bg-main);
 }
 
 /* =========================================== Dropdown */
@@ -186,3 +191,14 @@ h1, h2, h3, p {
 }
 
 /* ============================================== Modal */
+
+.table {
+	margin: 0;
+	box-shadow: 0 0 3px var(--shadow-dark);
+}
+
+.table th,
+.table td {
+	font-size: 1rem;
+	color: var(--txt-main-dark);
+}

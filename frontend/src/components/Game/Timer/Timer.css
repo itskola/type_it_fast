@@ -1,0 +1,11 @@
+.timer {
+	font-size: 2rem;
+}
+
+.timer button {
+	color: var(--txt-main);
+}
+
+.time {
+	padding: 0 15px;
+}

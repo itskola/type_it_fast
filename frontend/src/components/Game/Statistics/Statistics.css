@@ -1,0 +1,11 @@
+.statistics-outer-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+td:first-child {
+	text-align: end;
+	letter-spacing: 0.2px;
+	padding-right: 20px !important;
+}

@@ -1,9 +1,3 @@
-#dropdown-options {
-	background: none;
-	border: none;
-	outline: none;
-}
-
 #dropdown-options:after {
 	content: none;
 }
