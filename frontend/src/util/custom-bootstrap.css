@@ -115,7 +115,7 @@ h1, h2, h3, p {
 }
 
 .dropdown-item {
-	font-size: 0.9rem;
+	font-size: 0.95rem;
 	color: var(--txt-main-light) !important;
 	padding: 3px 15px;
 	letter-spacing: 0.2px;

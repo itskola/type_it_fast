@@ -64,7 +64,7 @@ function Options() {
 				<Dropdown.Menu>
 					<Dropdown.Item className="option" onClick={handleThemeChange}>
 						<span>Theme</span>
-						<i className="fa fa-lightbulb"></i>
+						<i className="fa fa-sun"></i>
 					</Dropdown.Item>
 					<Dropdown.Divider />
 					<Dropdown.Item className="option"

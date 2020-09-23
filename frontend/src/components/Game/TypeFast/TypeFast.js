@@ -16,7 +16,14 @@ function TypeFast() {
 
 	const [text, setText] = useState({
 		value: "",
-		loading: true
+		loading: true,
+	})
+
+	const [startTimer, setStartTimer] = useState(false)
+	const [resetTimer, setResetTimer] = useState(false)
+
+	const [statistics, setStatistics] = useState({
+		correctWords: 0,
 	})
 
 	const [typed, setTyped] = useState("")
@@ -26,24 +33,25 @@ function TypeFast() {
 	const typeHere = useRef()
 
 	const handleInput = ({ target: { value } }) => {
+		if (!startTimer) setStartTimer(true)
+
 		setTyped(value)
 
 		const typeThisNode = typeThis.current
 		if (atWord.current === typeThisNode.children.length) return
-		
+
 		if (value[value.length - 1] === " ") {
 			const currentWord = typeThisNode.children[atWord.current]
 
 			currentWord.classList.remove("current-word")
 			if (currentWord.textContent === value)
 				currentWord.classList.add("correct-word")
-			else
-				currentWord.classList.add("incorrect-word")
-			
+			else currentWord.classList.add("incorrect-word")
+
 			++atWord.current
 			if (atWord.current < typeThisNode.children.length)
 				typeThisNode.children[atWord.current].classList.add("current-word")
-			
+
 			setTyped("")
 		}
 	}
@@ -51,14 +59,12 @@ function TypeFast() {
 	useEffect(() => {
 		setText(text => ({
 			...text,
-			loading: true
+			loading: true,
 		}))
 
 		axios.get(textModeState.endpoint)
-			.then(({ data }) => { 
-				setText({
-					value: data, loading: false
-				})
+			.then(({ data }) => {
+				setText({ value: data, loading: false })
 				atWord.current = 0
 				typeHere.current.focus()
 			})
@@ -77,14 +83,27 @@ function TypeFast() {
 						<Spinner animation="border" />
 					) : (
 						text.value.split(" ").map((word, i) => (
-							<span key={i} className="word">{word + " "}</span>
+							<span key={i} className="word">
+								{word + " "}
+							</span>
 						))
 					)}
 				</div>
 
-				<Timer />
+				<Timer
+					start={startTimer} startCallback={() => setStartTimer(false)}
+					reset={resetTimer} resetCallback={() => setResetTimer(false)}
+				/>
 
-				<input ref={typeHere} className="strip-css-input type-here" 
+				<button
+					className="reset-timer strip-css-btn"
+					onClick={() => setResetTimer(true)}
+				>
+					<i className="fa fa-sync"></i>
+				</button>
+
+				<input ref={typeHere}
+					className="strip-css-input type-here"
 					type="text" value={typed}
 					onChange={handleInput}
 				/>

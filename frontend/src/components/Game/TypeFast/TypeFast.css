@@ -46,3 +46,15 @@
 .incorrect-word {
 	color: var(--incorrect);
 }
+
+.reset-timer {
+	font-size: 1.8rem;
+	color: var(--txt-main-dark);
+}
+
+.reset-timer:hover {
+	-webkit-animation: fa-spin 550ms ease-out;
+	-moz-animation: fa-spin 550ms ease-out;
+	-o-animation: fa-spin 550ms ease-out;
+	animation: fa-spin 550ms ease-out;
+}
