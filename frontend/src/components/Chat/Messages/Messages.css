@@ -43,3 +43,17 @@
     border-radius: var(--message-radius);
 	border-top-right-radius: 0;
 }
+
+/* ========================================== */
+
+.scroll-down {
+	font-size: 1.1rem;
+	background-color: var(--bg-main-dark) !important;
+	padding: 0 6px;
+	border-radius: 50%;
+
+	position: absolute;
+	bottom: 7%;
+	left: 50%;
+	transform: translateX(-50%);
+}

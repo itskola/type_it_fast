@@ -2,27 +2,27 @@
 	content: none;
 }
 
-.fa-cog {
-	font-size: 1.6rem;
+#dropdown-icon {
+	font-size: 1.45rem;
 	color: var(--txt-main);
 	cursor: pointer;
-	
+
 	transition: color 250ms;
 }
 
-.fa-cog:hover {
+#dropdown-icon:hover {
 	color: var(--txt-main-dark);
-}
-
-.fa-sun {
-	font-size: 1.15rem;
-	color: var(--bg-main-dark);
 }
 
 #options .option {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+}
+
+.option .theme {
+	font-size: 1.1rem;
+	color: var(--bg-main-dark);
 }
 
 .option .fa-check {

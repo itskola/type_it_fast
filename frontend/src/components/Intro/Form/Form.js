@@ -16,7 +16,7 @@ const _form = {
 
 // TODO: add password recovery
 	/* <Button variant="link" className="p-0 mt-1">Forgot your password?</Button> */
-function _Form({ id, display, onLogin, onRegister, errors={} }) {
+function _Form({ id, display, disabled = false, onLogin, onRegister, errors = {} }) {
 	const [form, setForm] = useState({
 		username: "",
 		email: "",
@@ -104,7 +104,8 @@ function _Form({ id, display, onLogin, onRegister, errors={} }) {
 			{display.login && (
 				<Button variant="primary" type="submit" 
 					className="text-uppercase w-100 py-3"
-					onClick={handleLogin}
+					onClick={handleLogin} 
+					disabled={disabled}
 				>
 					Login
 				</Button>
@@ -114,6 +115,7 @@ function _Form({ id, display, onLogin, onRegister, errors={} }) {
 				<Button variant="success" type="submit"
 					className="text-uppercase w-100 py-3"
 					onClick={handleRegister}
+					disabled={disabled}
 				>
 					Register
 				</Button>

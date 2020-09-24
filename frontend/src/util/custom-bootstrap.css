@@ -89,18 +89,12 @@ h1, h2, h3, p {
 /* Toast ============================================== */
 
 .toast {
+	text-align: center;
 	color: var(--txt-main-light);
 	background-color: var(--bg-main-dark);
 	border: none;
 	border-radius: 0;
 	box-shadow: 0 0 3px var(--shadow-dark);
-}
-
-.toast-top {
-	position: absolute;
-    top: 10px;
-    left: 50%;
-    transform: translateX(-50%);
 }
 
 /* ============================================== Toast */
@@ -115,7 +109,7 @@ h1, h2, h3, p {
 }
 
 .dropdown-item {
-	font-size: 0.95rem;
+	font-size: 0.9rem;
 	color: var(--txt-main-light) !important;
 	padding: 3px 15px;
 	letter-spacing: 0.2px;

@@ -1,22 +1,22 @@
-.join-outer-container {
+#intro-outer-container {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	height: 100%;
 }
 
-.join-inner-container {
+#intro-inner-container {
 	width: 395px;
 	background-color: var(--bg-main-light);
 	box-shadow: 0 0 8px var(--shadow-dark);
 	padding: 60px 40px;
 }
 
-.join-inner-container .nav.nav-tabs {
+#intro-inner-container .nav.nav-tabs {
 	margin: 25px 35px;
 }
 
-.join-inner-container .nav-item.nav-link {
+#intro-inner-container .nav-item.nav-link {
 	font-size: 1rem;
 }
 

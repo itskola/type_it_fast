@@ -1,0 +1,16 @@
+.word {
+	border-radius: 3px;
+	transition: background-color 0.1s linear;
+}
+
+.current-word {
+	background-color: var(--bg-main-light);
+}
+
+.correct-word {
+	color: var(--correct);
+}
+
+.incorrect-word {
+	color: var(--incorrect);
+}

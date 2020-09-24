@@ -1,4 +1,4 @@
-.typefast-inner-container {
+#typefast-inner-container {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -29,23 +29,6 @@
 }
 
 /* ==================================================== */
-
-.word {
-	border-radius: 3px;
-	transition: background-color 0.1s linear;
-}
-
-.current-word {
-	background-color: var(--bg-main-light);
-}
-
-.correct-word {
-	color: var(--correct);
-}
-
-.incorrect-word {
-	color: var(--incorrect);
-}
 
 .reset-timer {
 	font-size: 1.8rem;

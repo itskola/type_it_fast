@@ -9,11 +9,11 @@ function Messages({ messages, user }) {
 	const lastScrollTop = useRef(0)
 
 	useEffect(() => {
-		// if user scrolled to top, don't scroll to bottom 
+		// if user scrolled to top, don't scroll to bottom
 		if (lastScrollTop.current > msgRef.current.scrollTop) return
 
 		lastScrollTop.current = msgRef.current.scrollTop
-		
+
 		// scroll to bottom of overflowed div
 		msgRef.current.scrollTop = msgRef.current.scrollHeight
 	})
