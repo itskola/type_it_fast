@@ -15,10 +15,14 @@ router.route("/")
 			let user = await User.findOne({ username: req.body.username })
 			if (user) {
 				if (!(await Hash.compare(req.body.password, user.password))) {
-					return res.status(409).json(
-						Error.CreateMessage(Error.Type.Login, Error.Message.Login)
-					)
+					user = null
 				}
+			}
+
+			if (!user) {
+				return res
+					.status(409)
+					.json(Error.CreateMessage(Error.Type.Login, Error.Message.Login))
 			}
 
 			user = { id: user._id, username: user.username }
