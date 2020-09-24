@@ -4,7 +4,7 @@ import { useAuthContext, AuthAction } from "../../context/auth"
 import { useTextModeContext, TextModeAction } from "../../context/textMode"
 import { endpoints } from "../../util/endpoints"
 
-import DeleteAccount from "./DeleteAccount"
+import DeleteAccount from "./DeleteAccount/DeleteAccount"
 
 import Dropdown from "react-bootstrap/Dropdown"
 

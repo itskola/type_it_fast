@@ -1,0 +1,5 @@
+.fa-exclamation-triangle {
+	font-size: 1.4rem; 
+	color: var(--incorrect);
+	margin-right: 12px;
+}

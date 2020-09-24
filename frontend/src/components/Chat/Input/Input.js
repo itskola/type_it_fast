@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 
 import "./Input.css"
 
@@ -10,7 +10,7 @@ function Input({ onChange, onClick }) {
 
 	const handleChange = e => {
 		msgTypeRef.current.style.height = "auto"
-		msgTypeRef.current.style.height = `${1 + msgTypeRef.current.scrollHeight}px`
+		msgTypeRef.current.style.height = `${msgTypeRef.current.scrollHeight}px`
 		setText(e.target.value)
 
 		if (onChange) onChange(e)
@@ -25,7 +25,7 @@ function Input({ onChange, onClick }) {
 			}
 		}
 	}
-
+	
 	return (
 		<div className={`message-box ${focusClass}`}>
 			<textarea ref={msgTypeRef} 

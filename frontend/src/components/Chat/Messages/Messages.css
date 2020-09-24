@@ -6,13 +6,9 @@
 
 /* ========================================== */
 
-:root {
-	--message-radius: 10px;
-}
-
-/* ========================================== */
-
 .message-container {
+	--message-radius: 10px;
+
     display: table;
     max-width: 80%;
 	word-break: break-all;
@@ -27,8 +23,8 @@
     font-size: 0.85rem;
 	padding: 4px 10px;
 	
-    background-color: var(--txt-main-dark);
     color: var(--bg-main-dark);
+    background-color: var(--txt-main-dark);
     border-radius: var(--message-radius);
 	border-top-left-radius: 0;
 }
@@ -42,8 +38,8 @@
 }
 
 .message-container-right .message-text {
-    background: var(--accent-color);
     color: var(--txt-main-light);
+    background: var(--accent-color);
     border-radius: var(--message-radius);
 	border-top-right-radius: 0;
 }

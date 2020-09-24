@@ -1,12 +1,14 @@
 import React from "react"
 
-import { useAuthContext, AuthAction } from "../../context/auth"
-import { endpoints } from "../../util/endpoints"
+import { useAuthContext, AuthAction } from "../../../context/auth"
+import { endpoints } from "../../../util/endpoints"
 
 import Button from "react-bootstrap/Button"
 import Modal from "react-bootstrap/Modal"
 
 import axios from "axios"
+
+import "./DeleteAccount.css"
 
 function DeleteAccount({ show, setShow }) {
 	const { setAuthState } = useAuthContext()

@@ -31,38 +31,12 @@ app.use(require("cookie-parser")())
 
 // ============================================ Middleware
 
-const connUsers = (function () {
-	const users = []
+// WebSocket =============================================
 
-	return {
-		add: (id, username) => {
-			users.push({ id, username })
-		},
-		remove: id => {
-			const index = users.findIndex(user => user.id === id)
-			users.splice(index, 1)
-		},
-		getUsernames: () => users.map(user => user.username),
-	}
-})()
+const socketioSetup = require("./socketioIndex")
+socketioSetup(io)
 
-io.on("connect", socket => {
-	socket.on("join", ({ username }) => {
-		// console.log("New:", socket.id, "-", username)
-		connUsers.add(socket.id, username)
-		io.emit("users", { connectedUsers: connUsers.getUsernames() })
-	})
-
-	socket.on("message", message => {
-		socket.broadcast.emit("message", message)
-	})
-
-	socket.on("disconnect", () => {
-		// console.log("New:", socket.i	d, "-", username)
-		connUsers.remove(socket.id)
-		io.emit("users", { connectedUsers: connUsers.getUsernames() })
-	})
-})
+// ============================================= WebSocket
 
 // Routes ================================================
 

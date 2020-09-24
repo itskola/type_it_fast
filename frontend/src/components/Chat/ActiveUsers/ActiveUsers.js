@@ -9,7 +9,7 @@ function ActiveUsers({ users }) {
 		<div className="users scrollbar-hidden">
 			<div className="users-total">
 				<span>Total</span>
-				<span>{users.length}</span>
+				<span className="total">{users.length}</span>
 			</div>
 			<div className="user-container">
 				{users.map((user, i) => (
@@ -21,3 +21,4 @@ function ActiveUsers({ users }) {
 }
 
 export default ActiveUsers
+// export default React.memo(ActiveUsers)

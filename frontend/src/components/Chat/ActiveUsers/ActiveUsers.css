@@ -1,3 +1,13 @@
+.users-total,
+.user {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	background-color: var(--bg-main);
+}
+
+/* ========================================== */
+
 .users {
 	overflow: auto;
 	max-height: 100%;
@@ -13,24 +23,19 @@
 	font-size: 0.95rem;
 	text-transform: uppercase;
 	color: var(--correct);
-	border-bottom: 3px solid var(--bg-main-dark);
+	border-bottom: 2px solid var(--bg-main-dark);
+	padding: 3px 5px;
 }
 
-.users-total span:nth-child(2) {
+.users-total .total {
 	background-color: var(--bg-main-light);
-	padding: 2px 10px;
-	border-radius: 50%;
+	padding: 0 5px;
+	border-radius: 5px;	
 }
 
 /* ========================================== */
 
-.users-total,
 .user {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-
-	background-color: var(--bg-main);
 	padding: 3px 10px;
 }
 
@@ -43,8 +48,8 @@
 }
 
 .user-online {
-	color: var(--correct);
 	font-size: 0.45rem;
+	color: var(--correct);
 }
 
 .user:hover {
