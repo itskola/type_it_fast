@@ -1,5 +1,6 @@
 .word {
 	border-radius: 3px;
+
 	transition: background-color 0.1s linear;
 }
 

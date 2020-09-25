@@ -37,10 +37,13 @@ function Options() {
 	const handleLogout = async () => {
 		setWaitingResponse(true)
 
-		await axios.delete(endpoints.Logout)
-
-		setWaitingResponse(false)
-		setAuthState(AuthAction.Logout())
+		try {
+			await axios.delete(endpoints.Logout)
+		} catch (e) {
+		} finally {
+			setWaitingResponse(false)
+			setAuthState(AuthAction.Logout())
+		}
 	}
 
 	// TODO: change color theme ...

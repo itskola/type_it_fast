@@ -2,9 +2,9 @@ import React, { useEffect, useRef, useState } from "react"
 
 import { useTextModeContext } from "../../../context/textMode"
 
-import Words from "./Words/Words"
 import Statistics from "../Statistics/Statistics"
 import Timer from "../Timer/Timer"
+import Words from "./Words/Words"
 
 import Spinner from "react-bootstrap/Spinner"
 
@@ -19,19 +19,23 @@ function TypeFast() {
 		value: [],
 		loading: true,
 	})
+	const [wordsStatus, setWordsStatus] = useState([])
+	const [typedWord, setTypedWord] = useState("")
+	const typeHere = useRef()
+
+	const resetWordsProgress = () => {
+		setWordsStatus([])
+		setTypedWord("")
+		typeHere.current.focus()
+	}
 
 	const [timerState, setTimerState] = useState({
 		start: false,
 		running: false,
-		reset: false,
-		// stop: false
+		reset: false
 	})
 
 	// const [statistics, setStatistics] = useState({correctWords: 0})
-
-	const [typed, setTyped] = useState("")
-
-	const typeHere = useRef()
 
 	const handleInputWithTimer = e => {
 		if (!timerState.running) {
@@ -42,23 +46,18 @@ function TypeFast() {
 		handleInput(e)
 	}
 
-	const [wordIndex, setWordIndex] = useState(0)
-	const [wordsStatus, setWordsStatus] = useState([])
-
 	const handleInput = ({ target: { value } }) => {
-		setTyped(value)
+		setTypedWord(value)
 
-		if (wordIndex === words.value.length) return
+		if (wordsStatus.length === words.value.length) return
 
 		if (value[value.length - 1] === " ") {
-			if (words.value[wordIndex] + " " === value)
+			if (words.value[wordsStatus.length] + " " === value)
 				setWordsStatus([...wordsStatus, true])
 			else
 				setWordsStatus([...wordsStatus, false])
 
-			setWordIndex(wordIndex + 1)
-
-			setTyped("")
+			setTypedWord("")
 		}
 	}
 
@@ -70,10 +69,12 @@ function TypeFast() {
 		axios.get(textModeState.endpoint)
 			.then(({ data }) => {
 				setWords({ value: data.split(" "), loading: false })
-				setWordIndex(0) // add current-word class somehow
-				typeHere.current.focus()
+				resetWordsProgress()
 			})
-			.catch(() => setWords({value: ["-"], loading: false}))
+			.catch(() => { 
+				setWords({value: ["---"], loading: false})
+				resetWordsProgress()
+			})
 	}, [textModeState.endpoint])
 
 	return (
@@ -101,25 +102,21 @@ function TypeFast() {
 							...timerState,
 							running: false, reset: false,
 						})
-						setTyped("")
-						setWordIndex(0)
-						setWordsStatus([])
-						typeHere.current.focus()
+						resetWordsProgress()
 					}}
 				/>
 
 				<button 
 					className="strip-css-btn reset-timer"
-					onClick={() =>
-						setTimerState({ ...timerState, reset: true })
-					}
+					onClick={() => setTimerState({ ...timerState, reset: true }) }
 				>
 					<i className="fa fa-sync"></i>
 				</button>
 
+				{/* try putting input in Component and use memo to stop rendering TypeFast every time */}
 				<input ref={typeHere}
 					className="strip-css-input type-here"
-					type="text" value={typed}
+					type="text" value={typedWord}
 					onChange={handleInputWithTimer}
 				/>
 

@@ -3,31 +3,40 @@ import React from "react"
 import "./Words.css"
 
 function Words({ words, wordsStatus }) {
-	const wordsArr = []
-	for (let i = 0; i < wordsStatus.length; ++i) {
-		wordsArr.push(
+	const wordsJSX = []
+	let atWord
+
+	for (atWord = 0; atWord < wordsStatus.length; ++atWord) {
+		wordsJSX.push(
 			<span
-				key={i}
+				key={atWord}
 				className={
-					wordsStatus[i] === true
+					wordsStatus[atWord] === true
 						? "word correct-word"
 						: "word incorrect-word"
 				}
 			>
-				{words[i] + " "}
+				{words[atWord] + " "}
 			</span>
 		)
 	}
 
-	for (let i = wordsStatus.length; i < words.length; ++i) {
-		wordsArr.push(
-			<span key={i} className="word">
-				{words[i] + " "}
+	if (atWord < words.length) {
+		wordsJSX.push(
+			<span key={atWord} className="word current-word">
+				{words[atWord] + " "}
 			</span>
 		)
+		for (atWord = atWord + 1; atWord < words.length; ++atWord) {
+			wordsJSX.push(
+				<span key={atWord} className="word">
+					{words[atWord] + " "}
+				</span>
+			)
+		}
 	}
 
-	return <>{wordsArr}</>
+	return <>{wordsJSX}</>
 }
 
 export default Words
