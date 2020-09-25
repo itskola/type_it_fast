@@ -14,6 +14,7 @@
 	text-align: center;
 	color: var(--txt-main);
 	background: var(--bg-main-dark);
+	user-select: none;
 }
 
 .type-this .word {
@@ -26,18 +27,4 @@
 	color: var(--txt-main);
 	background: var(--bg-main-light) !important;
 	width: 325px;
-}
-
-/* ==================================================== */
-
-.reset-timer {
-	font-size: 1.8rem;
-	color: var(--txt-main-dark);
-}
-
-.reset-timer:hover {
-	-webkit-animation: fa-spin 550ms ease-out;
-	-moz-animation: fa-spin 550ms ease-out;
-	-o-animation: fa-spin 550ms ease-out;
-	animation: fa-spin 550ms ease-out;
 }

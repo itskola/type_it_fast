@@ -3,9 +3,18 @@
 }
 
 .timer button {
-	color: var(--txt-main);
+	color: var(--txt-main-dark);
+	padding: 0 10px;
+
+	transition: 0.1s linear;
+}
+
+.timer button:hover {
+	color: var(--txt-main-light);
+	transform: translateY(-1%);
 }
 
 .time {
-	padding: 0 15px;
+	padding: 0 5px;
+	user-select: none;
 }

@@ -2,8 +2,8 @@ import React, { useEffect, useRef, useState } from "react"
 
 import { useTextModeContext } from "../../../context/textMode"
 
+import TimerWithReset from "../TimerWithReset/TimerWithReset"
 import Statistics from "../Statistics/Statistics"
-import Timer from "../Timer/Timer"
 import Words from "./Words/Words"
 
 import Spinner from "react-bootstrap/Spinner"
@@ -21,26 +21,29 @@ function TypeFast() {
 	})
 	const [wordsStatus, setWordsStatus] = useState([])
 	const [typedWord, setTypedWord] = useState("")
-	const typeHere = useRef()
+
+	const [typeHereDisabled, setTypeHereDisabled] = useState(false)
+	const typeHereRef = useRef()
 
 	const resetWordsProgress = () => {
 		setWordsStatus([])
+
 		setTypedWord("")
-		typeHere.current.focus()
+		setTypeHereDisabled(false)
+		typeHereRef.current.focus()
 	}
 
 	const [timerState, setTimerState] = useState({
 		start: false,
-		running: false,
-		reset: false
+		reset: false,
 	})
 
 	// const [statistics, setStatistics] = useState({correctWords: 0})
 
 	const handleInputWithTimer = e => {
-		if (!timerState.running) {
+		if (!timerState.start) {
 			setTimerState({
-				...timerState, start: true,
+				start: true, reset: false
 			})
 		}
 		handleInput(e)
@@ -54,8 +57,7 @@ function TypeFast() {
 		if (value[value.length - 1] === " ") {
 			if (words.value[wordsStatus.length] + " " === value)
 				setWordsStatus([...wordsStatus, true])
-			else
-				setWordsStatus([...wordsStatus, false])
+			else setWordsStatus([...wordsStatus, false])
 
 			setTypedWord("")
 		}
@@ -63,7 +65,8 @@ function TypeFast() {
 
 	useEffect(() => {
 		setWords(words => ({
-			...words, loading: true,
+			...words,
+			loading: true,
 		}))
 
 		axios.get(textModeState.endpoint)
@@ -71,8 +74,8 @@ function TypeFast() {
 				setWords({ value: data.split(" "), loading: false })
 				resetWordsProgress()
 			})
-			.catch(() => { 
-				setWords({value: ["---"], loading: false})
+			.catch(() => {
+				setWords({ value: ["---"], loading: false })
 				resetWordsProgress()
 			})
 	}, [textModeState.endpoint])
@@ -84,40 +87,24 @@ function TypeFast() {
 					{words.loading ? (
 						<Spinner animation="border" />
 					) : (
-						<Words words={words.value} wordsStatus={wordsStatus}/>
+						<Words words={words.value} wordsStatus={wordsStatus} />
 					)}
 				</div>
 
-				<Timer
-					start={timerState.start}
-					startCallback={() =>
-						setTimerState({
-							...timerState,
-							start: false, running: true,
-						})
-					}
-					reset={timerState.reset}
-					resetCallback={() => {
-						setTimerState({
-							...timerState,
-							running: false, reset: false,
-						})
-						resetWordsProgress()
-					}}
-				/>
-
-				<button 
-					className="strip-css-btn reset-timer"
-					onClick={() => setTimerState({ ...timerState, reset: true }) }
-				>
-					<i className="fa fa-sync"></i>
-				</button>
-
-				{/* try putting input in Component and use memo to stop rendering TypeFast every time */}
-				<input ref={typeHere}
+				<input ref={typeHereRef} disabled={typeHereDisabled}
 					className="strip-css-input type-here"
 					type="text" value={typedWord}
 					onChange={handleInputWithTimer}
+				/>
+
+				<TimerWithReset state={timerState} setState={setTimerState}
+					onReset={() => {
+						resetWordsProgress()
+					}}
+					onStop={() => {
+						setTypedWord("")
+						setTypeHereDisabled(true)
+					}}
 				/>
 
 				<Statistics />

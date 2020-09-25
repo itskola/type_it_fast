@@ -1,0 +1,18 @@
+.timer-with-reset {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.timer-reset {
+	font-size: 1.6rem;
+	color: var(--txt-main-dark);
+	padding: 2px;
+}
+
+.timer-reset:hover {
+	-webkit-animation: fa-spin 650ms ease-out;
+	-moz-animation: fa-spin 650ms ease-out;
+	-o-animation: fa-spin 650ms ease-out;
+	animation: fa-spin 650ms ease-out;
+}

@@ -1,21 +1,26 @@
-import React, { useState, useEffect, useRef } from "react"
+import React, { useEffect, useState } from "react"
+
+import RealTimer from "./RealTimer"
+import MockTimer from "./MockTimer"
 
 import "./Timer.css"
 
 const changeSeconds = (seconds, op) => {
-	// (seconds == 600) ==> 10 minutes
-
 	let change = 0
 	switch (op) {
 		case "+":
 			change = 30
-			if (seconds < 60) change = 15
+			if (seconds < 5) change = 1
+			else if (seconds < 15) change = 5
+			else if (seconds < 60) change = 15
 			else if (seconds >= 600) change = 60
 			break
 		case "-":
 			change = -30
-			if (seconds > 600) change = -60
+			if (seconds <= 5) change = -1
+			else if (seconds <= 15) change = -5
 			else if (seconds <= 60) change = -15
+			else if (seconds > 600) change = -60
 			break
 		default:
 			break
@@ -35,7 +40,7 @@ function formatSeconds(seconds) {
 	partsOfTime.push(Math.ceil(remainingSeconds)) // seconds
 
 	let startFrom = partsOfTime.findIndex(part => part !== 0)
-	if (startFrom === -1) return "00"
+	if (startFrom === -1) return "0"
 
 	let formatted = partsOfTime[startFrom] + ""
 	for (let i = startFrom + 1; i < partsOfTime.length; ++i) {
@@ -45,109 +50,40 @@ function formatSeconds(seconds) {
 	return formatted
 }
 
-function Timer({ start, startCallback, reset, resetCallback }) {
+function Timer({ start, reset, onReset, onStop }) {
 	const defaultSeconds = 60
-	const [time, setTime] = useState({
-		seconds: defaultSeconds,
-		formatted: formatSeconds(defaultSeconds),
-	})
+	const [seconds, setSeconds] = useState(defaultSeconds)
 
-	const timerRef = useRef(null)
-
-	const startTimer = () => {
-		timerRef.current = setInterval(countdown, 1000)
-	}
-
-	const stopTimer = () => {
-		clearInterval(timerRef.current)
-		timerRef.current = null
-	}
-
-	const resetTimer = () => {
-		stopTimer()
-		setTime({
-			seconds: defaultSeconds,
-			formatted: formatSeconds(defaultSeconds),
-		})
-	}
-
-	const countdown = () => {
-		// Countdown is used as setInterval callback so, due to closure,
-		// it will always have reference to initial state (time).
-		// To access current state functional state update is needed.
-
-		setTime(prev => {
-			if (prev.seconds === 0) {
-				stopTimer()
-				return prev
-			}
-
-			const newSeconds = prev.seconds - 1
-			return {
-				seconds: newSeconds,
-				formatted: formatSeconds(newSeconds),
-			}
-		})
+	const decreaseTime = () => {
+		if (seconds <= 1) return
+		setSeconds(prev => changeSeconds(prev, "-"))
 	}
 
 	const increaseTime = () => {
-		setTime(prev => {
-			const newSeconds = changeSeconds(prev.seconds, "+")
-			return {
-				seconds: newSeconds,
-				formatted: formatSeconds(newSeconds),
-			}
-		})
-	}
-
-	const decreaseTime = () => {
-		if (time.seconds <= 0) return
-
-		setTime(prev => {
-			const newSeconds = changeSeconds(prev.seconds, "-")
-			return {
-				seconds: newSeconds,
-				formatted: formatSeconds(newSeconds),
-			}
-		})
+		setSeconds(prev => changeSeconds(prev, "+"))
 	}
 
 	useEffect(() => {
-		if (start) {
-			startTimer()
-			startCallback()
-		}
-	})
-
-	useEffect(() => {
-		if (reset) {
-			resetTimer()
-			resetCallback()
-		}
+		if (reset)
+			if(onReset) onReset()
 	})
 
 	return (
 		<div className="timer">
-			{(timerRef.current === null) && (
-				<button className="strip-css-btn" onClick={decreaseTime}>
-					-
-				</button>
+			{start && !reset ? (
+				<RealTimer
+					seconds={seconds}
+					formatSeconds={formatSeconds}
+					onStop={onStop}
+				/>
+			) : (
+				<MockTimer
+					seconds={seconds}
+					onDecrease={decreaseTime}
+					onIncrease={increaseTime}
+					formatSeconds={formatSeconds}
+				/>
 			)}
-			<span className="time">{time.formatted}</span>
-			{(timerRef.current === null) && (
-				<button className="strip-css-btn" onClick={increaseTime}>
-					+
-				</button>
-			)}
-
-			{/* <br />
-			<button onClick={startTimer}>START</button>
-			<br />
-			<button className="strip-css-btn"
-				onClick={resetTimer}
-			>
-				<i className="fa fa-sync"></i>
-			</button> */}
 		</div>
 	)
 }

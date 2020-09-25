@@ -8,9 +8,9 @@ const PORT = process.env.PORT
 
 // Database ==============================================
 
-const connectDB = require("./config/db")
+const connectDb = require("./config/db")
 
-connectDB(DB_URI, (conn, err) => {
+connectDb(DB_URI, (conn, err) => {
 	if (err) {
 		console.error(err)
 		process.exit(1)

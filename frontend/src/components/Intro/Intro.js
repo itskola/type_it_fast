@@ -15,6 +15,10 @@ import axios from "axios"
 
 import "./Intro.css"
 
+const formTab = { Login: "login", Register: "register" }
+const dLogin = { email: false, login: true, register: false }
+const dRegister = { email: !dLogin.email, login: !dLogin.login, register: !dLogin.register }
+
 function Intro() {
 	const { setAuthState } = useAuthContext()
 
@@ -37,11 +41,7 @@ function Intro() {
 		message: ""
 	})
 
-	const formTab = { Login: "login", Register: "register" }
 	const [activeTab, setActiveTab] = useState(formTab.Login)
-
-	const dLogin = { email: false, login: true, register: false }
-	const dRegister = { email: !dLogin.email, login: !dLogin.login, register: !dLogin.register }
 
 	const handleLogin = form => {
 		setWaitingResponse(true)
