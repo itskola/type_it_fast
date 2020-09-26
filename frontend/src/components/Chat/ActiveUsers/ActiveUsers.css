@@ -20,23 +20,23 @@
 	left: 0;
 	right: 0;
 
-	font-size: 0.95rem;
 	text-transform: uppercase;
+	font-size: 0.95rem;
 	color: var(--correct);
 	border-bottom: 2px solid var(--bg-main-dark);
-	padding: 3px 5px;
+	padding: 0.25rem;
 }
 
 .users-total .total {
 	background-color: var(--bg-main-light);
-	padding: 0 5px;
+	padding: 0 0.25rem;
 	border-radius: 5px;	
 }
 
 /* ========================================== */
 
 .user {
-	padding: 3px 10px;
+	padding: 0.25rem 0.5rem;
 }
 
 .user:nth-child(odd) {

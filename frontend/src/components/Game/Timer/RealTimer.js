@@ -33,6 +33,7 @@ function RealTimer({ seconds, formatSeconds, onStop = null }) {
 	useEffect(() => {
 		if (stopped)
 			if (onStop) onStop()
+		// onTick()
 	})
 
 	return (

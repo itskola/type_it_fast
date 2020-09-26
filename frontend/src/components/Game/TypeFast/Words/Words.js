@@ -2,7 +2,7 @@ import React from "react"
 
 import "./Words.css"
 
-function Words({ words, wordsStatus }) {
+function Words({ words, wordsStatus, currentWord }) {
 	const wordsJSX = []
 	let atWord
 
@@ -22,11 +22,14 @@ function Words({ words, wordsStatus }) {
 	}
 
 	if (atWord < words.length) {
+		let currentWordClasses = "word current-word"
+		if (!currentWord.status)  currentWordClasses += " incorrect-word"
 		wordsJSX.push(
-			<span key={atWord} className="word current-word">
+			<span key={atWord} className={currentWordClasses}>
 				{words[atWord] + " "}
 			</span>
 		)
+
 		for (atWord = atWord + 1; atWord < words.length; ++atWord) {
 			wordsJSX.push(
 				<span key={atWord} className="word">

@@ -1,13 +1,24 @@
 .timer-with-reset {
+	font-family: "Roboto Mono", monospace;
+
 	display: flex;
-	flex-direction: column;
+	flex-direction: row;
 	align-items: center;
 }
 
+.timer-reset-separator {
+	--reset-spacing: 1rem;
+
+	line-height: 1.25;
+	border-left: 2px solid var(--txt-main-dark);
+	padding-left: calc(var(--timer-spacing) + var(--reset-spacing));
+	margin-left: var(--reset-spacing);
+}
+
 .timer-reset {
-	font-size: 1.6rem;
+	font-size: 1.5rem;
 	color: var(--txt-main-dark);
-	padding: 2px;
+	padding: 0.125rem;
 }
 
 .timer-reset:hover {

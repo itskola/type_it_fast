@@ -1,10 +1,15 @@
+:root {
+	--timer-spacing: 0.25rem;
+}
+
 .timer {
+	font-family: inherit;
 	font-size: 2rem;
 }
 
 .timer button {
 	color: var(--txt-main-dark);
-	padding: 0 10px;
+	padding: 0 var(--timer-spacing);
 
 	transition: 0.1s linear;
 }
@@ -15,6 +20,6 @@
 }
 
 .time {
-	padding: 0 5px;
 	user-select: none;
+	padding: 0 var(--timer-spacing);
 }

@@ -20,13 +20,18 @@ function TypeFast() {
 		loading: true,
 	})
 	const [wordsStatus, setWordsStatus] = useState([])
-	const [typedWord, setTypedWord] = useState("")
+	const [currentWord, setCurrentWord] = useState({
+		index: 0,
+		status: true
+	})
 
+	const [typedWord, setTypedWord] = useState("")
 	const [typeHereDisabled, setTypeHereDisabled] = useState(false)
 	const typeHereRef = useRef()
 
 	const resetWordsProgress = () => {
 		setWordsStatus([])
+		setCurrentWord({ index: 0, status: true })
 
 		setTypedWord("")
 		setTypeHereDisabled(false)
@@ -37,7 +42,10 @@ function TypeFast() {
 		reset: false,
 	})
 
-	// const [statistics, setStatistics] = useState({correctWords: 0})
+	const [statistics, setStatistics] = useState({
+		numberOfWords: 0,
+		correctWords: 0
+	})
 
 	const handleInputWithTimer = e => {
 		if (!timerState.start) {
@@ -48,17 +56,27 @@ function TypeFast() {
 		handleInput(e)
 	}
 
-	const handleInput = ({ target: { value } }) => {
-		setTypedWord(value)
+	const handleInput = ({ target: { value: typed } }) => {
+		setTypedWord(typed)
+		const atWord = currentWord.index
 
-		if (wordsStatus.length === words.value.length) return
+		if (atWord === words.value.length) return
 
-		if (value[value.length - 1] === " ") {
-			if (words.value[wordsStatus.length] + " " === value)
+		// user is done with current word
+		if (typed[typed.length - 1] === " ") {
+			if (words.value[atWord] + " " === typed)
 				setWordsStatus([...wordsStatus, true])
-			else setWordsStatus([...wordsStatus, false])
+			else 
+				setWordsStatus([...wordsStatus, false])
 
 			setTypedWord("")
+			setCurrentWord({ index: atWord + 1, status: true })
+		}
+		else {
+			if (typed !== words.value[atWord].substring(0, typed.length))
+				setCurrentWord({ ...currentWord, status: false })
+			else
+				setCurrentWord({ ...currentWord, status: true })
 		}
 	}
 
@@ -91,11 +109,14 @@ function TypeFast() {
 					{words.loading ? (
 						<Spinner animation="border" />
 					) : (
-						<Words words={words.value} wordsStatus={wordsStatus} />
+						<Words 
+							words={words.value} wordsStatus={wordsStatus} 
+							currentWord={currentWord} 
+						/>
 					)}
 				</div>
 
-				<div>
+				<div className="type-here-container">
 					<input ref={typeHereRef} disabled={typeHereDisabled}
 						className="strip-css-input type-here"
 						type="text" value={typedWord}
@@ -103,7 +124,8 @@ function TypeFast() {
 					/>
 				</div>
 
-				<TimerWithReset state={timerState} setState={setTimerState}
+				<TimerWithReset 
+					state={timerState} setState={setTimerState}
 					onReset={() => {
 						resetWordsProgress()
 					}}

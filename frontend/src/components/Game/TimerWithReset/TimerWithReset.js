@@ -19,12 +19,14 @@ function TimerWithReset({ state, setState, onReset, onStop }) {
 				onStop={onStop}
 			/>
 
-			<button
-				className="strip-css-btn timer-reset"
-				onClick={() => setState({ ...state, reset: true })}
-			>
-				<i className="fa fa-sync"></i>
-			</button>
+			<div className="timer-reset-separator">
+				<button
+					className="strip-css-btn timer-reset"
+					onClick={() => setState({ ...state, reset: true })}
+				>
+					<i className="fa fa-sync"></i>
+				</button>
+			</div>
 		</div>
 	)
 }

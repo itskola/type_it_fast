@@ -9,11 +9,11 @@
 	width: 395px;
 	background-color: var(--bg-main-light);
 	box-shadow: 0 0 8px var(--shadow-dark);
-	padding: 60px 40px;
+	padding: 3.75rem 2.5rem;
 }
 
 #intro-inner-container .nav.nav-tabs {
-	margin: 25px 35px;
+	margin: 1.5rem 2rem;
 }
 
 #intro-inner-container .nav-item.nav-link {
@@ -25,6 +25,6 @@
 @media only screen and (max-width: 450px) {
 	.join-inner-container {
 		width: 85%;
-		padding: 45px 25px;
+		padding: 2.75rem 1.5rem;
 	}
 }

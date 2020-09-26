@@ -23,11 +23,11 @@ h1, h2, h3, p {
 
 #tooltip {
 	font-family: inherit !important;
-	font-size: 0.85rem !important;
+	font-size: 0.9rem !important;
 }
 
 #tooltip > .tooltip-inner {
-	padding: 12px;
+	padding: 0.75rem;
 	background-color: var(--bg-main-dark);
 	border-radius: 3px;
 	color: var(--txt-main-light);
@@ -64,7 +64,7 @@ h1, h2, h3, p {
 	flex: 1;
 	text-align: center;
 	text-transform: uppercase;
-	font-size: 0.8rem;
+	font-size: 0.75rem;
 	border-radius: 0;
 
 	color: var(--txt-main-dark);
@@ -105,13 +105,13 @@ h1, h2, h3, p {
 	background-color: var(--bg-main-light) !important;
 	border: none !important;
 	border-radius: 0;
-	box-shadow: 0 0 5px 0px var(--shadow-dark);
+	box-shadow: 0 0 3px var(--shadow-dark);
 }
 
 .dropdown-item {
 	font-size: 0.9rem;
 	color: var(--txt-main-light) !important;
-	padding: 3px 15px;
+	padding: 0.25rem 1rem;
 	letter-spacing: 0.2px;
 }
 
@@ -120,7 +120,7 @@ h1, h2, h3, p {
 }
 
 .dropdown-divider {
-	margin: 5px;
+	margin: 0.25rem;
 	border-color: var(--bg-main);
 }
 
@@ -129,7 +129,7 @@ h1, h2, h3, p {
 /* Modal ============================================== */
 
 .modal-content {
-	padding: 0 15px;
+	padding: 0 1rem;
 	border: none !important;
 	border-radius: 0;
 	background-color: var(--bg-main-dark) !important;
@@ -162,16 +162,16 @@ h1, h2, h3, p {
 }
 
 .modal-body {
-	font-size: 1.2rem;
+	font-size: 1.25rem;
 }
 
 .modal-footer {
-	font-size: 0.85rem;
+	font-size: 0.75rem;
 }
 
 @media only screen and (max-width: 450px) {
 	.modal-header .modal-title {
-		font-size: 1.2rem;
+		font-size: 1.25rem;
 	}
 
 	.modal-body {
@@ -188,11 +188,11 @@ h1, h2, h3, p {
 
 .table {
 	margin: 0;
-	box-shadow: 0 0 3px var(--shadow-dark);
+	background-color: var(--bg-main-light);
 }
 
 .table th,
 .table td {
-	font-size: 1rem;
+	font-size: 1.125rem;
 	color: var(--txt-main-dark);
 }

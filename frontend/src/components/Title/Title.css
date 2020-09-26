@@ -4,7 +4,7 @@
 
 #title > h1 {
 	letter-spacing: 1.2px;
-	font-size: 2.2rem;
+	font-size: 2.25rem;
 	color: transparent;
 	background-image: var(--accent-color-gradient);
 	-webkit-background-clip: text;
@@ -12,7 +12,7 @@
 }
 
 #title > h1 > span {
-	font-size: 1.8rem;
+	font-size: 1.75rem;
 	font-weight: bold;
 }
 
