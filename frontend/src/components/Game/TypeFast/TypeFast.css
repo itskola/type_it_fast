@@ -6,6 +6,10 @@
 	height: 100%;
 }
 
+#typefast-inner-container > div {
+	margin-top: 15px;
+}
+
 .type-this, .type-here {
 	padding: 10px 15px;
 }

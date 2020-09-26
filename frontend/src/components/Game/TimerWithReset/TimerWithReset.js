@@ -10,18 +10,13 @@ function TimerWithReset({ state, setState, onReset, onStop }) {
 		onReset()
 	}
 
-	const handleStop = () => {
-		setState({ start: false, reset: false })
-		onStop()
-	}
-
 	return (
 		<div className="timer-with-reset">
 			<Timer
 				start={state.start}
 				reset={state.reset}
 				onReset={handleReset}
-				onStop={handleStop}
+				onStop={onStop}
 			/>
 
 			<button

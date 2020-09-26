@@ -30,7 +30,6 @@ function TypeFast() {
 
 		setTypedWord("")
 		setTypeHereDisabled(false)
-		typeHereRef.current.focus()
 	}
 
 	const [timerState, setTimerState] = useState({
@@ -80,6 +79,11 @@ function TypeFast() {
 			})
 	}, [textModeState.endpoint])
 
+	useEffect(() => {
+		if (!typeHereDisabled)
+			typeHereRef.current.focus()
+	})
+
 	return (
 		<div id="typefast-outer-container">
 			<div id="typefast-inner-container">
@@ -91,11 +95,13 @@ function TypeFast() {
 					)}
 				</div>
 
-				<input ref={typeHereRef} disabled={typeHereDisabled}
-					className="strip-css-input type-here"
-					type="text" value={typedWord}
-					onChange={handleInputWithTimer}
-				/>
+				<div>
+					<input ref={typeHereRef} disabled={typeHereDisabled}
+						className="strip-css-input type-here"
+						type="text" value={typedWord}
+						onChange={handleInputWithTimer}
+					/>
+				</div>
 
 				<TimerWithReset state={timerState} setState={setTimerState}
 					onReset={() => {

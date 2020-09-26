@@ -25,15 +25,15 @@ function RealTimer({ seconds, formatSeconds, onStop = null }) {
 	}
 
 	useEffect(() => {
-		if (stopped)
-			if (onStop) onStop()
-	})
-
-	useEffect(() => {
 		startTimer()
 		return () => stopTimer()
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []) 
+
+	useEffect(() => {
+		if (stopped)
+			if (onStop) onStop()
+	})
 
 	return (
 		<>

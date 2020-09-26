@@ -85,7 +85,12 @@ function Intro() {
 			.then(({ data }) => {
 				setAuthState(AuthAction.Login(data))
 			})
-			.catch(() => {})
+			.catch(() => {
+				// logout out user locally if cookie was destroyed 
+				if (AuthAction.LocalAuth()) {
+					setAuthState(AuthAction.Logout())
+				}
+			})
 	}, [setAuthState])
 
 	return (
