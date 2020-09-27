@@ -193,6 +193,13 @@ h1, h2, h3, p {
 
 .table th,
 .table td {
-	font-size: 1.125rem;
 	color: var(--txt-main-dark);
+}
+
+.table th {
+	font-size: 1.25rem;
+}
+
+.table td {
+	font-size: 1.125rem;
 }

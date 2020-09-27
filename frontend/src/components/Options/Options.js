@@ -46,10 +46,10 @@ function Options() {
 		}
 	}
 
-	// TODO: change color theme ...
-	const handleThemeChange = () => {
-		console.log("Change ColorTheme handler")
-	}
+	// TODO: implement changing of dark and light themes
+	// const handleThemeChange = () => {
+	// 	console.log("Change ColorTheme handler")
+	// }
 
 	const handleTextModeStateChange = (action, mode) => {
 		if (mode !== textModeState.mode) setTextModeState(action)
@@ -78,11 +78,13 @@ function Options() {
 				</Dropdown.Toggle>
 
 				<Dropdown.Menu>
-					<Dropdown.Item className="option" onClick={handleThemeChange}>
+					<Dropdown.Item className="option option-disabled">
 						<span>Theme</span>
 						<i className="theme fa fa-sun"></i>
 					</Dropdown.Item>
+
 					<Dropdown.Divider />
+
 					<Dropdown.Item className="option"
 						onClick={() =>
 							handleTextModeStateChange(
@@ -91,7 +93,7 @@ function Options() {
 						}
 					>
 						<span>Sentences</span>
-						{isSentencesMode && <i className="fa fa-check"></i>}
+						{isSentencesMode && <i className="checked fa fa-check"></i>}
 					</Dropdown.Item>
 					<Dropdown.Item className="option"
 						onClick={() =>
@@ -101,13 +103,17 @@ function Options() {
 						}
 					>
 						<span>Words</span>
-						{isWordsMode && <i className="fa fa-check"></i>}
+						{isWordsMode && <i className="checked fa fa-check"></i>}
 					</Dropdown.Item>
+
 					<Dropdown.Divider />
+
 					<Dropdown.Item onClick={handleLogout}>
 						Logout
 					</Dropdown.Item>
+
 					<Dropdown.Divider />
+
 					<Dropdown.Item onClick={() => setShowDeleteAccount(true)}>
 						Delete account
 					</Dropdown.Item>

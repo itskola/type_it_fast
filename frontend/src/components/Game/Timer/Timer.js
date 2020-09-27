@@ -50,7 +50,7 @@ function formatSeconds(seconds) {
 	return formatted
 }
 
-function Timer({ start, reset, onReset, onStop }) {
+function Timer({ start, reset, onTick = null, onReset = null, onStop = null}) {
 	const defaultSeconds = 60
 	const [seconds, setSeconds] = useState(defaultSeconds)
 
@@ -64,8 +64,7 @@ function Timer({ start, reset, onReset, onStop }) {
 	}
 
 	useEffect(() => {
-		if (reset)
-			if(onReset) onReset()
+		if (reset && onReset) onReset()
 	})
 
 	return (
@@ -74,6 +73,7 @@ function Timer({ start, reset, onReset, onStop }) {
 				<RealTimer
 					seconds={seconds}
 					formatSeconds={formatSeconds}
+					onTick={onTick}
 					onStop={onStop}
 				/>
 			) : (

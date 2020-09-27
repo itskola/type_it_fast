@@ -4,7 +4,7 @@ import Timer from "../Timer/Timer"
 
 import "./TimerWithReset.css"
 
-function TimerWithReset({ state, setState, onReset, onStop }) {
+function TimerWithReset({ state, setState, onTick, onReset, onStop }) {
 	const handleReset = () => {
 		setState({ start: false, reset: false })
 		onReset()
@@ -15,6 +15,7 @@ function TimerWithReset({ state, setState, onReset, onStop }) {
 			<Timer
 				start={state.start}
 				reset={state.reset}
+				onTick={onTick}
 				onReset={handleReset}
 				onStop={onStop}
 			/>

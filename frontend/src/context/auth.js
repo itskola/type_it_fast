@@ -54,6 +54,7 @@ class Auth {
 				}
 			default:
 				console.error(`Action "${type}" is not supported`)
+				return state
 		}
 	}
 }

@@ -25,6 +25,12 @@
 	color: var(--bg-main-dark);
 }
 
-.option .fa-check {
+.option .checked {
 	color: var(--correct);
+}
+
+/* ========================================== */
+
+.option-disabled {
+	cursor: no-drop !important;
 }

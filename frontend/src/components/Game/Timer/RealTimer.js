@@ -1,13 +1,15 @@
 import React, { useState, useEffect, useRef } from "react"
 
-function RealTimer({ seconds, formatSeconds, onStop = null }) {
+function RealTimer({ seconds, formatSeconds, onTick = null, onStop = null }) {
 	const [_seconds, _setSeconds] = useState(seconds)
+	const [started, setStarted] = useState(false)
 	const [stopped, setStopped] = useState(false)
 
 	const intervalId = useRef(null)
 
 	const startTimer = () => {
 		intervalId.current = setInterval(countdown, 1000)
+		setStarted(true)
 	}
 
 	const stopTimer = () => {
@@ -31,9 +33,14 @@ function RealTimer({ seconds, formatSeconds, onStop = null }) {
 	}, []) 
 
 	useEffect(() => {
-		if (stopped)
-			if (onStop) onStop()
-		// onTick()
+		if (stopped && onStop) {
+			onStop()
+			return
+		}
+		// see if you will need to remove return from onStop
+			// currenty you won't get onTick when timer goes from 1 to 0
+		if (started && onTick) 
+			if (_seconds !== seconds) onTick(seconds - _seconds)
 	})
 
 	return (
