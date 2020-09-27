@@ -1,19 +1,4 @@
-.statistics-outer-container {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-
-.statistics-inner-container th {
-	letter-spacing: 1px;
+.statistics-container th {
+	letter-spacing: 2px;
 	font-size: 1.5rem !important;
-}
-
-.statistics-inner-container td {
-	letter-spacing: 0.2px;
-}
-
-.statistics-inner-container td:first-child {
-	text-align: end;
-	padding-right: 1.25rem !important;
 }

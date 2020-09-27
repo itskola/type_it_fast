@@ -63,18 +63,18 @@ function Options() {
 	const isWordsMode = textModeState.mode === TextModeAction.Mode.Words
 
 	return (
-		<div id="options">
+		<>
 			{waitingResponse && (
 				<PageOverlay>
 					<Spinner animation="grow"></Spinner>
 				</PageOverlay>
 			)}
 			
-			<Dropdown drop="right">
+			<Dropdown id="options" drop="right">
 				<Dropdown.Toggle as={CustomToggle} 
-					id="dropdown-options" className="strip-css-btn"
+					id="options-toggle" className="strip-css-btn clickable-icon"
 				>
-					<i id="dropdown-icon" className="fa fa-cog"></i>
+					<i id="clickable-icon" className="fa fa-cog"></i>
 				</Dropdown.Toggle>
 
 				<Dropdown.Menu>
@@ -121,7 +121,7 @@ function Options() {
 			</Dropdown>
 
 			<DeleteAccount show={showDeleteAccount} setShow={setShowDeleteAccount} />
-		</div>
+		</>
 	)
 }
 

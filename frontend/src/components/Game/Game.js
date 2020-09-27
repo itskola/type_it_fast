@@ -9,8 +9,12 @@ import "./Game.css"
 function Game() {
 	return (
 		<div id="game" className="scrollbar-hidden">
-			<Title />
-			<TypeFast />
+			<div>
+				<Title />
+			</div>
+			<div>
+				<TypeFast />
+			</div>
 			{/* <Scoreboard /> */}
 		</div>
 	)

@@ -2,6 +2,7 @@ import React, { useReducer } from "react"
 
 import { TextModeContext, TextMode } from "../../context/textMode"
 
+import ProjectSource from "../ProjectSource/ProjectSource"
 import Options from "../Options/Options"
 import Game from "../Game/Game"
 import Chat from "../Chat/Chat"
@@ -20,6 +21,7 @@ function Main() {
 				<Options />
 				<Game />
 				<Chat />
+				<ProjectSource />
 			</div>
 		</TextModeContext.Provider>
 	)

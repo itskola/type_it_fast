@@ -1,9 +1,5 @@
 .timer-with-reset {
 	font-family: "Roboto Mono", monospace;
-
-	display: flex;
-	flex-direction: row;
-	align-items: center;
 }
 
 .timer-reset-separator {

@@ -3,22 +3,26 @@
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	height: 100%;
 }
 
 #typefast-inner-container > div {
-	margin-top: 1rem;
+	margin-bottom: var(--game-spacing);
 }
 
-.type-this, .type-here {
+#typefast-inner-container .group-col > div {
+	margin-bottom: var(--game-spacing);
+}
+
+.type-this,
+.type-here {
 	padding: 0.5rem 1rem;
 }
 
 .type-this {
+	user-select: none;
 	text-align: center;
 	color: var(--txt-main);
 	background: var(--bg-main-dark);
-	user-select: none;
 }
 
 .type-this .word {
@@ -31,9 +35,4 @@
 	color: var(--txt-main);
 	background: var(--bg-main-light) !important;
 	width: 325px;
-}
-
-
-.bla-bla {
-	display: flex;
 }

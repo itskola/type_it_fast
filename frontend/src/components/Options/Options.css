@@ -1,17 +1,11 @@
-#dropdown-options:after {
+#options {
+	position: fixed;
+	top: var(--main-spacing);
+	left: var(--main-spacing);
+}
+
+#options-toggle:after {
 	content: none;
-}
-
-#dropdown-icon {
-	font-size: 1.45rem;
-	color: var(--txt-main);
-	cursor: pointer;
-
-	transition: color 250ms;
-}
-
-#dropdown-icon:hover {
-	color: var(--txt-main-dark);
 }
 
 #options .option {

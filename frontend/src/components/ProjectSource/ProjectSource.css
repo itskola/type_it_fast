@@ -1,0 +1,5 @@
+#project-source {
+	position: fixed;
+	bottom: var(--main-spacing);
+	left: var(--main-spacing);
+}

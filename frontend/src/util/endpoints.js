@@ -11,4 +11,6 @@ export const endpoints = {
 
 	Words: `${textMode}/words`,
 	Sentence: `${textMode}/sentence`,
+
+	ProjectSource: "https://github.com/itskola/type_it_fast",
 }

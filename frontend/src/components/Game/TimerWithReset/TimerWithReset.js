@@ -11,7 +11,7 @@ function TimerWithReset({ state, setState, onTick, onReset, onStop }) {
 	}
 
 	return (
-		<div className="timer-with-reset">
+		<div className="group-row timer-with-reset">
 			<Timer
 				start={state.start}
 				reset={state.reset}

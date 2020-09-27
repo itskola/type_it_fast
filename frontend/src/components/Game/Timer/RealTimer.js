@@ -30,17 +30,14 @@ function RealTimer({ seconds, formatSeconds, onTick = null, onStop = null }) {
 		startTimer()
 		return () => stopTimer()
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []) 
+	}, [])
 
 	useEffect(() => {
-		if (stopped && onStop) {
-			onStop()
-			return
-		}
-		// see if you will need to remove return from onStop
-			// currenty you won't get onTick when timer goes from 1 to 0
 		if (started && onTick) 
 			if (_seconds !== seconds) onTick(seconds - _seconds)
+			
+		if (stopped && onStop)
+			onStop()
 	})
 
 	return (

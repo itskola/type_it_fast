@@ -186,20 +186,25 @@ h1, h2, h3, p {
 
 /* ============================================== Modal */
 
-.table {
+table {
 	margin: 0;
 	background-color: var(--bg-main-light);
 }
 
-.table th,
-.table td {
+/* table thead,
+table tbody tr:nth-child(even) {
+	background-color: var(--bg-main);
+} */
+
+table th,
+table td {
 	color: var(--txt-main-dark);
 }
 
-.table th {
+table th {
 	font-size: 1.25rem;
 }
 
-.table td {
+table td {
 	font-size: 1.125rem;
 }

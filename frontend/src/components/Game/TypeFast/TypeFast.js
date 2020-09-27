@@ -31,6 +31,7 @@ function TypeFast() {
 	const [timerState, setTimerState] = useState({
 		start: false, reset: false
 	})
+	const [secondsElapsed, setSecondsElapsed] = useState(0)
 
 	const [wordsStatistic, setWordsStatistic] = useReducer(
 		WordsStatistic.setState, WordsStatistic.state
@@ -45,6 +46,7 @@ function TypeFast() {
 		setWordsStatus([])
 		setCurrentWord({ index: 0, status: true })
 		setWordsStatistic(WordsStatisticAction.Reset())
+		setSecondsElapsed(0)
 
 		setTypedWord("")
 		setTypeHereDisabled(false)
@@ -120,34 +122,36 @@ function TypeFast() {
 						/>
 					)}
 				</div>
-
-				<div className="type-here-container">
-					<input
-						ref={typeHereRef} disabled={typeHereDisabled}
-						className="strip-css-input type-here"
-						type="text" value={typedWord}
-						onChange={handleInputWithTimer}
+	
+				<div className="group-col">
+					<div>
+						<input ref={typeHereRef} type="text" 
+							className="strip-css-input type-here"
+							disabled={typeHereDisabled} 
+							value={typedWord} onChange={handleInputWithTimer}
+						/>
+					</div>
+	
+					<TimerWithReset
+						state={timerState} setState={setTimerState}
+						onTick={elapsed => {
+							setSecondsElapsed(elapsed)
+						}}
+						onReset={() => {
+							resetProgress()
+						}}
+						onStop={() => {
+							setTypedWord("")
+							setTypeHereDisabled(true)
+						}}
 					/>
-				</div>	
 
-				<TimerWithReset
-					state={timerState} setState={setTimerState}
-					onTick={secondsPassed => {
-						// console.log(secondsPassed, "passed")
-					}}
-					onReset={() => {
-						resetProgress()
-					}}
-					onStop={() => {
-						setTypedWord("")
-						setTypeHereDisabled(true)
-					}}
-				/>
-
-				<Statistics
-					statistics={wordsStatistic}
-					textMode={textModeState.mode}
-				/>
+					<Statistics
+						statistics={wordsStatistic}
+						elapsed={secondsElapsed}
+						textMode={textModeState.mode}
+					/>
+				</div>
 			</div>
 		</div>
 	)
