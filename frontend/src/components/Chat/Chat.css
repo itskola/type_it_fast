@@ -1,19 +1,63 @@
-#chat-container {
-	position: relative;
-	width: 335px;
-	box-shadow: 0 0 5px var(--shadow-dark);
+#chat-outer-container {
+	--chat-size: 335px;
+
+	margin-left: var(--chat-size);
+
+	/* so that Game component stays equally distanced from left and right */
+	margin-right: var(--main-spacing);
 }
 
-#chat-container .nav-item.nav-link {
+#chat-inner-container {
+	position: fixed;
+	top: var(--main-spacing);
+	right: var(--main-spacing);
+	bottom: var(--main-spacing);
+
+	width: var(--chat-size);
+
+	background-color: var(--bg-main);
+	box-shadow: 0 0 4px var(--shadow-dark);
+}
+
+#chat-inner-container .nav-item.nav-link {
 	font-size: 0.85rem;
 }
 
-#chat-container .nav-item.nav-link {
+#chat-inner-container .nav-item.nav-link {
 	color: var(--bg-main);
 	background-color: var(--txt-main);
 }
 
-#chat-container .nav-item.nav-link.active {
+#chat-inner-container .nav-item.nav-link.active {
 	color: var(--txt-main);
 	background-color: var(--bg-main);
+}
+
+/* ==================================================== */
+
+@media only screen and (max-width: 950px) {
+	#chat-outer-container {
+		--chat-size: 315px;
+	}
+}
+
+@media only screen and (max-width: 850px) {
+	#chat-outer-container {
+		--chat-size: 285px;
+	}
+}
+
+@media only screen and (max-width: 800px) {
+	#chat-outer-container {
+		--chat-size: 270px;
+	}
+}
+
+@media only screen and (max-width: 720px) {
+	#chat-outer-container {
+		display: none;
+
+		/* so that Game component stays equally distanced from left and right */
+		margin-right: 0;
+	}
 }

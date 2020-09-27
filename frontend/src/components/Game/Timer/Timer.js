@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react"
 
+import { Duration } from "../../../context/duration"
+
 import RealTimer from "./RealTimer"
 import MockTimer from "./MockTimer"
 
@@ -50,17 +52,27 @@ function formatSeconds(seconds) {
 	return formatted
 }
 
-function Timer({ start, reset, onTick = null, onReset = null, onStop = null}) {
-	const defaultSeconds = 60
-	const [seconds, setSeconds] = useState(defaultSeconds)
+function Timer({ start, reset, onTick = null, onReset = null, onStop = null }) {
+	const [seconds, setSeconds] = useState(Duration.Get())
 
 	const decreaseTime = () => {
 		if (seconds <= 1) return
-		setSeconds(prev => changeSeconds(prev, "-"))
+		
+		setSeconds(prevSeconds => {
+			const newSeconds = changeSeconds(prevSeconds, "-")
+
+			Duration.Set(newSeconds)
+			return newSeconds
+		})
 	}
 
 	const increaseTime = () => {
-		setSeconds(prev => changeSeconds(prev, "+"))
+		setSeconds(prevSeconds => {
+			const newSeconds = changeSeconds(prevSeconds, "+")
+
+			Duration.Set(newSeconds)
+			return newSeconds
+		})
 	}
 
 	useEffect(() => {

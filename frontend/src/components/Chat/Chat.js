@@ -48,16 +48,18 @@ function Chat() {
 	}
 
 	return (
-		<div id="chat-container">
-			<Tabs defaultActiveKey="chat">
-				<Tab eventKey="chat" title="Chat">
-					<Messages messages={messages} user={authState.username} />
-					<Input onClick={sendMessage} />
-				</Tab>
-				<Tab eventKey="active-users" title="Active Users">
-					<ActiveUsers users={users} />
-				</Tab>
-			</Tabs>
+		<div id="chat-outer-container">
+			<div id="chat-inner-container">
+				<Tabs defaultActiveKey="chat">
+					<Tab eventKey="chat" title="Chat">
+						<Messages messages={messages} user={authState.username} />
+						<Input onClick={sendMessage} />
+					</Tab>
+					<Tab eventKey="active-users" title="Active Users">
+						<ActiveUsers users={users} />
+					</Tab>
+				</Tabs>
+			</div>
 		</div>
 	)
 }

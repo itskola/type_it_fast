@@ -3,7 +3,6 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	background-color: var(--bg-main);
 }
 
 /* ========================================== */
@@ -21,16 +20,16 @@
 	right: 0;
 
 	text-transform: uppercase;
-	font-size: 0.95rem;
 	color: var(--correct);
-	border-bottom: 2px solid var(--bg-main-dark);
-	padding: 0.25rem;
+	background-color: var(--bg-main);
+	padding: 0.375rem;
+	border-bottom: 1px solid var(--bg-main-dark);
 }
 
 .users-total .total {
 	background-color: var(--bg-main-light);
 	padding: 0 0.25rem;
-	border-radius: 5px;	
+	border-radius: 5px;
 }
 
 /* ========================================== */
@@ -43,15 +42,15 @@
 	background-color: var(--bg-main-light);
 }
 
+.user:hover {
+	background-color: var(--bg-main-dark);
+}
+
 .username {
-	font-size: 0.85rem;
+	font-size: 0.95rem;
 }
 
 .user-online {
 	font-size: 0.45rem;
 	color: var(--correct);
-}
-
-.user:hover {
-	background-color: var(--bg-main-dark);
 }

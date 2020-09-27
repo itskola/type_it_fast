@@ -4,9 +4,6 @@
 	height: 100%;
 	display: flex;
 	justify-content: space-between;
-	padding: var(--main-spacing) 0 0 var(--main-spacing);
-}
 
-#main-container > div {
-	margin: 0 var(--main-spacing) var(--main-spacing) 0;
+	padding: var(--main-spacing);
 }

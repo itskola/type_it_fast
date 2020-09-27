@@ -4,6 +4,10 @@
 	left: var(--main-spacing);
 }
 
+#options-toggle {
+	line-height: 1;
+}
+
 #options-toggle:after {
 	content: none;
 }

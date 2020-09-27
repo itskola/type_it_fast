@@ -9,7 +9,7 @@ import Main from "./components/Main/Main"
 import NotFound from "./components/NotFound/NotFound"
 
 import "bootstrap/dist/css/bootstrap.min.css"
-import "./util/custom-bootstrap.css"
+import "./components/CustomBootstrap.css"
 import "./App.css"
 
 function App() {

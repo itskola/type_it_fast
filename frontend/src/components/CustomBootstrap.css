@@ -6,7 +6,7 @@ h1, h2, h3, p {
 /* InputGroup ========================================= */
 
 .input-group {
-	background-color: var(--bg-main);
+	background-color: var(--bg-main-dark);
 }
 
 .input-group input {
@@ -22,27 +22,30 @@ h1, h2, h3, p {
 /* Tooltip ============================================ */
 
 #tooltip {
+	--tooltip-bg: var(--shadow-dark);
+	--tooltip-txt: var(--txt-main-light);
+
 	font-family: inherit !important;
 	font-size: 0.9rem !important;
 }
 
 #tooltip > .tooltip-inner {
+	color: var(--tooltip-txt);
+	background-color: var(--tooltip-bg);
 	padding: 0.75rem;
-	background-color: var(--bg-main-dark);
 	border-radius: 3px;
-	color: var(--txt-main-light);
 }
 
 .bs-tooltip-auto[x-placement^="right"] .arrow::before,
 .bs-tooltip-right .arrow::before {
-	border-right-color: var(--bg-main-dark) !important;
-	color: var(--txt-main-light) !important;
+	color: var(--tooltip-txt) !important;
+	border-right-color: var(--tooltip-bg) !important;
 }
 
 .bs-tooltip-auto[x-placement^="bottom"] .arrow::before,
 .bs-tooltip-right .arrow::before {
-	border-right-color: var(--bg-main-dark) !important;
-	color: var(--txt-main-light) !important;
+	color: var(--tooltip-txt) !important;
+	border-right-color: var(--tooltip-bg) !important;
 }
 
 /* ============================================ Tooltip */
@@ -67,13 +70,13 @@ h1, h2, h3, p {
 	font-size: 0.75rem;
 	border-radius: 0;
 
-	color: var(--txt-main-dark);
+	color: var(--txt-main);
 	background-color: var(--bg-main);
 }
 
 .nav-item.nav-link.active {
-	color: var(--bg-main);
-	background-color: var(--txt-main);
+	color: var(--txt-main);
+	background-color: var(--bg-main-dark);
 }
 
 .tab-content {
@@ -91,10 +94,9 @@ h1, h2, h3, p {
 .toast {
 	text-align: center;
 	color: var(--txt-main-light);
-	background-color: var(--bg-main-dark);
+	background-color: var(--shadow-dark);
 	border: none;
 	border-radius: 0;
-	box-shadow: 0 0 3px var(--shadow-dark);
 }
 
 /* ============================================== Toast */
@@ -105,7 +107,6 @@ h1, h2, h3, p {
 	background-color: var(--bg-main-light) !important;
 	border: none !important;
 	border-radius: 0;
-	box-shadow: 0 0 3px var(--shadow-dark);
 }
 
 .dropdown-item {
@@ -129,17 +130,22 @@ h1, h2, h3, p {
 /* Modal ============================================== */
 
 .modal-content {
+	--modal-bg: var(--bg-main-dark);
+	--modal-txt: var(--txt-main-light);
+
 	padding: 0 1rem;
 	border: none !important;
 	border-radius: 0;
-	background-color: var(--bg-main-dark) !important;
+	background-color: var(--modal-bg) !important;
 	box-shadow: 0 0 8px var(--shadow-dark);
 }
 
-.modal-header, .modal-body, .modal-footer {
-	color: var(--txt-main-light) !important;
-	background-color: var(--bg-main-dark) !important;
-	border-color: var(--bg-main) !important;
+.modal-header,
+.modal-body,
+.modal-footer {
+	color: var(--modal-txt) !important;
+	background-color: var(--modal-bg) !important;
+	border-color: var(--shadow-dark) !important;
 }
 
 .modal-header {
@@ -152,9 +158,9 @@ h1, h2, h3, p {
 }
 
 .modal-header .close {
-	color: var(--txt-main-light);
-	margin: 0 !important;
+	color: var(--modal-txt);
 	padding: 0 !important;
+	margin: 0 !important;
 }
 
 .modal-header .close span {
@@ -187,14 +193,14 @@ h1, h2, h3, p {
 /* ============================================== Modal */
 
 table {
-	margin: 0;
 	background-color: var(--bg-main-light);
+	margin: 0;
 }
 
-/* table thead,
+table thead,
 table tbody tr:nth-child(even) {
 	background-color: var(--bg-main);
-} */
+}
 
 table th,
 table td {

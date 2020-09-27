@@ -23,7 +23,7 @@
 	font-size: 0.85rem;
 	padding: 0.25rem 0.5rem;
 
-	color: var(--bg-main-dark);
+	color: var(--bg-main-light);
 	background-color: var(--txt-main-dark);
 	border-radius: var(--message-radius);
 	border-top-left-radius: 0;

@@ -16,7 +16,7 @@ function Main() {
 	)
 
 	return (
-		<TextModeContext.Provider value={{textModeState, setTextModeState}}>
+		<TextModeContext.Provider value={{ textModeState, setTextModeState }}>
 			<div id="main-container">
 				<Options />
 				<Game />

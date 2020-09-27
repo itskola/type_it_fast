@@ -11,7 +11,7 @@ const Token = "auth"
 
 const AuthAction = {
 	LocalAuth: () => localStorage.getItem(Token),
-	
+
 	Login: payload => ({
 		type: ActionType.Login,
 		payload,

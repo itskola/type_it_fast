@@ -1,7 +1,7 @@
 #game {
 	--game-spacing: 1.5rem;
 
-	flex: 3.5;
+	flex: 1;
 }
 
 #game > div {

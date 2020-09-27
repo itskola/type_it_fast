@@ -19,10 +19,11 @@
 }
 
 .type-this {
+	max-width: 1000px;
 	user-select: none;
+
 	text-align: center;
 	color: var(--txt-main);
-	background: var(--bg-main-dark);
 }
 
 .type-this .word {
@@ -35,4 +36,18 @@
 	color: var(--txt-main);
 	background: var(--bg-main-light) !important;
 	width: 325px;
+}
+
+/* ==================================================== */
+
+@media only screen and (max-width: 350px) {
+	.type-here {
+		width: 300px;
+	}
+}
+
+@media only screen and (max-width: 325px) {
+	.type-here {
+		width: 285px;
+	}
 }

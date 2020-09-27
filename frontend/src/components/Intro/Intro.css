@@ -7,8 +7,8 @@
 
 #intro-inner-container {
 	width: 395px;
-	background-color: var(--bg-main-light);
-	box-shadow: 0 0 8px var(--shadow-dark);
+	background-color: var(--bg-main);
+	box-shadow: 0 0 5px var(--shadow-dark);
 	padding: 3.75rem 2.5rem;
 }
 
