@@ -1,6 +1,8 @@
 .word {
+	white-space: pre-wrap;
+	padding-right: 0.125rem;
 	border-radius: 3px;
-
+	
 	transition: background-color 0.1s linear;
 }
 

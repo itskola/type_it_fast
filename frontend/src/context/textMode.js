@@ -34,14 +34,12 @@ class TextMode {
 			case ActionType.Sentences:
 				localStorage.setItem(Token, type)
 				return {
-					...state,
 					mode: localStorage.getItem(Token),
 					endpoint: endpoints.Sentence,
 				}
 			case ActionType.Words:
 				localStorage.setItem(Token, type)
 				return {
-					...state,
 					mode: localStorage.getItem(Token),
 					endpoint: endpoints.Words,
 				}

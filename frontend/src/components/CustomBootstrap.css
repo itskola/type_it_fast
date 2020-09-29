@@ -9,12 +9,9 @@ h1, h2, h3, p {
 	background-color: var(--bg-main-dark);
 }
 
-.input-group input {
-	color: var(--txt-main-dark) !important;
-}
-
+.input-group input,
 .input-group-text {
-	color: var(--txt-main-dark);
+	color: var(--txt-main) !important;
 }
 
 /* ========================================= InputGroup */
@@ -70,7 +67,7 @@ h1, h2, h3, p {
 	font-size: 0.75rem;
 	border-radius: 0;
 
-	color: var(--txt-main);
+	color: var(--txt-main-dark);
 	background-color: var(--bg-main);
 }
 
@@ -107,13 +104,13 @@ h1, h2, h3, p {
 	background-color: var(--bg-main-light) !important;
 	border: none !important;
 	border-radius: 0;
+	box-shadow: 0 0 3px var(--bg-main-dark);
 }
 
 .dropdown-item {
-	font-size: 0.9rem;
+	font-size: 1rem;
 	color: var(--txt-main-light) !important;
 	padding: 0.25rem 1rem;
-	letter-spacing: 0.2px;
 }
 
 .dropdown-item:hover {

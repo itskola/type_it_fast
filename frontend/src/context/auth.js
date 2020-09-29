@@ -40,7 +40,6 @@ class Auth {
 
 				localStorage.setItem(Token, isAuth)
 				return {
-					...state,
 					id: payload.id,
 					username: payload.username,
 					isAuth,

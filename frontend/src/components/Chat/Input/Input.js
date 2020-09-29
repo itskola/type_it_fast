@@ -29,7 +29,7 @@ function Input({ onChange, onClick }) {
 	return (
 		<div className={`message-box ${focusClass}`}>
 			<textarea ref={msgTypeRef} 
-				className="strip-css-input message-type" 
+				className="strip-css-txtarea message-type" 
 				value={text} placeholder="send a message" rows="1"
 				onChange={handleChange}
 				onKeyPress={handleKeyPress}
@@ -38,7 +38,7 @@ function Input({ onChange, onClick }) {
 			></textarea>
 			<div className="message-send-container">
 				<button 
-					className={`strip-css-input message-send ${focusClass}`} 
+					className={`strip-css-btn message-send ${focusClass}`} 
 					onClick={onClick}
 				>
 					<i className="fa fa-paper-plane"></i>

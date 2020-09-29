@@ -46,13 +46,13 @@ function Statistics({ statistics, elapsed, textMode }) {
 						%
 					</td>
 				</tr>
-				<tr>
+				<tr >
 					<td>Correct words</td>
-					<td>{words.correct}</td>
+					<td className="correct-word">{words.correct}</td>
 				</tr>
 				<tr>
 					<td>Incorrect words</td>
-					<td>{words.incorrect}</td>
+					<td className="incorrect-word">{words.incorrect}</td>
 				</tr>
 				<tr>
 					<td>Text mode</td>

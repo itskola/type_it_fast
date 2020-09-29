@@ -1,4 +1,3 @@
-// redis ?
 const connUsers = (function () {
 	const users = []
 

@@ -1,5 +1,5 @@
 #chat-outer-container {
-	--chat-size: 335px;
+	--chat-size: 345px;
 
 	margin-left: var(--chat-size);
 
@@ -8,15 +8,15 @@
 }
 
 #chat-inner-container {
+	width: var(--chat-size);
+
 	position: fixed;
 	top: var(--main-spacing);
 	right: var(--main-spacing);
 	bottom: var(--main-spacing);
-
-	width: var(--chat-size);
-
+	
 	background-color: var(--bg-main);
-	box-shadow: 0 0 4px var(--shadow-dark);
+	box-shadow: 0 0 8px var(--shadow-dark);
 }
 
 #chat-inner-container .nav-item.nav-link {
@@ -37,7 +37,7 @@
 
 @media only screen and (max-width: 950px) {
 	#chat-outer-container {
-		--chat-size: 315px;
+		--chat-size: 325px;
 	}
 }
 
@@ -49,7 +49,7 @@
 
 @media only screen and (max-width: 800px) {
 	#chat-outer-container {
-		--chat-size: 270px;
+		--chat-size: 275px;
 	}
 }
 

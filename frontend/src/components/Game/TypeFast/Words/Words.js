@@ -2,38 +2,38 @@ import React from "react"
 
 import "./Words.css"
 
-function Words({ words, wordsStatus, currentWord }) {
+function Words({ words, wordsStatus, wordCurrent }) {
 	const wordsJSX = []
-	let atWord
+	let wordAt
 
-	for (atWord = 0; atWord < wordsStatus.length; ++atWord) {
+	for (wordAt = 0; wordAt < wordsStatus.length; ++wordAt) {
 		wordsJSX.push(
 			<span
-				key={atWord}
+				key={wordAt}
 				className={
-					wordsStatus[atWord] === true
+					wordsStatus[wordAt] === true
 						? "word correct-word"
 						: "word incorrect-word"
 				}
 			>
-				{words[atWord] + " "}
+				{words[wordAt] + " "}
 			</span>
 		)
 	}
 
-	if (atWord < words.length) {
-		let currentWordClasses = "word current-word"
-		if (!currentWord.status)  currentWordClasses += " incorrect-word"
+	if (wordAt < words.length) {
+		let wordCurrentClasses = "word current-word"
+		if (!wordCurrent.status) wordCurrentClasses += " incorrect-word"
 		wordsJSX.push(
-			<span key={atWord} className={currentWordClasses}>
-				{words[atWord] + " "}
+			<span key={wordAt} className={wordCurrentClasses}>
+				{words[wordAt] + " "}
 			</span>
 		)
 
-		for (atWord = atWord + 1; atWord < words.length; ++atWord) {
+		for (wordAt = wordAt + 1; wordAt < words.length; ++wordAt) {
 			wordsJSX.push(
-				<span key={atWord} className="word">
-					{words[atWord] + " "}
+				<span key={wordAt} className="word">
+					{words[wordAt] + " "}
 				</span>
 			)
 		}

@@ -2,6 +2,7 @@ import React, { useEffect, useReducer, useRef, useState } from "react"
 
 import { useTextModeContext } from "../../../context/textMode"
 import { WordsStatistic, WordsStatisticAction } from "../Statistics/reducer"
+import { WordsInfo, WordsInfoAction } from "./reducer"
 
 import TimerWithReset from "../TimerWithReset/TimerWithReset"
 import Statistics from "../Statistics/Statistics"
@@ -16,36 +17,39 @@ import "./TypeFast.css"
 function TypeFast() {
 	const { textModeState } = useTextModeContext()
 
-	const [words, setWords] = useState({ 
-		value: [], loading: true 
-	})
-	const [wordsStatus, setWordsStatus] = useState([])
-	const [currentWord, setCurrentWord] = useState({ 
-		index: 0, status: true 
-	})
+	const [waitingResponse, setWaitingResponse] = useState(false)
 
+	const typeThisRef = useRef()
+	const typeHereRef = useRef()
 	const [typedWord, setTypedWord] = useState("")
 	const [typeHereDisabled, setTypeHereDisabled] = useState(false)
-	const typeHereRef = useRef()
 
-	const [timerState, setTimerState] = useState({
-		start: false, reset: false
-	})
-	const [secondsElapsed, setSecondsElapsed] = useState(0)
-
+	const [wordsInfo, setWordsInfo] = useReducer(
+		WordsInfo.setState, WordsInfo.state
+	)
 	const [wordsStatistic, setWordsStatistic] = useReducer(
 		WordsStatistic.setState, WordsStatistic.state
 	)
+	const [wordCurrent, setWordCurrent] = useState({ 
+		index: 0, status: true 
+	})
 
-	const initializeProgress = text => {
+	const [timerState, setTimerState] = useState({
+		start: false, reset: false,
+	})
+	const [secondsElapsed, setSecondsElapsed] = useState(0)
+
+	const initializeProgress = (text) => {
 		resetProgress()
-		setWordsStatistic(WordsStatisticAction.Init(text))
+		setWordsInfo(WordsInfoAction.Init(text))
+		setWordsStatistic(WordsStatisticAction.Init())
 	}
 
 	const resetProgress = () => {
-		setWordsStatus([])
-		setCurrentWord({ index: 0, status: true })
+		setWordsInfo(WordsInfoAction.Reset())
 		setWordsStatistic(WordsStatisticAction.Reset())
+		setWordCurrent({ index: 0, status: true })
+
 		setSecondsElapsed(0)
 
 		setTypedWord("")
@@ -53,53 +57,63 @@ function TypeFast() {
 	}
 
 	const handleInputWithTimer = e => {
-		if (!timerState.start)
+		if (!timerState.start) 
 			setTimerState({ start: true, reset: false })
 		handleInput(e)
 	}
 
 	const handleInput = ({ target: { value: typed } }) => {
 		setTypedWord(typed)
-		const atWord = currentWord.index
 
-		if (atWord === words.value.length) return
+		const wordAt = wordCurrent.index
+		const word = wordsInfo.shown[wordAt]
 
 		// user is done with current word
 		if (typed[typed.length - 1] === " ") {
-			if (words.value[atWord] + " " === typed) {
-				setWordsStatus([...wordsStatus, true])
+			if (word + " " === typed) {
+				setWordsInfo(WordsInfoAction.Correct())
 				setWordsStatistic(WordsStatisticAction.Correct(typed))
 			} else {
-				setWordsStatus([...wordsStatus, false])
-				setWordsStatistic(
-					WordsStatisticAction.Incorrect(words.value[atWord] + " ", typed)
-				)
+				setWordsInfo(WordsInfoAction.Incorrect())
+				setWordsStatistic(WordsStatisticAction.Incorrect(word + " ", typed))
 			}
 
 			setTypedWord("")
-			setCurrentWord({ index: atWord + 1, status: true })
+
+			const typeThisNode = typeThisRef.current
+			let totalChildren = 0
+			for (let i = 0; i <= wordAt + 1; ++i) {
+				totalChildren += typeThisNode.children[i].offsetWidth
+			}
+
+			if (totalChildren >= typeThisNode.offsetWidth) {
+				setWordsInfo(WordsInfoAction.Next(wordAt + 1))
+				setWordCurrent({ index: 0, status: true })
+			} else {
+				setWordCurrent({ index: wordAt + 1, status: true })
+			} 
 		} else {
-			if (typed !== words.value[atWord].substring(0, typed.length))
-				setCurrentWord({ ...currentWord, status: false })
+			if (typed !== word.substring(0, typed.length))
+				setWordCurrent({ ...wordCurrent, status: false })
 			else 
-				setCurrentWord({ ...currentWord, status: true })
+				setWordCurrent({ ...wordCurrent, status: true })
 		}
 	}
 
 	useEffect(() => {
-		setWords(words => ({
-			...words, loading: true,
-		}))
+		setWaitingResponse(true)
+		setTypeHereDisabled(true)
 
 		axios.get(textModeState.endpoint)
 			.then(({ data }) => {
-				setWords({ value: data.split(" "), loading: false })
 				initializeProgress(data)
 			})
 			.catch(() => {
-				setWords({ value: ["---"], loading: false })
 				initializeProgress("---")
 				setTypeHereDisabled(true)
+			})
+			.finally(() => {
+				setWaitingResponse(false)
 			})
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [textModeState.endpoint])
@@ -109,49 +123,47 @@ function TypeFast() {
 	})
 
 	return (
-		<div id="typefast-outer-container">
-			<div id="typefast-inner-container">
-				<div className="type-this">
-					{words.loading ? (
-						<Spinner animation="border" />
-					) : (
-						<Words
-							words={words.value}
-							wordsStatus={wordsStatus}
-							currentWord={currentWord}
-						/>
-					)}
-				</div>
-	
-				<div className="group-col">
-					<div>
-						<input ref={typeHereRef} type="text" 
-							className="strip-css-input type-here"
-							disabled={typeHereDisabled} 
-							value={typedWord} onChange={handleInputWithTimer}
-						/>
-					</div>
-	
-					<TimerWithReset
-						state={timerState} setState={setTimerState}
-						onTick={elapsed => {
-							setSecondsElapsed(elapsed)
-						}}
-						onReset={() => {
-							resetProgress()
-						}}
-						onStop={() => {
-							setTypedWord("")
-							setTypeHereDisabled(true)
-						}}
+		<div id="typefast-container" className="group-col">
+			<div ref={typeThisRef} className="type-this">
+				{waitingResponse ? (
+					<Spinner animation="border" />
+				) : (
+					<Words
+						words={wordsInfo.shown}
+						wordsStatus={wordsInfo.status}
+						wordCurrent={wordCurrent}
 					/>
+				)}
+			</div>
 
-					<Statistics
-						statistics={wordsStatistic}
-						elapsed={secondsElapsed}
-						textMode={textModeState.mode}
+			<div className="group-col">
+				<div>
+					<input ref={typeHereRef} type="text"
+						className="strip-css-input type-here"
+						disabled={typeHereDisabled}
+						value={typedWord}
+						onChange={handleInputWithTimer}
+						onPaste={e => {
+							e.preventDefault()
+							return false
+						}}
 					/>
 				</div>
+
+				<TimerWithReset
+					state={timerState} setState={setTimerState}
+					onTick={elapsed => setSecondsElapsed(elapsed)}
+					onReset={resetProgress}
+					onStop={() => {
+						setTypeHereDisabled(true)
+					}}
+				/>
+
+				<Statistics
+					statistics={wordsStatistic}
+					elapsed={secondsElapsed}
+					textMode={textModeState.mode}
+				/>
 			</div>
 		</div>
 	)

@@ -53,13 +53,19 @@ body {
 /* ==================================================== */
 
 .strip-css-btn,
-.strip-css-input {
+.strip-css-txtarea {
 	background: none;
 	border: none;
 	outline: none;
 }
+.strip-css-input {
+	background-color: none;
+	border: none;
+	outline: none;
+}
 .strip-css-btn:focus,
-.strip-css-input:focus {
+.strip-css-input:focus,
+.strip-css-txtarea:focus {
 	outline: none;
 }
 

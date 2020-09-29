@@ -24,6 +24,7 @@
 .message-type {
 	resize: none;
 	overflow: hidden;
+	
 	height: auto;
 	max-height: 75px;
 

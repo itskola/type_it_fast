@@ -37,7 +37,7 @@ function DeleteAccount({ show, setShow }) {
 				setWaitingResponse(false)
 				setToast({
 					show: true,
-					message: "Something went wrong. Please retry after logging back in again."
+					message: "Something went wrong. Please log back in and try again."
 				})
 			})
 	}
@@ -64,10 +64,12 @@ function DeleteAccount({ show, setShow }) {
 						Delete account?
 					</Modal.Title>
 				</Modal.Header>
+
 				<Modal.Body>
 					Click on "Delete" button to confirm that you want to delete your
 					account.
 				</Modal.Body>
+				
 				<Modal.Footer>
 					<Button variant="danger" onClick={handleDeleteAccount}>
 						Delete

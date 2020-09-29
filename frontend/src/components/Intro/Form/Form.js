@@ -1,7 +1,5 @@
 import React, { useState, useRef } from "react"
 
-import OverlayTrigger from "react-bootstrap/OverlayTrigger"
-import Tooltip from "react-bootstrap/Tooltip"
 import Button from "react-bootstrap/Button"
 import Form from "react-bootstrap/Form"
 
@@ -81,19 +79,11 @@ function _Form({ id, display, disabled = false, onLogin, onRegister, errors = {}
 			/>
 
 			{display.email && (
-				<OverlayTrigger placement="right"
-					overlay={
-						<Tooltip id="tooltip">
-							Your email is only used for password recovery.
-						</Tooltip>
-					}
-				>
-					<InputGroup ref={inputs.email} id={id}
-						type="email" placeholder="email" name={_form.email}
-						error={formErrors[_form.email]}
-						onChange={handleChange}
-					/>
-				</OverlayTrigger>
+				<InputGroup ref={inputs.email} id={id}
+					type="email" placeholder="email" name={_form.email}
+					error={formErrors[_form.email]}
+					onChange={handleChange}
+				/>
 			)}
 
 			<InputGroup ref={inputs.password} id={id}
