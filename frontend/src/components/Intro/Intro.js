@@ -81,16 +81,17 @@ function Intro() {
 	}
 
 	useEffect(() => {
-		axios.get(endpoints.Login)
-			.then(({ data }) => {
-				setAuthState(AuthAction.Login(data))
-			})
-			.catch(() => {
-				// logout out user locally if cookie was destroyed 
-				if (AuthAction.LocalAuth()) {
+		// check if user is already logged in
+		if (AuthAction.LocalAuth()) {
+			axios.get(endpoints.Login)
+				.then(({ data }) => {
+					setAuthState(AuthAction.Login(data))
+				})
+				.catch(() => {
+					// logout out user locally if cookie was destroyed 
 					setAuthState(AuthAction.Logout())
-				}
-			})
+				})
+		}
 	}, [setAuthState])
 
 	return (

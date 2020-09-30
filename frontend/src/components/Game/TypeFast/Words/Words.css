@@ -1,19 +1,30 @@
+#words {
+	--word-size: 1.875rem;
+	
+	font-size: var(--word-size);
+	line-height: calc(var(--word-size) * 1.5);
+	max-height: calc((var(--word-size) * 1.5) * 2);
+	overflow: hidden;
+
+	max-width: 75%;
+	user-select: none;
+	text-align: center;
+}
+
 .word {
 	white-space: pre-wrap;
 	padding-right: 0.125rem;
 	border-radius: 3px;
-	
-	transition: background-color 0.1s linear;
 }
 
-.current-word {
+.word-current {
 	background-color: var(--bg-main-light);
 }
 
-.correct-word {
+.word-correct {
 	color: var(--correct);
 }
 
-.incorrect-word {
+.word-incorrect {
 	color: var(--incorrect);
 }

@@ -1,0 +1,34 @@
+#word-typed {
+	width: 335px;
+
+	text-align: center;
+	font-size: 1.675rem;
+	color: var(--txt-main);
+	background-color: var(--bg-main-light);
+	padding: 0.5rem 1rem;
+}
+
+#word-typed:disabled {
+	color: var(--txt-main-dark);
+	background-color: var(--bg-main);
+}
+
+/* ==================================================== */
+
+@media only screen and (max-width: 365px) {
+	#word-typed {
+		width: 315px;
+	}
+}
+
+@media only screen and (max-width: 345px) {
+	#word-typed {
+		width: 295px;
+	}
+}
+
+@media only screen and (max-width: 325px) {
+	#word-typed {
+		width: 275px;
+	}
+}

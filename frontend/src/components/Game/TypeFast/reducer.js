@@ -1,6 +1,8 @@
+import { rangeArray, shuffleArray } from "../../../util/helper"
+import { TextModeAction } from "../../../context/textMode"
+
 const ActionType = {
 	Init: "init",
-	Error: "error",
 	Correct: "correct",
 	Incorrect: "incorrect",
 	Next: "next",
@@ -8,12 +10,9 @@ const ActionType = {
 }
 
 const WordsInfoAction = {
-	Init: text => ({
+	Init: (text, mode) => ({
 		type: ActionType.Init,
-		payload: text,
-	}),
-	Error: () => ({
-		type: ActionType.Error,
+		payload: { data: text, mode },
 	}),
 	Correct: () => ({
 		type: ActionType.Correct,
@@ -25,14 +24,96 @@ const WordsInfoAction = {
 		type: ActionType.Next,
 		payload: count,
 	}),
-	Reset: () => ({
+	Reset: mode => ({
 		type: ActionType.Reset,
+		payload: mode,
 	}),
 }
 
-let AllWords = []
 let NumberOfShownWords = 30
-const ErrorWord = "---"
+
+class SentencesMode {
+	constructor(sentences) {
+		this.data = []
+		this.startingIndexes = []
+		this.offset = 0
+
+		const range = rangeArray(0, sentences.length)
+		shuffleArray(range)
+
+		let totalLenght = 0
+		range.forEach(i => {
+			const wordsInSentence = sentences[i].split(" ")
+			wordsInSentence.forEach(word => {
+				this.data.push(word)
+			})
+
+			this.startingIndexes.push(totalLenght)
+			totalLenght += wordsInSentence.length
+		})
+	}
+
+	get length() {
+		return this.data.length
+	}
+
+	init(count) {
+		this.reset()
+		return this.next(count, [])
+	}
+
+	next(count, words) {
+		words = words.slice(count)
+
+		for (let i = this.offset; i < this.offset + count; ++i) {
+			words.push(this.data[i % this.length])
+		}
+
+		this.offset += count
+		if (this.offset >= this.length) this.offset -= this.length
+
+		return words
+	}
+
+	reset() {
+		this.offset = this.startingIndexes.find(start => start >= this.offset) || 0
+	}
+}
+
+class WordsMode {
+	constructor(words) {
+		this.data = words
+		this.offset = 0
+	}
+
+	get length() {
+		return this.data.length
+	}
+
+	init(count) {
+		this.reset()
+		return this.next(count, [])
+	}
+
+	next(count, words) {
+		words = words.slice(count)
+		for (let i = this.offset; i < this.offset + count; ++i) {
+			words.push(this.data[i % this.length])
+		}
+
+		this.offset += count
+		if (this.offset >= this.length) this.offset -= this.length
+
+		return words
+	}
+
+	reset() {
+		shuffleArray(this.data)
+		this.offset = 0
+	}
+}
+
+let textMode = null
 
 class WordsInfo {
 	static state = {
@@ -43,35 +124,36 @@ class WordsInfo {
 	static setState = (state, { type, payload }) => {
 		switch (type) {
 			case ActionType.Init:
-				AllWords = payload.split(" ")
-				return {
-					shown: AllWords.slice(0, NumberOfShownWords),
-					status: [],
+				if (payload.mode === TextModeAction.Mode.Sentences) {
+					textMode = new SentencesMode(payload.data)
+				} else {
+					textMode = new WordsMode(payload.data)
 				}
-			case ActionType.Error:
-				AllWords = [ErrorWord]
+
 				return {
-					shown: [ErrorWord],
+					shown: textMode.init(NumberOfShownWords),
 					status: [],
 				}
 			case ActionType.Correct:
 				return {
-					shown: state.shown,
+					...state,
 					status: [...state.status, true],
 				}
 			case ActionType.Incorrect:
 				return {
-					shown: state.shown,
+					...state,
 					status: [...state.status, false],
 				}
 			case ActionType.Next:
 				return {
-					shown: AllWords.slice(10, NumberOfShownWords),
+					shown: textMode.next(payload, state.shown),
 					status: [],
 				}
 			case ActionType.Reset:
+				textMode.reset()
+
 				return {
-					shown: AllWords.slice(0, NumberOfShownWords),
+					shown: textMode.init(NumberOfShownWords),
 					status: [],
 				}
 			default:

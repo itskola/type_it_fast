@@ -2,28 +2,28 @@ import React from "react"
 
 import "./Words.css"
 
-function Words({ words, wordsStatus, wordCurrent }) {
+function Words({ words, wordsStatus, wordCurrent }, ref) {
 	const wordsJSX = []
 	let wordAt
-
+	
 	for (wordAt = 0; wordAt < wordsStatus.length; ++wordAt) {
 		wordsJSX.push(
 			<span
 				key={wordAt}
 				className={
 					wordsStatus[wordAt] === true
-						? "word correct-word"
-						: "word incorrect-word"
+						? "word word-correct"
+						: "word word-incorrect"
 				}
 			>
 				{words[wordAt] + " "}
 			</span>
 		)
 	}
-
+	
 	if (wordAt < words.length) {
-		let wordCurrentClasses = "word current-word"
-		if (!wordCurrent.status) wordCurrentClasses += " incorrect-word"
+		let wordCurrentClasses = "word word-current"
+		if (!wordCurrent.status) wordCurrentClasses += " word-incorrect"
 		wordsJSX.push(
 			<span key={wordAt} className={wordCurrentClasses}>
 				{words[wordAt] + " "}
@@ -39,7 +39,11 @@ function Words({ words, wordsStatus, wordCurrent }) {
 		}
 	}
 
-	return <>{wordsJSX}</>
+	return (
+		<div ref={ref} id="words">
+			{wordsJSX}
+		</div>
+	)
 }
 
-export default Words
+export default React.forwardRef(Words)

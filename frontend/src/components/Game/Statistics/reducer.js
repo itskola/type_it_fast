@@ -55,9 +55,11 @@ class WordsStatistic {
 				const actual = payload.actual
 				const typed = payload.typed
 
-				let [longer, shorter] = [actual.length, typed.length]
+				let longer = actual.length,
+					shorter = typed.length
 				if (shorter > longer) {
-					[longer, shorter] = [typed.length, actual.length]
+					longer = typed.length
+					shorter = actual.length
 				}
 
 				let correct = 0

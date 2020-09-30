@@ -6,6 +6,7 @@ import { WordsInfo, WordsInfoAction } from "./reducer"
 
 import TimerWithReset from "../TimerWithReset/TimerWithReset"
 import Statistics from "../Statistics/Statistics"
+import WordTyped from "./WordTyped/WordTyped"
 import Words from "./Words/Words"
 
 import Spinner from "react-bootstrap/Spinner"
@@ -19,51 +20,61 @@ function TypeFast() {
 
 	const [waitingResponse, setWaitingResponse] = useState(false)
 
-	const typeThisRef = useRef()
-	const typeHereRef = useRef()
-	const [typedWord, setTypedWord] = useState("")
-	const [typeHereDisabled, setTypeHereDisabled] = useState(false)
+	const wordsRef = useRef()
+	const wordTypedRef = useRef()
+	const [wordTyped, setWordTyped] = useState("")
+	const [wordTypedDisabled, setWordTypedDisabled] = useState(false)
 
-	const [wordsInfo, setWordsInfo] = useReducer(
-		WordsInfo.setState, WordsInfo.state
-	)
+	const [wordsInfo, setWordsInfo] = useReducer(WordsInfo.setState, WordsInfo.state)
 	const [wordsStatistic, setWordsStatistic] = useReducer(
-		WordsStatistic.setState, WordsStatistic.state
+		WordsStatistic.setState,
+		WordsStatistic.state
 	)
-	const [wordCurrent, setWordCurrent] = useState({ 
-		index: 0, status: true 
+	const [wordCurrent, setWordCurrent] = useState({
+		index: 0,
+		status: true,
 	})
 
 	const [timerState, setTimerState] = useState({
-		start: false, reset: false,
+		start: false,
+		reset: false,
 	})
 	const [secondsElapsed, setSecondsElapsed] = useState(0)
 
-	const initializeProgress = (text) => {
-		resetProgress()
-		setWordsInfo(WordsInfoAction.Init(text))
+	const initializeProgress = text => {
+		setWordsInfo(WordsInfoAction.Init(text, textModeState.mode))
 		setWordsStatistic(WordsStatisticAction.Init())
+
+		resetComponents()
 	}
 
 	const resetProgress = () => {
-		setWordsInfo(WordsInfoAction.Reset())
+		setWordsInfo(WordsInfoAction.Reset(textModeState.mode))
 		setWordsStatistic(WordsStatisticAction.Reset())
+
+		resetComponents()
+	}
+
+	const resetComponents = () => {
 		setWordCurrent({ index: 0, status: true })
 
-		setSecondsElapsed(0)
+		setWordTyped("")
+		setWordTypedDisabled(false)
 
-		setTypedWord("")
-		setTypeHereDisabled(false)
+		setSecondsElapsed(0)
 	}
 
 	const handleInputWithTimer = e => {
-		if (!timerState.start) 
+		if (e.target.value === " ") return
+		if (!timerState.start) {
 			setTimerState({ start: true, reset: false })
+
+		}
 		handleInput(e)
 	}
 
 	const handleInput = ({ target: { value: typed } }) => {
-		setTypedWord(typed)
+		setWordTyped(typed)
 
 		const wordAt = wordCurrent.index
 		const word = wordsInfo.shown[wordAt]
@@ -78,20 +89,19 @@ function TypeFast() {
 				setWordsStatistic(WordsStatisticAction.Incorrect(word + " ", typed))
 			}
 
-			setTypedWord("")
-
-			const typeThisNode = typeThisRef.current
-			let totalChildren = 0
-			for (let i = 0; i <= wordAt + 1; ++i) {
-				totalChildren += typeThisNode.children[i].offsetWidth
-			}
-
-			if (totalChildren >= typeThisNode.offsetWidth) {
+			// check if user is at last word in first row
+			const wordNodes = wordsRef.current.children
+			if (
+				wordNodes[wordAt].getBoundingClientRect().top < 
+				wordNodes[wordAt + 1].getBoundingClientRect().top
+			) {
 				setWordsInfo(WordsInfoAction.Next(wordAt + 1))
 				setWordCurrent({ index: 0, status: true })
 			} else {
 				setWordCurrent({ index: wordAt + 1, status: true })
-			} 
+			}
+
+			setWordTyped("")
 		} else {
 			if (typed !== word.substring(0, typed.length))
 				setWordCurrent({ ...wordCurrent, status: false })
@@ -102,15 +112,15 @@ function TypeFast() {
 
 	useEffect(() => {
 		setWaitingResponse(true)
-		setTypeHereDisabled(true)
+		setWordTypedDisabled(true)
 
 		axios.get(textModeState.endpoint)
 			.then(({ data }) => {
 				initializeProgress(data)
 			})
 			.catch(() => {
-				initializeProgress("---")
-				setTypeHereDisabled(true)
+				initializeProgress(["---"])
+				setWordTypedDisabled(true)
 			})
 			.finally(() => {
 				setWaitingResponse(false)
@@ -119,43 +129,35 @@ function TypeFast() {
 	}, [textModeState.endpoint])
 
 	useEffect(() => {
-		if (!typeHereDisabled) typeHereRef.current.focus()
+		if (!wordTypedDisabled) wordTypedRef.current.focus()
 	})
 
 	return (
 		<div id="typefast-container" className="group-col">
-			<div ref={typeThisRef} className="type-this">
-				{waitingResponse ? (
-					<Spinner animation="border" />
-				) : (
-					<Words
-						words={wordsInfo.shown}
-						wordsStatus={wordsInfo.status}
-						wordCurrent={wordCurrent}
-					/>
-				)}
-			</div>
+			{waitingResponse ? (
+				<Spinner animation="border" />
+			) : (
+				<Words ref={wordsRef}
+					words={wordsInfo.shown}
+					wordsStatus={wordsInfo.status}
+					wordCurrent={wordCurrent}
+				/>
+			)}
 
 			<div className="group-col">
-				<div>
-					<input ref={typeHereRef} type="text"
-						className="strip-css-input type-here"
-						disabled={typeHereDisabled}
-						value={typedWord}
-						onChange={handleInputWithTimer}
-						onPaste={e => {
-							e.preventDefault()
-							return false
-						}}
-					/>
-				</div>
+				<WordTyped ref={wordTypedRef}
+					disabled={wordTypedDisabled}
+					value={wordTyped}
+					onChange={handleInputWithTimer}
+				/>
 
 				<TimerWithReset
-					state={timerState} setState={setTimerState}
+					state={timerState}
+					setState={setTimerState}
 					onTick={elapsed => setSecondsElapsed(elapsed)}
 					onReset={resetProgress}
 					onStop={() => {
-						setTypeHereDisabled(true)
+						setWordTypedDisabled(true)
 					}}
 				/>
 

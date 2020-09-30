@@ -8,10 +8,12 @@ const Error = require("../util/error")
 
 const Cache = {
 	Sentence: {
-		empty: true, value: "",
+		empty: true,
+		value: [],
 	},
 	WordList: {
-		empty: true, value: "",
+		empty: true,
+		value: [],
 	},
 	Set: (cache, value) => {
 		cache.empty = false
@@ -19,50 +21,50 @@ const Cache = {
 	},
 }
 
-const textModeEntriesToString = (Collection, cache) =>
-	new Promise(async (resolve, reject) => {
-		if (!cache.empty) 
-			return resolve(cache.value)
-
-		try {
-			const docs = await Collection.find({}).select("-_id")
-
-			let text = ""
-			for (let i = 0; i < docs.length - 1; ++i) text += docs[i].text + " "
-			text += docs[docs.length - 1].text
-
-			Cache.Set(cache, text)
-
-			resolve(cache.value)
-		} catch (err) {
-			reject(err)
-		}
-	})
-
 router.use(Auth.verify)
 
-router.get("/sentences", (req, res) => {
-	textModeEntriesToString(Sentence, Cache.Sentence)
-		.then(text => {
-			return res.status(200).send(text)
+router.get("/sentences", async (req, res) => {
+	if (!Cache.Sentence.empty) 
+		return res.status(200).send(Cache.Sentence.value)
+
+	try {
+		const docs = await Sentence.find({}).select("-_id")
+
+		const sentences = []
+		docs.forEach(doc => {
+			sentences.push(doc.text)
 		})
-		.catch(err => {
-			return res
-				.status(500)
-				.json(Error.CreateMessage(Error.Type.Db, Error.Message.Db))
-		})
+
+		Cache.Set(Cache.Sentence, sentences)
+		return res.status(200).send(Cache.Sentence.value)
+	} catch (err) {
+		return res
+			.status(500)
+			.json(Error.CreateMessage(Error.Type.Db, Error.Message.Db))
+	}
 })
 
-router.get("/words", (req, res) => {
-	textModeEntriesToString(WordList, Cache.WordList)
-		.then(text => {
-			return res.status(200).send(text)
+router.get("/words", async (req, res) => {
+	if (!Cache.WordList.empty) 
+		return res.status(200).send(Cache.WordList.value)
+
+	try {
+		const docs = await WordList.find({}).select("-_id")
+
+		const words = []
+		docs.forEach(doc => {
+			doc.text.split(" ").forEach(word => {
+				words.push(word)
+			})
 		})
-		.catch(err => {
-			return res
-				.status(500)
-				.json(Error.CreateMessage(Error.Type.Db, Error.Message.Db))
-		})
+
+		Cache.Set(Cache.WordList, words)
+		return res.status(200).send(Cache.WordList.value)
+	} catch (err) {
+		return res
+			.status(500)
+			.json(Error.CreateMessage(Error.Type.Db, Error.Message.Db))
+	}
 })
 
 module.exports = router
