@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { useAuthContext } from "../../context/auth"
+import { useAuthContext } from "context/auth"
 
 import Tabs from "react-bootstrap/Tabs"
 import Tab from "react-bootstrap/Tab"

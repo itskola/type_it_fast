@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 
-import { Duration } from "../../../context/duration"
+import { Duration } from "context/duration"
 
 import RealTimer from "./RealTimer"
 import MockTimer from "./MockTimer"

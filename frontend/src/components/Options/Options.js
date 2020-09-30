@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react"
 
-import { useAuthContext, AuthAction } from "../../context/auth"
-import { useTextModeContext, TextModeAction } from "../../context/textMode"
-import { endpoints } from "../../util/endpoints"
+import { useAuthContext, AuthAction } from "context/auth"
+import { useTextModeContext, TextModeAction } from "context/textMode"
+import { endpoints } from "util/endpoints"
 
 import DeleteAccount from "./DeleteAccount/DeleteAccount"
-import PageOverlay from "../PageOverlay/PageOverlay"
 
 import Dropdown from "react-bootstrap/Dropdown"
 import Spinner from "react-bootstrap/Spinner"
@@ -65,9 +64,9 @@ function Options() {
 	return (
 		<>
 			{waitingResponse && (
-				<PageOverlay>
+				<div className="page-overlay">
 					<Spinner animation="grow"></Spinner>
-				</PageOverlay>
+				</div>
 			)}
 			
 			<Dropdown id="options" drop="right">

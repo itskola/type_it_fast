@@ -2,7 +2,7 @@ import React from "react"
 
 import Table from "react-bootstrap/Table"
 
-import { Accuracy, Wpm } from "../../../util/statistics"
+import { Accuracy, Wpm } from "util/statistics"
 
 import "./Statistics.css"
 

@@ -1,6 +1,6 @@
 import React from "react"
 
-import { endpoints } from "../../util/endpoints"
+import { endpoints } from "util/endpoints"
 
 import "./ProjectSource.css"
 

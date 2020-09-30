@@ -1,9 +1,7 @@
 import React, { useState } from "react"
 
-import { useAuthContext, AuthAction } from "../../../context/auth"
-import { endpoints } from "../../../util/endpoints"
-
-import PageOverlay from "../../PageOverlay/PageOverlay"
+import { useAuthContext, AuthAction } from "context/auth"
+import { endpoints } from "util/endpoints"
 
 import Spinner from "react-bootstrap/Spinner"
 import Button from "react-bootstrap/Button"
@@ -52,9 +50,9 @@ function DeleteAccount({ show, setShow }) {
 			</Toast>
 
 			{waitingResponse && (
-				<PageOverlay>
+				<div className="page-overlay">
 					<Spinner animation="grow"></Spinner>
-				</PageOverlay>
+				</div>
 			)}
 
 			<Modal show={show} onHide={() => setShow(false)}>

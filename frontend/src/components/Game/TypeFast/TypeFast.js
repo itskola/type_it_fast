@@ -1,6 +1,6 @@
 import React, { useEffect, useReducer, useRef, useState } from "react"
 
-import { useTextModeContext } from "../../../context/textMode"
+import { useTextModeContext } from "context/textMode"
 import { WordsStatistic, WordsStatisticAction } from "../Statistics/reducer"
 import { WordsInfo, WordsInfoAction } from "./reducer"
 
@@ -79,7 +79,7 @@ function TypeFast() {
 		const wordAt = wordCurrent.index
 		const word = wordsInfo.shown[wordAt]
 
-		// user is done with current word
+		// user is done with the current word
 		if (typed[typed.length - 1] === " ") {
 			if (word + " " === typed) {
 				setWordsInfo(WordsInfoAction.Correct())
@@ -89,7 +89,7 @@ function TypeFast() {
 				setWordsStatistic(WordsStatisticAction.Incorrect(word + " ", typed))
 			}
 
-			// check if user is at last word in first row
+			// check if user is at the last word in a row
 			const wordNodes = wordsRef.current.children
 			if (
 				wordNodes[wordAt].getBoundingClientRect().top < 

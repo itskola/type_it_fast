@@ -1,5 +1,5 @@
-import { rangeArray, shuffleArray } from "../../../util/helper"
-import { TextModeAction } from "../../../context/textMode"
+import { rangeArray, shuffleArray } from "util/helper"
+import { TextModeAction } from "context/textMode"
 
 const ActionType = {
 	Init: "init",
