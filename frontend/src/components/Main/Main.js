@@ -1,10 +1,11 @@
 import React, { useReducer } from "react"
 
-import { TextModeContext, TextMode } from "../../context/textMode"
+import { TextModeContext, TextMode } from "context/textMode"
 
 import ProjectSource from "../ProjectSource/ProjectSource"
+import TypeFast from "../TypeFast/TypeFast"
 import Options from "../Options/Options"
-import Game from "../Game/Game"
+import Title from "../Title/Title"
 import Chat from "../Chat/Chat"
 
 import "./Main.css"
@@ -19,7 +20,10 @@ function Main() {
 		<TextModeContext.Provider value={{ textModeState, setTextModeState }}>
 			<div id="main-container">
 				<Options />
-				<Game />
+				<div className="group-col">
+					<Title />
+					<TypeFast />
+				</div>
 				<Chat />
 				<ProjectSource />
 			</div>

@@ -1,0 +1,11 @@
+#typefast-container {
+	--typefast-spacing: 1.25rem
+}
+
+#typefast-container > div {
+	margin-bottom: var(--typefast-spacing);
+}
+
+#typefast-container .group-col > div {
+	margin-bottom: var(--typefast-spacing);	
+}

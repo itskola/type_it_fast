@@ -7,3 +7,7 @@
 
 	padding: var(--main-spacing);
 }
+
+#main-container > .group-col > div {
+	margin-bottom: 1.5rem;
+}

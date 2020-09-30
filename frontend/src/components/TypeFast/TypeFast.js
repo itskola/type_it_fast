@@ -1,11 +1,11 @@
 import React, { useEffect, useReducer, useRef, useState } from "react"
 
 import { useTextModeContext } from "context/textMode"
-import { WordsStatistic, WordsStatisticAction } from "../Statistics/reducer"
+import { WordsStatistic, WordsStatisticAction } from "./Statistics/reducer"
 import { WordsInfo, WordsInfoAction } from "./reducer"
 
-import TimerWithReset from "../TimerWithReset/TimerWithReset"
-import Statistics from "../Statistics/Statistics"
+import TimerWithReset from "./TimerWithReset/TimerWithReset"
+import Statistics from "./Statistics/Statistics"
 import WordTyped from "./WordTyped/WordTyped"
 import Words from "./Words/Words"
 

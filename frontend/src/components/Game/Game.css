@@ -1,9 +1,0 @@
-#game {
-	--game-spacing: 1.5rem;
-
-	flex: 1;
-}
-
-#game > div {
-	margin-bottom: var(--game-spacing);
-}
