@@ -37,8 +37,10 @@ function RealTimer({ seconds, formatSeconds, onTick = null, onStop = null }) {
 			if (_seconds !== seconds) onTick(seconds - _seconds)
 			
 		if (stopped && onStop)
-			onStop()
-	})
+			onStop(seconds)
+			
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [started, stopped, _seconds])
 
 	return (
 		<>

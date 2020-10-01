@@ -1,4 +1,8 @@
-.statistics-container th {
+#statistics-container th {
 	letter-spacing: 1.5px;
-	font-size: 1.75rem;
+	font-size: 1.675rem;
+}
+
+#statistics-container.table {
+	margin-bottom: 0;
 }

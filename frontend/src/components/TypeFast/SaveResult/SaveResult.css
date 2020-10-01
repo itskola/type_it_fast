@@ -1,0 +1,28 @@
+#save-result {
+	position: absolute;
+	bottom: 0;
+	left: 50%;
+	transform: translate(-50%, 50%);
+}
+
+#save-result > div {
+	background-color: var(--accent-color);
+	padding: 0.5rem;
+	border-radius: 2rem;
+}
+
+#save-result button {
+	line-height: 1;
+	font-size: 2rem;
+	color: var(--shadow-dark);
+	background-color: var(--accent-color);
+	padding: 0.5rem 0.675rem;
+	border-radius: 2rem;
+
+	transition: 0.25s linear;
+}
+
+#save-result button:hover {
+	background-color: var(--accent-color-dark);
+	transform: translateY(-4%);
+}

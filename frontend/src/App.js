@@ -6,6 +6,7 @@ import { AuthContext, Auth } from "./context/auth"
 
 import Intro from "./components/Intro/Intro"
 import Main from "./components/Main/Main"
+import Results from "./components/Results/Results"
 import NotFound from "./components/NotFound/NotFound"
 
 import "bootstrap/dist/css/bootstrap.min.css"
@@ -23,6 +24,7 @@ function App() {
 						{authState.isAuth ? <Redirect to="/main" /> : <Intro />}
 					</Route>
 					<ProtectedRoute path="/main" component={Main} />
+					<ProtectedRoute path="/results" component={Results} />
 					<Route component={NotFound} />
 				</Switch>
 			</Router>

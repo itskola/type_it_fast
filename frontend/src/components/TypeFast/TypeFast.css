@@ -9,3 +9,7 @@
 #typefast-container .group-col > div {
 	margin-bottom: var(--typefast-spacing);	
 }
+
+#statistics-result-container {
+	position: relative;
+}

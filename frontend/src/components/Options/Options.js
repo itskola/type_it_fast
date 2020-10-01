@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react"
+import { Link } from "react-router-dom"
 
 import { useAuthContext, AuthAction } from "context/auth"
 import { useTextModeContext, TextModeAction } from "context/textMode"
@@ -14,7 +15,8 @@ import axios from "axios"
 import "./Options.css"
 
 const CustomToggle = React.forwardRef(({ onClick, children, ...rest }, ref) => (
-	<button ref={ref}
+	<button
+		ref={ref}
 		onClick={e => {
 			e.preventDefault()
 			onClick(e)
@@ -68,10 +70,12 @@ function Options() {
 					<Spinner animation="grow"></Spinner>
 				</div>
 			)}
-			
+
 			<Dropdown id="options" drop="right">
-				<Dropdown.Toggle as={CustomToggle} 
-					id="options-toggle" className="strip-css-btn clickable-icon"
+				<Dropdown.Toggle
+					as={CustomToggle}
+					id="options-toggle"
+					className="strip-css-btn clickable-icon"
 				>
 					<i id="clickable-icon" className="fa fa-cog"></i>
 				</Dropdown.Toggle>
@@ -84,20 +88,24 @@ function Options() {
 
 					<Dropdown.Divider />
 
-					<Dropdown.Item className="option"
+					<Dropdown.Item
+						className="option"
 						onClick={() =>
 							handleTextModeStateChange(
-								TextModeAction.Sentences(), TextModeAction.Mode.Sentences
+								TextModeAction.Sentences(),
+								TextModeAction.Mode.Sentences
 							)
 						}
 					>
 						<span>Sentences</span>
 						{isSentencesMode && <i className="checked fa fa-check"></i>}
 					</Dropdown.Item>
-					<Dropdown.Item className="option"
+					<Dropdown.Item
+						className="option"
 						onClick={() =>
 							handleTextModeStateChange(
-								TextModeAction.Words(), TextModeAction.Mode.Words
+								TextModeAction.Words(),
+								TextModeAction.Mode.Words
 							)
 						}
 					>
@@ -107,9 +115,10 @@ function Options() {
 
 					<Dropdown.Divider />
 
-					<Dropdown.Item onClick={handleLogout}>
-						Logout
+					<Dropdown.Item as={Link} to="/results">
+						Results
 					</Dropdown.Item>
+					<Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
 
 					<Dropdown.Divider />
 

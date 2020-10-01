@@ -110,7 +110,7 @@ h1, h2, h3, p {
 .dropdown-item {
 	font-size: 1rem;
 	color: var(--txt-main-light) !important;
-	padding: 0.25rem 1rem;
+	padding: 0.25rem 0.875rem;
 }
 
 .dropdown-item:hover {

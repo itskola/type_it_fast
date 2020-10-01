@@ -4,8 +4,11 @@ import { useTextModeContext } from "context/textMode"
 import { WordsStatistic, WordsStatisticAction } from "./Statistics/reducer"
 import { WordsInfo, WordsInfoAction } from "./reducer"
 
+import { endpoints } from "util/endpoints"
+
 import TimerWithReset from "./TimerWithReset/TimerWithReset"
 import Statistics from "./Statistics/Statistics"
+import SaveResult from "./SaveResult/SaveResult"
 import WordTyped from "./WordTyped/WordTyped"
 import Words from "./Words/Words"
 
@@ -26,33 +29,32 @@ function TypeFast() {
 	const [wordTypedDisabled, setWordTypedDisabled] = useState(false)
 
 	const [wordsInfo, setWordsInfo] = useReducer(WordsInfo.setState, WordsInfo.state)
-	const [wordsStatistic, setWordsStatistic] = useReducer(
-		WordsStatistic.setState,
-		WordsStatistic.state
-	)
+	const [wordsStatistic, setWordsStatistic] = useReducer(WordsStatistic.setState, WordsStatistic.state)
 	const [wordCurrent, setWordCurrent] = useState({
-		index: 0,
-		status: true,
+		index: 0, status: true,
 	})
 
 	const [timerState, setTimerState] = useState({
-		start: false,
-		reset: false,
+		start: false, reset: false,
 	})
-	const [secondsElapsed, setSecondsElapsed] = useState(0)
+	const [timerSecondsElapsed, setTimerSecondsElapsed] = useState(0)
+
+	const [saveResult, setSaveResult] = useState({
+		show: false, waiting: false,
+	})
 
 	const initializeProgress = text => {
+		resetComponents()
+
 		setWordsInfo(WordsInfoAction.Init(text, textModeState.mode))
 		setWordsStatistic(WordsStatisticAction.Init())
-
-		resetComponents()
 	}
 
 	const resetProgress = () => {
+		resetComponents()
+
 		setWordsInfo(WordsInfoAction.Reset(textModeState.mode))
 		setWordsStatistic(WordsStatisticAction.Reset())
-
-		resetComponents()
 	}
 
 	const resetComponents = () => {
@@ -61,15 +63,15 @@ function TypeFast() {
 		setWordTyped("")
 		setWordTypedDisabled(false)
 
-		setSecondsElapsed(0)
+		setTimerState({start: false, reset: false})
+		setTimerSecondsElapsed(0)
+
+		setSaveResult({ show: false, waiting: false })
 	}
 
 	const handleInputWithTimer = e => {
 		if (e.target.value === " ") return
-		if (!timerState.start) {
-			setTimerState({ start: true, reset: false })
-
-		}
+		if (!timerState.start) setTimerState({ start: true, reset: false })
 		handleInput(e)
 	}
 
@@ -92,7 +94,7 @@ function TypeFast() {
 			// check if user is at the last word in a row
 			const wordNodes = wordsRef.current.children
 			if (
-				wordNodes[wordAt].getBoundingClientRect().top < 
+				wordNodes[wordAt].getBoundingClientRect().top <
 				wordNodes[wordAt + 1].getBoundingClientRect().top
 			) {
 				setWordsInfo(WordsInfoAction.Next(wordAt + 1))
@@ -108,6 +110,19 @@ function TypeFast() {
 			else 
 				setWordCurrent({ ...wordCurrent, status: true })
 		}
+	}
+
+	const handleSaveResult = () => {
+		setSaveResult({ ...saveResult, waiting: true })
+
+		axios.post(endpoints.Results, {
+				statistics: wordsStatistic,
+				seconds: timerSecondsElapsed,
+				textMode: textModeState.mode,
+			})
+			.then(() => {})
+			.catch(() => {})
+			.finally(() => setSaveResult({ show: false, waiting: true }))
 	}
 
 	useEffect(() => {
@@ -130,7 +145,7 @@ function TypeFast() {
 
 	useEffect(() => {
 		if (!wordTypedDisabled) wordTypedRef.current.focus()
-	})
+	}, [wordTypedDisabled])
 
 	return (
 		<div id="typefast-container" className="group-col">
@@ -152,20 +167,28 @@ function TypeFast() {
 				/>
 
 				<TimerWithReset
-					state={timerState}
-					setState={setTimerState}
-					onTick={elapsed => setSecondsElapsed(elapsed)}
+					state={timerState} setState={setTimerState}
+					onTick={elapsed => setTimerSecondsElapsed(elapsed)}
 					onReset={resetProgress}
-					onStop={() => {
+					onStop={elapsedTotal => {
 						setWordTypedDisabled(true)
+						setSaveResult({ ...saveResult, show: true })
 					}}
 				/>
 
-				<Statistics
-					statistics={wordsStatistic}
-					elapsed={secondsElapsed}
-					textMode={textModeState.mode}
-				/>
+				<div id="statistics-result-container">
+					<Statistics
+						statistics={wordsStatistic}
+						elapsed={timerSecondsElapsed}
+						textMode={textModeState.mode}
+					/>
+					{saveResult.show && (
+						<SaveResult
+							onClick={handleSaveResult}
+							waitingResponse={saveResult.waiting}
+						/>
+					)}
+				</div>
 			</div>
 		</div>
 	)

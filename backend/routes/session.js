@@ -8,7 +8,7 @@ const Hash = require("../util/hash")
 
 router.route("/")
 	.get(Auth.verify, (req, res) => {
-		res.status(200).send(req.decoded)
+		res.status(200).send(req.user)
 	})
 	.post(async (req, res) => {
 		try {

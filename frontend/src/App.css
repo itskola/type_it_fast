@@ -8,6 +8,7 @@
 	--bg-main-dark: #1d1e21;
 
 	--accent-color: #4a4acc;
+	--accent-color-dark: #32329f;
 	--accent-color-gradient: linear-gradient(to left, #4a4acc, #088880);
 
 	--shadow-light: rgb(125, 125, 125);
@@ -25,10 +26,8 @@
 	box-sizing: border-box;
 }
 
-html,
-body,
-input,
-textarea {
+html, body,
+input, textarea {
 	font-family: "Poppins", sans-serif;
 }
 

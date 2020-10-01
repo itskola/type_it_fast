@@ -1,7 +1,7 @@
 const session = "/api/session"
 const account = "/api/account"
 const textMode = "/api/text-mode"
-const progress = "/api/progress"
+const progress = "/api/results"
 
 export const endpoints = {
 	Login: `${session}`,
@@ -13,7 +13,7 @@ export const endpoints = {
 
 	Words: `${textMode}/words`,
 	Sentence: `${textMode}/sentences`,
-	SaveResults: `${progress}`,
+	Results: `${progress}`,
 
 	ProjectSource: "https://github.com/itskola/type_it_fast",
 }

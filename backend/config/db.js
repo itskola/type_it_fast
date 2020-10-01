@@ -5,7 +5,8 @@ async function connect(uri, callback) {
 		const conn = await mongoose.connect(uri, {
 			useNewUrlParser: true,
             useUnifiedTopology: true,
-            useCreateIndex: true
+			useCreateIndex: true,
+			useFindAndModify: false
         })
 		callback(conn, null)
 	} catch (err) {

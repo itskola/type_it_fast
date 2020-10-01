@@ -1,5 +1,8 @@
-import { rangeArray, shuffleArray } from "util/helper"
+import { SentencesContainer, WordsContainer } from "util/wordsContainer"
 import { TextModeAction } from "context/textMode"
+
+let container = null
+let WordsToShow = 30
 
 const ActionType = {
 	Init: "init",
@@ -30,91 +33,6 @@ const WordsInfoAction = {
 	}),
 }
 
-let NumberOfShownWords = 30
-
-class SentencesMode {
-	constructor(sentences) {
-		this.data = []
-		this.startingIndexes = []
-		this.offset = 0
-
-		const range = rangeArray(0, sentences.length)
-		shuffleArray(range)
-
-		let totalLenght = 0
-		range.forEach(i => {
-			const wordsInSentence = sentences[i].split(" ")
-			wordsInSentence.forEach(word => {
-				this.data.push(word)
-			})
-
-			this.startingIndexes.push(totalLenght)
-			totalLenght += wordsInSentence.length
-		})
-	}
-
-	get length() {
-		return this.data.length
-	}
-
-	init(count) {
-		this.reset()
-		return this.next(count, [])
-	}
-
-	next(count, words) {
-		words = words.slice(count)
-
-		for (let i = this.offset; i < this.offset + count; ++i) {
-			words.push(this.data[i % this.length])
-		}
-
-		this.offset += count
-		if (this.offset >= this.length) this.offset -= this.length
-
-		return words
-	}
-
-	reset() {
-		this.offset = this.startingIndexes.find(start => start >= this.offset) || 0
-	}
-}
-
-class WordsMode {
-	constructor(words) {
-		this.data = words
-		this.offset = 0
-	}
-
-	get length() {
-		return this.data.length
-	}
-
-	init(count) {
-		this.reset()
-		return this.next(count, [])
-	}
-
-	next(count, words) {
-		words = words.slice(count)
-		for (let i = this.offset; i < this.offset + count; ++i) {
-			words.push(this.data[i % this.length])
-		}
-
-		this.offset += count
-		if (this.offset >= this.length) this.offset -= this.length
-
-		return words
-	}
-
-	reset() {
-		shuffleArray(this.data)
-		this.offset = 0
-	}
-}
-
-let textMode = null
-
 class WordsInfo {
 	static state = {
 		shown: [],
@@ -124,14 +42,18 @@ class WordsInfo {
 	static setState = (state, { type, payload }) => {
 		switch (type) {
 			case ActionType.Init:
-				if (payload.mode === TextModeAction.Mode.Sentences) {
-					textMode = new SentencesMode(payload.data)
-				} else {
-					textMode = new WordsMode(payload.data)
-				}
+				WordsToShow = 30
+
+				if (payload.mode === TextModeAction.Mode.Sentences)
+					container = new SentencesContainer(payload.data)
+				else
+					container = new WordsContainer(payload.data)
+
+				if (WordsToShow > container.length)
+					WordsToShow = container.length
 
 				return {
-					shown: textMode.init(NumberOfShownWords),
+					shown: container.init(WordsToShow),
 					status: [],
 				}
 			case ActionType.Correct:
@@ -146,14 +68,14 @@ class WordsInfo {
 				}
 			case ActionType.Next:
 				return {
-					shown: textMode.next(payload, state.shown),
+					shown: container.next(payload, state.shown),
 					status: [],
 				}
 			case ActionType.Reset:
-				textMode.reset()
+				container.reset()
 
 				return {
-					shown: textMode.init(NumberOfShownWords),
+					shown: container.init(WordsToShow),
 					status: [],
 				}
 			default:

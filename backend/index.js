@@ -43,6 +43,7 @@ socketioSetup(io)
 app.use("/api/session", require("./routes/session"))
 app.use("/api/account", require("./routes/account"))
 app.use("/api/text-mode", require("./routes/textMode"))
+app.use("/api/results", require("./routes/results"))
 
 // ================================================ Routes
 

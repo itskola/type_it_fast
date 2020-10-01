@@ -30,7 +30,7 @@ class Auth {
 					)
 			}
 
-			req.decoded = decoded
+			req.user = decoded
 			next()
 		})
 	}
