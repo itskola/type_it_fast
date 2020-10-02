@@ -55,10 +55,10 @@ function DeleteAccount({ show, setShow }) {
 				</div>
 			)}
 
-			<Modal show={show} onHide={() => setShow(false)}>
+			<Modal show={show} onHide={() => setShow(false)} id="delete-account">
 				<Modal.Header closeButton>
 					<Modal.Title>
-						<i className="delete-accont-icon fa fa-exclamation-triangle"></i>
+						<i className="title-icon fa fa-exclamation-triangle"></i>
 						Delete account?
 					</Modal.Title>
 				</Modal.Header>

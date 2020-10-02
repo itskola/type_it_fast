@@ -11,7 +11,7 @@
 	color: var(--txt-main-dark);
 	padding: 0 var(--timer-spacing);
 
-	transition: 0.1s linear;
+	transition: 0.15s linear;
 }
 
 .timer button:hover {

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 
 import { useAuthContext, AuthAction } from "../../context/auth"
 import { endpoints } from "../../util/endpoints"
@@ -79,20 +79,6 @@ function Intro() {
 				registerResponse(data)
 			})
 	}
-
-	useEffect(() => {
-		// check if user is already logged in
-		if (AuthAction.LocalAuth()) {
-			axios.get(endpoints.Login)
-				.then(({ data }) => {
-					setAuthState(AuthAction.Login(data))
-				})
-				.catch(() => {
-					// logout out user locally if cookie was destroyed 
-					setAuthState(AuthAction.Logout())
-				})
-		}
-	}, [setAuthState])
 
 	return (
 		<div id="intro-outer-container">

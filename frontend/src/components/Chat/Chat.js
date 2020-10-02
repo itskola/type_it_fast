@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react"
 import { useAuthContext } from "context/auth"
 
-import Tabs from "react-bootstrap/Tabs"
-import Tab from "react-bootstrap/Tab"
-
 import ActiveUsers from "./ActiveUsers/ActiveUsers"
 import Messages from "./Messages/Messages"
 import Input from "./Input/Input"
+
+import Tabs from "react-bootstrap/Tabs"
+import Tab from "react-bootstrap/Tab"
 
 import io from "socket.io-client"
 

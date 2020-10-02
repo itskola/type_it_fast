@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from "react"
-import { Link } from "react-router-dom"
-
 import { useAuthContext, AuthAction } from "context/auth"
 import { useTextModeContext, TextModeAction } from "context/textMode"
-import { endpoints } from "util/endpoints"
 
 import DeleteAccount from "./DeleteAccount/DeleteAccount"
+import Results from "./Results/Results"
 
 import Dropdown from "react-bootstrap/Dropdown"
 import Spinner from "react-bootstrap/Spinner"
 
+import { endpoints } from "util/endpoints"
 import axios from "axios"
 
 import "./Options.css"
@@ -32,6 +31,7 @@ function Options() {
 	const { textModeState, setTextModeState } = useTextModeContext()
 
 	const [showDeleteAccount, setShowDeleteAccount] = useState(false)
+	const [showResults, setShowResults] = useState(false)
 
 	const [waitingResponse, setWaitingResponse] = useState(false)
 
@@ -46,11 +46,6 @@ function Options() {
 			setAuthState(AuthAction.Logout())
 		}
 	}
-
-	// TODO: implement changing of dark and light themes
-	// const handleThemeChange = () => {
-	// 	console.log("Change ColorTheme handler")
-	// }
 
 	const handleTextModeStateChange = (action, mode) => {
 		if (mode !== textModeState.mode) setTextModeState(action)
@@ -85,6 +80,9 @@ function Options() {
 						<span>Theme</span>
 						<i className="theme fa fa-sun"></i>
 					</Dropdown.Item>
+					<Dropdown.Item onClick={() => setShowResults(true)}>
+						Results
+					</Dropdown.Item>
 
 					<Dropdown.Divider />
 
@@ -115,11 +113,8 @@ function Options() {
 
 					<Dropdown.Divider />
 
-					<Dropdown.Item as={Link} to="/results">
-						Results
-					</Dropdown.Item>
 					<Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
-
+					
 					<Dropdown.Divider />
 
 					<Dropdown.Item onClick={() => setShowDeleteAccount(true)}>
@@ -129,6 +124,7 @@ function Options() {
 			</Dropdown>
 
 			<DeleteAccount show={showDeleteAccount} setShow={setShowDeleteAccount} />
+			<Results show={showResults} setShow={setShowResults} />
 		</>
 	)
 }

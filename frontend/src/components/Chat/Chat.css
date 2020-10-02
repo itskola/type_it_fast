@@ -3,7 +3,7 @@
 
 	margin-left: var(--chat-size);
 
-	/* so that Game component stays equally distanced from left and right */
+	/* so that TypeFast component stays equally distanced from left and right */
 	margin-right: var(--main-spacing);
 }
 
@@ -51,7 +51,7 @@
 	#chat-outer-container {
 		display: none;
 
-		/* so that Game component stays equally distanced from left and right */
+		/* so that TypeFast component stays equally distanced from left and right */
 		margin-right: 0;
 	}
 }

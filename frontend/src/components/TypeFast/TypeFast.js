@@ -1,10 +1,8 @@
 import React, { useEffect, useReducer, useRef, useState } from "react"
-
 import { useTextModeContext } from "context/textMode"
+
 import { WordsStatistic, WordsStatisticAction } from "./Statistics/reducer"
 import { WordsInfo, WordsInfoAction } from "./reducer"
-
-import { endpoints } from "util/endpoints"
 
 import TimerWithReset from "./TimerWithReset/TimerWithReset"
 import Statistics from "./Statistics/Statistics"
@@ -14,6 +12,7 @@ import Words from "./Words/Words"
 
 import Spinner from "react-bootstrap/Spinner"
 
+import { endpoints } from "util/endpoints"
 import axios from "axios"
 
 import "./TypeFast.css"

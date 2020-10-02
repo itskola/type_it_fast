@@ -3,10 +3,11 @@ import React from "react"
 import Table from "react-bootstrap/Table"
 
 import { Accuracy, Wpm } from "util/statistics"
+import { formatSecondsWithUnit } from "util/helper"
 
 import "./Statistics.css"
 
-function Statistics({ statistics, elapsed, textMode }) {
+function Statistics({ statistics, elapsed, textMode, showElapsed = false }) {
 	const characters = statistics.characters
 	const words = statistics.words
 
@@ -46,7 +47,7 @@ function Statistics({ statistics, elapsed, textMode }) {
 						%
 					</td>
 				</tr>
-				<tr >
+				<tr>
 					<td>Correct words</td>
 					<td className="word-correct">{words.correct}</td>
 				</tr>
@@ -58,6 +59,12 @@ function Statistics({ statistics, elapsed, textMode }) {
 					<td>Text mode</td>
 					<td>{textMode}</td>
 				</tr>
+				{showElapsed && (
+					<tr>
+						<td>Duration</td>
+						<td>{formatSecondsWithUnit(elapsed)}</td>
+					</tr>
+				)}
 			</tbody>
 		</Table>
 	)

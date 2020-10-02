@@ -1,5 +1,3 @@
-.delete-accont-icon {
-	font-size: 1.4rem; 
+#delete-account .title-icon {
 	color: var(--incorrect);
-	margin-right: 0.8rem;
 }

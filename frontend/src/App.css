@@ -104,8 +104,13 @@ body {
 	align-items: center;
 }
 
+.title-icon {
+	font-size: 1.5rem; 
+	margin-right: 0.8rem;
+}
+
 .clickable-icon {
-	font-size: 1.5rem;
+	font-size: 1.375rem;
 	color: var(--txt-main-dark);
 	cursor: pointer;
 
