@@ -5,7 +5,7 @@ import ProtectedRoute from "./components/ProtectedRoute"
 import { AuthContext, Auth, AuthAction } from "context/auth"
 import { endpoints } from "util/endpoints"
 
-import Intro from "./components/Intro/Intro"
+import Join from "./components/Join/Join"
 import Main from "./components/Main/Main"
 import NotFound from "./components/NotFound/NotFound"
 
@@ -36,10 +36,10 @@ function App() {
 		<AuthContext.Provider value={{ authState, setAuthState }}>
 			<Router>
 				<Switch>
-					<Route exact path="/">
-						{authState.isAuth ? <Redirect to="/main" /> : <Intro />}
+					<ProtectedRoute exact path="/" component={Main} />
+					<Route path="/join">
+						{authState.isAuth ? <Redirect to="/" /> : <Join />}
 					</Route>
-					<ProtectedRoute path="/main" component={Main} />
 					<Route component={NotFound} />
 				</Switch>
 			</Router>

@@ -7,7 +7,7 @@ function ProtectedRoute({ component: Component, ...rest }) {
 		<Route
 			{...rest}
 			render={props =>
-				AuthAction.LocalAuth() ? <Component {...props} /> : <Redirect to="/" />
+				AuthAction.LocalAuth() ? <Component {...props} /> : <Redirect to="/join" />
 			}
 		/>
 	)

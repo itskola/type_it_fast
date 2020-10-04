@@ -1,11 +1,11 @@
-#intro-outer-container {
+#join-outer-container {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	height: 100%;
 }
 
-#intro-inner-container {
+#join-inner-container {
 	width: 395px;
 	background-color: var(--bg-main);
 	box-shadow: 0 0 8px var(--shadow-dark);
@@ -13,14 +13,14 @@
 	margin: 0.5rem;
 }
 
-#intro-inner-container .nav.nav-tabs {
+#join-inner-container .nav.nav-tabs {
 	margin: 1.5rem 2rem;
 }
 
 /* ==================================================== */
 
 @media only screen and (max-width: 400px) {
-	#intro-inner-container {
+	#join-inner-container {
 		padding: 3rem 1.75rem;
 	}
 }

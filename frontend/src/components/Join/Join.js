@@ -1,7 +1,6 @@
 import React, { useState } from "react"
 
 import { useAuthContext, AuthAction } from "../../context/auth"
-import { endpoints } from "../../util/endpoints"
 
 import Spinner from "react-bootstrap/Spinner"
 import Toast from "react-bootstrap/Toast"
@@ -11,15 +10,16 @@ import Tab from "react-bootstrap/Tab"
 import Title from "../Title/Title"
 import Form from "./Form/Form"
 
+import { endpoints } from "../../util/endpoints"
 import axios from "axios"
 
-import "./Intro.css"
+import "./Join.css"
 
 const formTab = { Login: "login", Register: "register" }
 const dLogin = { email: false, login: true, register: false }
 const dRegister = { email: !dLogin.email, login: !dLogin.login, register: !dLogin.register }
 
-function Intro() {
+function Join() {
 	const { setAuthState } = useAuthContext()
 
 	const [loginErrors, setLoginErrors] = useState({})
@@ -81,7 +81,7 @@ function Intro() {
 	}
 
 	return (
-		<div id="intro-outer-container">
+		<div id="join-outer-container">
 			<Toast className="page-top"
 				autohide delay={2000}
 				show={toast.show} onClose={() => setToast({...toast, show:false})}
@@ -100,7 +100,7 @@ function Intro() {
 					<span className="sr-only">Loading...</span>
 				</Spinner>
 			) : (
-				<div id="intro-inner-container">
+				<div id="join-inner-container">
 					<Title />
 
 					<Tabs activeKey={activeTab} onSelect={setActiveTab}>
@@ -123,4 +123,4 @@ function Intro() {
 	)
 }
 
-export default Intro
+export default Join

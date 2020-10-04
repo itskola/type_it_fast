@@ -18,6 +18,7 @@ function Results({ show, setShow }) {
 		if (show === false) return
 
 		setWaitingResponse(true)
+		
 		axios.get(endpoints.Results)
 			.then(({ data }) => setResults(data))
 			.catch(() => {})
