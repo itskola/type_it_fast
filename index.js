@@ -49,6 +49,8 @@ app.use("/api/results", require("./routes/results"))
 // ================================================ Routes
 
 if (process.env.NODE_ENV === "production") {
+	console.log("Running in production")
+
 	app.use(express.static(path.join(__dirname, "client", "build")))
 
 	app.get("*", (req, res) => {
