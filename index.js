@@ -1,10 +1,11 @@
 const express = require("express")
 const socketio = require("socket.io")
 const http = require("http")
+const path = require("path")
 
 require("dotenv").config({ path: "./config/.env" })
 const DB_URI = process.env.DB_URI
-const PORT = process.env.PORT
+const PORT = process.env.PORT || 5000
 
 // Database ==============================================
 
@@ -46,5 +47,13 @@ app.use("/api/text-mode", require("./routes/textMode"))
 app.use("/api/results", require("./routes/results"))
 
 // ================================================ Routes
+
+if (process.env.NODE_ENV === "production") {
+	app.use(express.static(path.join(__dirname, "client", "build")))
+
+	app.get("*", (req, res) => {
+		res.sendFile(path.join(__dirname, "client", "build", "index.html"))
+	})
+}
 
 server.listen(PORT, () => console.log(`Server is listening on port ${PORT}`))
