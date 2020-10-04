@@ -8,15 +8,14 @@ const Error = require("../util/error")
 
 router.use(Auth.verify)
 
-router
-	.route("/")
+router.route("/")
 	.get(async (req, res) => {
 		try {
 			const results = await Result.find(
-				{ userId: mongoose.Types.ObjectId(req.user.id) },
+				{ userId: req.user.id },
 				"statistics seconds textMode -_id"
 			).sort({ updatedAt: -1 })
-
+			
 			res.status(200).send(results)
 		} catch (err) {
 			res.status(500).json(

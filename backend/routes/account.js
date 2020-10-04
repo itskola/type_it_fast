@@ -29,7 +29,7 @@ router.route("/")
 		}
 	})
 	.delete(Auth.verify, (req, res) => {
-		User.deleteOne({ username: req.user.username }, err => {
+		User.deleteOne({ username: req.user.username, _id: req.user.id }, err => {
 			if (err) {
 				return res
 					.status(500)

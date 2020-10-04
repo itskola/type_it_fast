@@ -1,0 +1,20 @@
+#info-container .modal-content {
+	padding: 0.75rem;
+}
+
+#info-container .modal-body {
+	padding: 0;
+}
+
+#info-container .modal-footer {
+	display: flex;
+	justify-content: center;
+	padding: 0;
+	padding-top: 0.75rem;
+	border: none;
+}
+
+#info-container .nav-link.nav-item {
+	font-size: 1.125rem;
+	box-shadow: 0 2px 4px -4px var(--shadow-dark);
+}

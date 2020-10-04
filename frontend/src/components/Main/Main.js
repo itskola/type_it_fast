@@ -6,10 +6,12 @@ import ProjectSource from "../ProjectSource/ProjectSource"
 import TypeFast from "../TypeFast/TypeFast"
 import Options from "../Options/Options"
 import Title from "../Title/Title"
+import Info from "../Info/Info"
 import Chat from "../Chat/Chat"
 
 import "./Main.css"
 
+// TODO: put Info and ProjectSource in div
 function Main() {
 	const [textModeState, setTextModeState] = useReducer(
 		TextMode.setState,
@@ -25,7 +27,11 @@ function Main() {
 					<TypeFast />
 				</div>
 				<Chat />
-				<ProjectSource />
+				<div id="fixed-container">
+					<Info />
+					<div className="spacer"></div>
+					<ProjectSource />
+				</div>
 			</div>
 		</TextModeContext.Provider>
 	)

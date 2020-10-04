@@ -11,7 +11,12 @@ h1, h2, h3, p {
 
 .input-group input,
 .input-group-text {
-	color: var(--txt-main) !important;
+	color: var(--txt-main);
+}
+
+.input-group input:focus,
+.input-group-text:focus {
+	color: var(--txt-main);
 }
 
 /* ========================================= InputGroup */
@@ -64,7 +69,7 @@ h1, h2, h3, p {
 	flex: 1;
 	text-align: center;
 	text-transform: uppercase;
-	font-size: 0.75rem;
+	font-size: 1rem;
 	border-radius: 0;
 
 	color: var(--txt-main-dark);
@@ -101,20 +106,21 @@ h1, h2, h3, p {
 /* Dropdown =========================================== */
 
 .dropdown-menu {
-	background-color: var(--bg-main-light) !important;
-	border: none !important;
+	background-color: var(--bg-main-light);
+	border: none;
 	border-radius: 0;
 	box-shadow: 0 0 3px var(--bg-main-dark);
 }
 
 .dropdown-item {
 	font-size: 1rem;
-	color: var(--txt-main-light) !important;
+	color: var(--txt-main-light);
 	padding: 0.25rem 0.875rem;
 }
 
 .dropdown-item:hover {
-	background-color: var(--bg-main) !important;
+	color: var(--txt-main-light);
+	background-color: var(--bg-main);
 }
 
 .dropdown-divider {
@@ -130,24 +136,21 @@ h1, h2, h3, p {
 	--modal-bg: var(--bg-main-dark);
 	--modal-txt: var(--txt-main-light);
 
-	padding: 0 1rem;
-	border: none !important;
-	border-radius: 0;
-	background-color: var(--modal-bg) !important;
+	color: var(--modal-txt);
+	background-color: var(--modal-bg);
+	padding: 0 0.875rem;
 	box-shadow: 0 0 8px var(--shadow-dark);
 }
 
 .modal-header,
 .modal-body,
 .modal-footer {
-	color: var(--modal-txt) !important;
-	background-color: var(--modal-bg) !important;
-	border-color: var(--shadow-dark) !important;
+	border-color: var(--modal-txt);
 }
 
 .modal-header {
-	display: flex !important;
-	align-items: center !important;
+	display: flex;
+	align-items: center;
 }
 
 .modal-header .modal-title {
@@ -156,12 +159,10 @@ h1, h2, h3, p {
 
 .modal-header .close {
 	color: var(--modal-txt);
-	padding: 0 !important;
-	margin: 0 !important;
 }
 
 .modal-header .close span {
-	text-shadow: none !important;
+	text-shadow: none;
 }
 
 .modal-body {

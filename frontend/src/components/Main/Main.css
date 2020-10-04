@@ -15,3 +15,16 @@
 #main-container > .group-col > div {
 	margin-bottom: 1.5rem;
 }
+
+#fixed-container {
+	position: fixed;
+	bottom: 1rem;
+	left: 1rem;
+
+	display: flex;
+	flex-direction: column;
+}
+
+#fixed-container .spacer {
+	height: 0.375rem;
+}

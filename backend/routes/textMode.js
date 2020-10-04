@@ -3,7 +3,6 @@ const router = require("express").Router()
 const Sentence = require("../models/sentence")
 const WordList = require("../models/wordList")
 
-const Auth = require("../util/auth")
 const Error = require("../util/error")
 
 const Cache = {
@@ -20,8 +19,6 @@ const Cache = {
 		cache.value = value
 	},
 }
-
-router.use(Auth.verify)
 
 router.get("/sentences", async (req, res) => {
 	if (!Cache.Sentence.empty) 

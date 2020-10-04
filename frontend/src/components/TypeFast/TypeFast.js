@@ -76,7 +76,7 @@ function TypeFast() {
 
 	const handleInput = ({ target: { value: typed } }) => {
 		setWordTyped(typed)
-
+		
 		const wordAt = wordCurrent.index
 		const word = wordsInfo.shown[wordAt]
 

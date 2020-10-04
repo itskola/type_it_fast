@@ -19,4 +19,8 @@ const resultSchema = new mongoose.Schema(
 	{ timestamps: { createdAt: false, updatedAt: true } }
 )
 
+// resultSchema.statics.deleteManyByUserId = function deleteManyByUserId(userId) {
+
+// }
+
 module.exports = mongoose.model("Result", resultSchema)

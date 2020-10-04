@@ -1,0 +1,28 @@
+.info-section {
+	margin: 1.75rem 1.25rem;
+}
+
+.title {
+	font-weight: bold;
+	margin-bottom: 1rem;
+}
+
+.paragraph {
+	line-height: 1.5;
+	margin: 0.75rem 0;
+}
+
+.paragraph span {
+	text-decoration: underline;
+	font-weight: bold;
+}
+
+/* =========================================== */
+
+.calculations td {
+	font-size: 1rem;
+}
+
+.calculations td:first-child {
+	font-weight: bold;
+}

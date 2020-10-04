@@ -1,6 +1,7 @@
 const mongoose = require("mongoose")
-const Joi = require("joi")
+const Result = require("./result")
 
+const Joi = require("joi")
 const Hash = require("../util/hash")
 
 const User = mongoose.model(
@@ -23,14 +24,25 @@ const User = mongoose.model(
 			required: true,
 			trim: true,
 		},
-	}).pre("save", function (next) {
-		Hash.generate(this.password)
-			.then(hash => {
-				this.password = hash
-				next()
-			})
-			.catch(err => next(err))
 	})
+		.pre("save", function (next) {
+			Hash.generate(this.password)
+				.then(hash => {
+					this.password = hash
+					next()
+				})
+				.catch(err => next(err))
+		})
+		.pre("deleteOne", { query: true }, function (next) {
+			const userId = this.getFilter()["_id"]
+			Result.deleteMany({ userId })
+				.then(res => {
+					next()
+				})
+				.catch(err => {
+					next(err)
+				})
+		})
 )
 
 function validate(user) {
