@@ -21,6 +21,7 @@
 
 @media only screen and (max-width: 400px) {
 	#join-inner-container {
+		width: 335px;
 		padding: 3rem 1.75rem;
 	}
 }
