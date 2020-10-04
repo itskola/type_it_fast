@@ -1,4 +1,6 @@
 import React, { useEffect, useReducer, useRef, useState } from "react"
+
+import { useAuthContext } from "context/auth"
 import { useTextModeContext } from "context/textMode"
 
 import { WordsStatistic, WordsStatisticAction } from "./Statistics/reducer"
@@ -18,6 +20,7 @@ import axios from "axios"
 import "./TypeFast.css"
 
 function TypeFast() {
+	const { authState } = useAuthContext()
 	const { textModeState } = useTextModeContext()
 
 	const [waitingResponse, setWaitingResponse] = useState(false)
@@ -181,7 +184,7 @@ function TypeFast() {
 						elapsed={timerSecondsElapsed}
 						textMode={textModeState.mode}
 					/>
-					{saveResult.show && (
+					{(authState.isAuth && saveResult.show) && (
 						<SaveResult
 							onClick={handleSaveResult}
 							waitingResponse={saveResult.waiting}

@@ -15,13 +15,14 @@ import "./Sections/Sections.css"
 function Info() {
 	const [showAbout, setShowAbout] = useState(false)
 
-	const tabStyle={ height: "calc(100vh - 250px)", overflowY: "auto"};
+	const tabStyle = { height: "calc(100vh - 250px)", overflowY: "auto" }
 
 	return (
 		<>
 			<button
 				id="info-btn"
 				className="strip-css-btn"
+				title="Info"
 				onClick={() => setShowAbout(true)}
 			>
 				<i className="fa fa-info-circle clickable-icon"></i>
@@ -38,7 +39,11 @@ function Info() {
 						<Tab eventKey="about" title="About" style={tabStyle}>
 							<About />
 						</Tab>
-						<Tab eventKey="calculations" title="Calculations" style={tabStyle}>
+						<Tab
+							eventKey="calculations"
+							title="Calculations"
+							style={tabStyle}
+						>
 							<Calculations />
 						</Tab>
 						<Tab eventKey="updates" title="Updates" style={tabStyle}>

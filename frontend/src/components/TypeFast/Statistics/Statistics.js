@@ -12,7 +12,7 @@ function Statistics({ statistics, elapsed, textMode, showElapsed = false }) {
 	const words = statistics.words
 
 	return (
-		<Table id="statistics-container" striped borderless>
+		<Table className="statistics-container" striped borderless>
 			<thead>
 				<tr>
 					<th className="text-center" colSpan="2">

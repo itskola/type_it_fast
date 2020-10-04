@@ -14,8 +14,8 @@ import axios from "axios"
 import "./Options.css"
 
 const CustomToggle = React.forwardRef(({ onClick, children, ...rest }, ref) => (
-	<button
-		ref={ref}
+	<button ref={ref}
+		title="Options"
 		onClick={e => {
 			e.preventDefault()
 			onClick(e)

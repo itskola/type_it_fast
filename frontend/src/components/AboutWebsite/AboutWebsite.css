@@ -1,0 +1,12 @@
+#about-website {
+	position: fixed;
+	bottom: 1rem;
+	left: 1rem;
+
+	display: flex;
+	flex-direction: column;
+}
+
+#about-website .spacer {
+	height: 0.375rem;
+}

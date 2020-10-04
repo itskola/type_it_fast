@@ -3,12 +3,14 @@ import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-d
 
 import ProtectedRoute from "./components/ProtectedRoute"
 import { AuthContext, Auth, AuthAction } from "context/auth"
-import { endpoints } from "util/endpoints"
+import { TextModeContext, TextMode } from "context/textMode"
 
-import Join from "./components/Join/Join"
+import AboutWebsite from "./components/AboutWebsite/AboutWebsite"
+import Intro from "./components/Intro/Intro"
 import Main from "./components/Main/Main"
 import NotFound from "./components/NotFound/NotFound"
 
+import { endpoints } from "util/endpoints"
 import axios from "axios"
 
 import "bootstrap/dist/css/bootstrap.min.css"
@@ -17,6 +19,7 @@ import "./App.css"
 
 function App() {
 	const [authState, setAuthState] = useReducer(Auth.setState, Auth.state)
+	const [textModeState, setTextModeState] = useReducer(TextMode.setState, TextMode.state)
 
 	useEffect(() => {
 		// check if user is already logged in
@@ -26,7 +29,7 @@ function App() {
 					setAuthState(AuthAction.Login(data))
 				})
 				.catch(() => {
-					// logout out user locally if cookie was destroyed 
+					// logout out user locally if cookie was destroyed
 					setAuthState(AuthAction.Logout())
 				})
 		}
@@ -34,15 +37,18 @@ function App() {
 
 	return (
 		<AuthContext.Provider value={{ authState, setAuthState }}>
-			<Router>
-				<Switch>
-					<ProtectedRoute exact path="/" component={Main} />
-					<Route path="/join">
-						{authState.isAuth ? <Redirect to="/" /> : <Join />}
-					</Route>
-					<Route component={NotFound} />
-				</Switch>
-			</Router>
+			<TextModeContext.Provider value={{ textModeState, setTextModeState }}>
+				<Router>
+					<Switch>
+						<ProtectedRoute exact path="/" component={Main} />
+						<Route path="/join">
+							{authState.isAuth ? <Redirect to="/" /> : <Intro />}
+						</Route>
+						<Route component={NotFound} />
+					</Switch>
+				</Router>
+				<AboutWebsite />
+			</TextModeContext.Provider>
 		</AuthContext.Provider>
 	)
 }

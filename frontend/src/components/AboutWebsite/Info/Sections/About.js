@@ -8,6 +8,8 @@ export default function About() {
 			<h4 className="title">About Type it Fast</h4>
 			<p className="paragraph">
 				Type it Fast is a minimalistic website for measuring typing speed.
+				You can change duration of typing test and save
+				your results (requires account).
 			</p>
 			<p className="paragraph">
 				Apart from taking actual speed required to type words, it also takes
